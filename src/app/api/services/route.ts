@@ -1,0 +1,3 @@
+import { NextResponse } from 'next/server'; import { prisma } from '@/lib/prisma'; import { serviceSchema } from '@/lib/validation';
+export async function GET(){ const services=await prisma.service.findMany({where:{published:true},orderBy:{createdAt:'desc'}}); return NextResponse.json({services}); }
+export async function POST(request:Request){ const parsed=serviceSchema.safeParse(await request.json()); if(!parsed.success) return NextResponse.json({error:{code:'VALIDATION_ERROR',message:'Service invalide',details:parsed.error.flatten()}},{status:422}); const service=await prisma.service.create({data:{...parsed.data,published:false}}); return NextResponse.json({service},{status:201}); }

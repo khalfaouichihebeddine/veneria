@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'; import { prisma } from '@/lib/prisma'; import { contactSchema } from '@/lib/validation';
+export async function POST(request:Request){ const parsed=contactSchema.safeParse(await request.json()); if(!parsed.success) return NextResponse.json({error:{code:'VALIDATION_ERROR',message:'Informations invalides',details:parsed.error.flatten()}},{status:422}); const message=await prisma.contactMessage.create({data:parsed.data}); return NextResponse.json({messageId:message.id,status:'received'},{status:201}); }

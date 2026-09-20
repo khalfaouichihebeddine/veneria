@@ -1,0 +1,8 @@
+{
+  "name": "veneria",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {"dev":"next dev -H 0.0.0.0","build":"next build","start":"next start","lint":"next lint","test":"vitest run","migrate":"prisma migrate deploy","migrate:status":"prisma migrate status","postinstall":"prisma generate"},
+  "dependencies": {"@prisma/client":"^6.16.0","next":"^15.5.0","next-auth":"^4.24.11","zod":"^4.1.5","@prisma/adapter-pg":"^6.16.0","pg":"^8.16.3","cloudinary":"^2.7.0","jose":"^6.1.0","bcryptjs":"^3.0.2","lucide-react":"^0.468.0"},
+  "devDependencies": {"@types/node":"^24.3.0","@types/react":"^19.1.13","@types/react-dom":"^19.1.9","prisma":"^6.16.0","typescript":"^5.9.2","vitest":"^3.2.4","tailwindcss":"^4.1.13","@tailwindcss/postcss":"^4.1.13"}
+}

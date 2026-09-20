@@ -1,0 +1,5 @@
+'use client';
+import Link from 'next/link';
+import { Menu, Sun } from 'lucide-react';
+import { useState } from 'react';
+export function SiteHeader(){ const [open,setOpen]=useState(false); return <header style={{borderBottom:'1px solid var(--line)',background:'rgba(250,247,240,.9)',position:'sticky',top:0,zIndex:10,backdropFilter:'blur(12px)'}}><div className="container" style={{height:76,display:'flex',alignItems:'center',justifyContent:'space-between'}}><Link href="/" style={{fontWeight:800,letterSpacing:'.16em',fontSize:14}}>VENERIA</Link><nav style={{display:open?'flex':undefined,gap:24,alignItems:'center'}} className="site-nav"><Link href="/produits">Objets</Link><Link href="/services">Services</Link><Link href="/a-propos">A propos</Link><Link href="/contact">Contact</Link><Link href="/admin" style={{color:'var(--ochre)'}}>Espace prive</Link></nav><div style={{display:'flex',gap:8}}><button aria-label="Changer de theme" style={{border:0,background:'none',padding:8}}><Sun size={17}/></button><button aria-label="Ouvrir le menu" onClick={()=>setOpen(!open)} style={{border:0,background:'none',padding:8}}><Menu size={19}/></button></div></div></header> }

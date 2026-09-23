@@ -250,7 +250,7 @@ export default async function ProductDetail({ params }: Props) {
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>Prix indicatif</div>
                   <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
-                    {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>EUR</span>
+                    {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>د.ت</span>
                   </div>
                   {product.unit && <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>/ {product.unit}</div>}
                 </div>

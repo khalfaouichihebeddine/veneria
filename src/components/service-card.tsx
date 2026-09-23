@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowUpRight, Users, Clock } from 'lucide-react';
 import type { Service } from '@/types';
+import { useLanguage } from './language-provider';
 
 const CATEGORY_ICONS: Record<string, string> = {
   academie: '🎓',
@@ -19,12 +22,14 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 export function ServiceCard({ service }: { service: Service }) {
+  const { localizeService, t, isArabic } = useLanguage();
+  service = localizeService(service);
   const catIcon = service.category ? CATEGORY_ICONS[service.category] ?? '🌱' : '🌱';
-  const catLabel = service.category ? CATEGORY_LABELS[service.category] ?? service.category : '';
+  const catLabel = service.category ? (isArabic ? ({ academie: 'أكاديمية فينيريا', technique: 'مرافقة تقنية', distillation: 'تقطير مشترك', visite: 'استقبال تربوي', parrainage: 'رعاية' }[service.category] ?? service.category) : CATEGORY_LABELS[service.category] ?? service.category) : '';
   const priceLabel =
     service.priceFrom === 0
-      ? 'Sur bourse / gratuit'
-      : `À partir de ${service.priceFrom} ${service.currency?.split(' ')[0] ?? 'EUR'}`;
+      ? t('freeOrScholarship')
+      : `${t('from')} ${service.priceFrom} ${t('tunisianDinar')}`;
 
   return (
     <Link
@@ -98,7 +103,7 @@ export function ServiceCard({ service }: { service: Service }) {
         >
           <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--green)' }}>{priceLabel}</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--green)' }}>
-            Découvrir <ArrowUpRight size={13} />
+            {t('discover')} <ArrowUpRight size={13} />
           </span>
         </div>
       </div>

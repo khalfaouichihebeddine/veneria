@@ -38,7 +38,7 @@ export default async function ServiceDetail({ params }: Props) {
   const priceLabel =
     service.priceFrom === 0
       ? 'Financement par bourse / Tarif solidaire'
-      : `À partir de ${service.priceFrom} ${service.currency ?? 'EUR'}`;
+      : `À partir de ${service.priceFrom} TND`;
 
   const hasImage = service.imageUrl;
 

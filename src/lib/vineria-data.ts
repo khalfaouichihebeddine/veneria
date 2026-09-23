@@ -212,7 +212,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
       retail: 'Flacon verre ambré 10 ml et 30 ml avec compte-goutte sécurisé',
       pro: 'Fûts aluminium et inox certifiés 1L, 5L, 25L pour cosmétique & pharmacie'
     },
-    price: 18,
+    price: 58,
     unit: 'flacon 30 ml',
     imageUrl: '/images/rosemary-oil.jpg',
     characteristics: [
@@ -238,7 +238,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
       retail: 'Pots en verre hexagonal 250 g et 500 g',
       pro: 'Seaux alimentaires hermétiques 5 kg et 20 kg pour épiceries & chefs'
     },
-    price: 16,
+    price: 52,
     unit: 'pot 500 g',
     imageUrl: '/images/miel.jpg',
     characteristics: [
@@ -264,7 +264,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
       retail: 'Sachets kraft respirants 250 g, 500 g et 1 kg (en coque ou décortiquées)',
       pro: 'Sacs toile de jute 10 kg et 25 kg pour transformateurs, pâtissiers et torréfacteurs'
     },
-    price: 14,
+    price: 45,
     unit: 'sachet 500 g décortiquées',
     imageUrl: '/images/amandes.jpg',
     characteristics: [
@@ -290,7 +290,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
       retail: 'Bouteilles verre sombre anti-UV 500 ml et 750 ml avec bouchon verseur',
       pro: 'Bidons fer blanc 3L et 5L, cuves inox 200L pour exportateurs'
     },
-    price: 22,
+    price: 72,
     unit: 'bouteille 750 ml',
     imageUrl: '/images/huile%20olivie.jpg',
     characteristics: [
@@ -316,7 +316,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
       retail: 'Flacon teinture mère 50 ml / Pain de cire 100 g',
       pro: 'Pains de cire brute en vrac 1 kg à 10 kg, propolis concassée'
     },
-    price: 24,
+    price: 78,
     unit: 'lot découverte apithérapie',
     imageUrl: '/images/hero-farm.jpg',
     characteristics: [
@@ -363,8 +363,8 @@ export const VINERIA_SERVICES: VineriaService[] = [
     description: `Pour les exploitations voisines, coopératives agricoles et Groupements de Développement Agricole (GDA) souhaitant sortir de la monoculture ou de la dépendance aux intrants chimiques coûteux. Nous co-construisons un plan de transition réaliste et échelonné sur 1 à 2 campagnes, en tenant compte du relief, du sol et des moyens matériels existants.`,
     targetAudience: 'Exploitations familiales, coopératives agricoles, GDA locaux',
     duration: 'Accompagnement saisonnier sur 1 à 2 campagnes agricoles',
-    priceFrom: 280,
-    currency: 'EUR par exploitation (possibilité d’appui bailleur)',
+    priceFrom: 900,
+    currency: 'TND par exploitation (possibilité d’appui bailleur)',
     imageUrl: '/images/hero-farm.jpg',
     syllabusOrFeatures: [
       'Diagnostic pédologique et hydrologique approfondi de la parcelle',
@@ -384,8 +384,8 @@ export const VINERIA_SERVICES: VineriaService[] = [
     description: `Nombreux sont les petits producteurs d’aromatiques du territoire qui n’ont pas les capitaux pour investir dans un alambic de qualité supérieure. Vineria met son unité de distillation basse pression et sa ligne de conditionnement propre à leur disposition. Cela sécurise la valeur ajoutée au niveau local et garantit des normes export.`,
     targetAudience: 'Producteurs indépendants de plantes à parfum, aromatiques et médicinales (PPAM)',
     duration: 'À la journée de passe alambic ou au volume de matière fraîche',
-    priceFrom: 65,
-    currency: 'EUR / passe d’alambic',
+    priceFrom: 220,
+    currency: 'TND / passe d’alambic',
     imageUrl: '/images/rosemary-oil.jpg',
     syllabusOrFeatures: [
       'Distillation contrôlée à la vapeur douce avec contrôle thermique continu',
@@ -405,8 +405,8 @@ export const VINERIA_SERVICES: VineriaService[] = [
     description: `Ouverture de Vineria aux groupes scolaires du Nord de la Tunisie, étudiants en agronomie de l’INAT/ISA, associations environnementales et délégations d’entreprises. Une demi-journée ou journée complète pour comprendre de visu comment un écosystème agricole méditerranéen peut prospérer sans goutte-à-goutte ni pesticides.`,
     targetAudience: 'Écoles, universités agronomiques, ONG, délégations d’entreprises',
     duration: 'Demi-journée (3h30) ou journée complète avec repas fermier de terroir',
-    priceFrom: 15,
-    currency: 'EUR par participant (gratuité écoles publiques locales)',
+    priceFrom: 55,
+    currency: 'TND par participant (gratuité écoles publiques locales)',
     imageUrl: '/images/academy.jpg',
     syllabusOrFeatures: [
       'Parcours guidé à travers les 5 ateliers interconnectés',
@@ -426,8 +426,8 @@ export const VINERIA_SERVICES: VineriaService[] = [
     description: `Une porte d’entrée directe pour un particulier ou une entreprise engagée en démarche RSE. En finançant un amandier ou une ruche pour une saison, le parrain reçoit des nouvelles photographiques de sa parcelle, une plaque nominative en bois d’olivier sur l’arbre/la ruche, et un colis annuel de la récolte correspondante (amandes décortiquées ou pots de miel personnalisés).`,
     targetAudience: 'Particuliers engagés, entreprises RSE, mécènes de la biodiversité',
     duration: 'Engagement annuel renouvelable',
-    priceFrom: 95,
-    currency: 'EUR / an',
+    priceFrom: 320,
+    currency: 'TND / an',
     imageUrl: '/images/hero-farm.jpg',
     syllabusOrFeatures: [
       'Plaque gravée au nom du parrain ou de l’entreprise sur l’arbre / la ruche',

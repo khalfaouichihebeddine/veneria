@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { SiteHeader, SiteFooter } from '@/components';
+import { LanguageProvider, SiteHeader, SiteFooter } from '@/components';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -38,11 +38,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <LanguageProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </LanguageProvider>
       </body>
     </html>
   );

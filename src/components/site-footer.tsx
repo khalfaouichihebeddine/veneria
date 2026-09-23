@@ -1,8 +1,17 @@
 'use client';
 import Link from 'next/link';
 import { Leaf, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from './language-provider';
 
 export function SiteFooter() {
+  const { t } = useLanguage();
+  const footerNavigation = [
+    ['/', t('home')],
+    ['/produits', t('products')],
+    ['/services', t('services')],
+    ['/a-propos', t('method')],
+    ['/contact', t('contact')],
+  ];
   return (
     <footer
       style={{
@@ -67,14 +76,8 @@ export function SiteFooter() {
 
           {/* Navigation */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Navigation</div>
-            {[
-              ['/', 'Accueil'],
-              ['/produits', 'Nos Produits'],
-              ['/services', 'Services & Académie'],
-              ['/a-propos', 'Notre Méthode'],
-              ['/contact', 'Contact'],
-            ].map(([href, label]) => (
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>{t('navigation')}</div>
+            {footerNavigation.map(([href, label]) => (
               <Link
                 key={href}
                 href={href}

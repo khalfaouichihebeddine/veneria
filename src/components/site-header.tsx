@@ -1,18 +1,19 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Leaf } from 'lucide-react';
-
-const NAV_LINKS = [
-  { href: '/produits', label: 'Nos Produits' },
-  { href: '/services', label: 'Services & Académie' },
-  { href: '/a-propos', label: 'Notre Méthode' },
-  { href: '/contact', label: 'Contact & Partenariats' },
-];
+import { Menu, X, Leaf, Languages } from 'lucide-react';
+import { useLanguage } from './language-provider';
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isArabic, toggleLanguage, t } = useLanguage();
+  const navLinks = [
+    { href: '/produits', label: t('products') },
+    { href: '/services', label: t('services') },
+    { href: '/a-propos', label: t('method') },
+    { href: '/contact', label: t('contact') },
+  ];
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -94,14 +95,14 @@ export function SiteHeader() {
                   marginTop: 2,
                 }}
               >
-                Permaculture · Nord Tunisie
+                {t('permaculture')}
               </div>
             </div>
           </Link>
 
           {/* Desktop nav — masqué sur mobile */}
           <nav className="desktop-nav">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="site-nav-link">
                 {link.label}
               </Link>
@@ -112,8 +113,11 @@ export function SiteHeader() {
               style={{ borderRadius: 8 }}
               id="header-cta"
             >
-              Devenir partenaire
+              {t('becomePartner')}
             </Link>
+            <button type="button" onClick={toggleLanguage} className="language-switch" aria-label={isArabic ? t('switchToFrench') : t('switchToArabic')} title={isArabic ? t('switchToFrench') : t('switchToArabic')}>
+              <Languages size={15} /> {isArabic ? 'FR' : 'ع'}
+            </button>
           </nav>
 
           {/* Mobile toggle — visible UNIQUEMENT sur mobile, masqué sur PC */}
@@ -157,7 +161,7 @@ export function SiteHeader() {
               boxShadow: '-12px 0 48px rgba(26,31,27,0.18)',
             }}
           >
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -184,9 +188,12 @@ export function SiteHeader() {
                 className="btn btn--primary"
                 style={{ width: '100%', justifyContent: 'center' }}
               >
-                Devenir partenaire
+                {t('becomePartner')}
               </Link>
             </div>
+            <button type="button" onClick={toggleLanguage} className="language-switch language-switch--drawer">
+              <Languages size={16} /> {isArabic ? 'Français' : 'العربية'}
+            </button>
           </nav>
         </div>
       )}

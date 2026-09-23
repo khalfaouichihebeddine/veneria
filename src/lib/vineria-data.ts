@@ -240,7 +240,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
     },
     price: 16,
     unit: 'pot 500 g',
-    imageUrl: '/images/harvest-goods.jpg',
+    imageUrl: '/images/miel.jpg',
     characteristics: [
       { label: 'Dominantes florales', value: 'Romarin sauvage, fleurs d’amandier, ciste' },
       { label: 'Texture', value: 'Crémeuse fine naturelle, cristallisation lente' },
@@ -266,7 +266,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
     },
     price: 14,
     unit: 'sachet 500 g décortiquées',
-    imageUrl: '/images/harvest-goods.jpg',
+    imageUrl: '/images/amandes.jpg',
     characteristics: [
       { label: 'Variétés', value: 'Mazzetto & Achaak rustiques' },
       { label: 'Teneur en huile', value: 'Concentration élevée > 55%' },
@@ -292,7 +292,7 @@ export const VINERIA_PRODUCTS: VineriaProduct[] = [
     },
     price: 22,
     unit: 'bouteille 750 ml',
-    imageUrl: '/images/harvest-goods.jpg',
+    imageUrl: '/images/huile%20olivie.jpg',
     characteristics: [
       { label: 'Taux d’acidité oléique', value: '< 0.18% (garantie par lot)' },
       { label: 'Indice de peroxyde', value: '< 8 meq O2/kg' },

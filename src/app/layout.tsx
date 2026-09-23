@@ -1,5 +1,49 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { SiteHeader } from '@/components/site-header';
-export const metadata: Metadata = { title:'Veneria — matieres choisies', description:'Objets, espaces et attentions singulieres.' };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <><SiteHeader />{children}<footer className="container" style={{padding:'42px 0',borderTop:'1px solid var(--line)',marginTop:80,color:'var(--muted)',fontSize:13,display:'flex',justifyContent:'space-between'}}><span>VENERIA / 2026</span><span>Objets choisis, espaces habites.</span></footer></>; }
+import { SiteHeader, SiteFooter } from '@/components';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: 'VINERIA — Ferme intégrée en permaculture, Nord de la Tunisie',
+    template: '%s | VINERIA',
+  },
+  description:
+    'Vineria est une exploitation agricole intégrée au nord de la Tunisie : amandiers, oliviers, romarin et ruches conduits en permaculture sèche. Huiles essentielles, miel, amandes, huile d\'olive — et la transmission aux agriculteurs voisins.',
+  keywords: [
+    'permaculture Tunisie',
+    'huile essentielle romarin bio',
+    'miel sauvage tunisien',
+    'amandes biologiques',
+    'huile d\'olive vierge extra Tunisie',
+    'agriculture sèche méditerranéenne',
+    'formation agroécologie',
+    'Académie Vineria',
+    'ferme intégrée Nord Tunisie',
+  ],
+  openGraph: {
+    siteName: 'VINERIA',
+    locale: 'fr_TN',
+    type: 'website',
+  },
+  robots: { index: true, follow: true },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="fr">
+      <body>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
+    </html>
+  );
+}

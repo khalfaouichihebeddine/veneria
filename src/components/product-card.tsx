@@ -1,4 +1,131 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowUpRight, Droplets, MapPin } from 'lucide-react';
 import type { Product } from '@/types';
-export function ProductCard({product}:{product:Product}){ return <Link href={`/produits/${product.slug}`} className="card" style={{display:'block',transition:'transform .2s'}}>{product.imageUrl&&<Image src={product.imageUrl} alt={product.name} width={600} height={440} style={{width:'100%',height:220,objectFit:'cover'}}/>}<div style={{padding:18}}><div style={{display:'flex',justifyContent:'space-between',gap:10}}><h3 style={{margin:0,fontSize:19}}>{product.name}</h3><span style={{color:'var(--ochre)'}}>{product.price} EUR</span></div><p style={{color:'var(--muted)',fontSize:14,lineHeight:1.5}}>{product.description}</p></div></Link> }
+
+export function ProductCard({ product }: { product: Product }) {
+  const categoryColors: Record<string, { bg: string; text: string }> = {
+    'huiles-essentielles': { bg: '#e8f0ea', text: '#2a5236' },
+    'ruche': { bg: '#fef3c7', text: '#b9752d' },
+    'amandes': { bg: '#fdf4e8', text: '#c8702b' },
+    'huile-olive': { bg: '#f0f7e8', text: '#3a6b47' },
+  };
+  const colors = product.category
+    ? categoryColors[product.category] ?? { bg: 'var(--linen)', text: 'var(--muted)' }
+    : { bg: 'var(--linen)', text: 'var(--muted)' };
+
+  return (
+    <Link
+      href={`/produits/${product.slug}`}
+      className="card"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        textDecoration: 'none',
+        overflow: 'hidden',
+      }}
+      id={`product-card-${product.slug}`}
+    >
+      {/* Image */}
+      <div style={{ position: 'relative', overflow: 'hidden', height: 220, background: 'var(--linen)', flexShrink: 0 }}>
+        {product.imageUrl ? (
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            style={{ objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.22,1,0.36,1)' }}
+            sizes="(max-width: 680px) 100vw, (max-width: 1000px) 50vw, 33vw"
+          />
+        ) : (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(135deg, var(--green-pale) 0%, var(--linen) 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Droplets size={48} style={{ color: 'var(--green-light)', opacity: 0.5 }} />
+          </div>
+        )}
+
+        {/* Category badge overlay */}
+        {product.categoryLabel && (
+          <span
+            style={{
+              position: 'absolute',
+              top: 12,
+              left: 12,
+              background: colors.bg,
+              color: colors.text,
+              border: '1px solid rgba(0,0,0,0.07)',
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              padding: '5px 10px',
+              borderRadius: 100,
+            }}
+          >
+            {product.categoryLabel}
+          </span>
+        )}
+      </div>
+
+      {/* Content */}
+      <div style={{ padding: '20px 22px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <h3 style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.35, margin: '0 0 7px', fontFamily: "'Playfair Display', Georgia, serif", color: 'var(--ink)' }}>
+          {product.name}
+        </h3>
+
+        {product.tagline && (
+          <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 10px', lineHeight: 1.4 }}>
+            {product.tagline}
+          </p>
+        )}
+
+        <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6, flex: 1, margin: '0 0 16px' }}>
+          {product.description.slice(0, 120)}{product.description.length > 120 ? '…' : ''}
+        </p>
+
+        {/* Origin */}
+        {product.origin && (
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5, marginBottom: 14 }}>
+            <MapPin size={12} style={{ color: 'var(--muted-light)', marginTop: 2, flexShrink: 0 }} />
+            <span style={{ fontSize: 11.5, color: 'var(--muted-light)', lineHeight: 1.4 }}>{product.origin}</span>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderTop: '1px solid var(--line-light)',
+            paddingTop: 14,
+          }}
+        >
+          <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 700, color: 'var(--green)' }}>
+            {product.price} <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--muted)' }}>EUR</span>
+            {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}> / {product.unit}</span>}
+          </span>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              fontSize: 12,
+              fontWeight: 700,
+              color: 'var(--green)',
+            }}
+          >
+            Voir <ArrowUpRight size={13} />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}

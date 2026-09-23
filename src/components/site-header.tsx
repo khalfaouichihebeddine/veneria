@@ -1,5 +1,195 @@
 'use client';
 import Link from 'next/link';
-import { Menu, Sun } from 'lucide-react';
-import { useState } from 'react';
-export function SiteHeader(){ const [open,setOpen]=useState(false); return <header style={{borderBottom:'1px solid var(--line)',background:'rgba(250,247,240,.9)',position:'sticky',top:0,zIndex:10,backdropFilter:'blur(12px)'}}><div className="container" style={{height:76,display:'flex',alignItems:'center',justifyContent:'space-between'}}><Link href="/" style={{fontWeight:800,letterSpacing:'.16em',fontSize:14}}>VENERIA</Link><nav style={{display:open?'flex':undefined,gap:24,alignItems:'center'}} className="site-nav"><Link href="/produits">Objets</Link><Link href="/services">Services</Link><Link href="/a-propos">A propos</Link><Link href="/contact">Contact</Link><Link href="/admin" style={{color:'var(--ochre)'}}>Espace prive</Link></nav><div style={{display:'flex',gap:8}}><button aria-label="Changer de theme" style={{border:0,background:'none',padding:8}}><Sun size={17}/></button><button aria-label="Ouvrir le menu" onClick={()=>setOpen(!open)} style={{border:0,background:'none',padding:8}}><Menu size={19}/></button></div></div></header> }
+import { useState, useEffect } from 'react';
+import { Menu, X, Leaf } from 'lucide-react';
+
+const NAV_LINKS = [
+  { href: '/produits', label: 'Nos Produits' },
+  { href: '/services', label: 'Services & Académie' },
+  { href: '/a-propos', label: 'Notre Méthode' },
+  { href: '/contact', label: 'Contact & Partenariats' },
+];
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  return (
+    <>
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+          background: scrolled ? 'rgba(250,247,240,0.96)' : 'rgba(250,247,240,0.80)',
+          backdropFilter: 'blur(18px)',
+          WebkitBackdropFilter: 'blur(18px)',
+          borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
+          transition: 'all 0.3s var(--ease)',
+          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            height: 72,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 24,
+          }}
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              textDecoration: 'none',
+            }}
+            aria-label="VINERIA — Accueil"
+          >
+            <span
+              style={{
+                width: 34,
+                height: 34,
+                borderRadius: '50%',
+                background: 'linear-gradient(140deg, var(--green-deep), var(--green-mid))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Leaf size={16} color="white" />
+            </span>
+            <div>
+              <div
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 16,
+                  letterSpacing: '0.12em',
+                  color: 'var(--green-deep)',
+                  lineHeight: 1,
+                }}
+              >
+                VINERIA
+              </div>
+              <div
+                style={{
+                  fontSize: 9,
+                  letterSpacing: '0.08em',
+                  color: 'var(--muted)',
+                  fontWeight: 500,
+                  textTransform: 'uppercase',
+                  lineHeight: 1,
+                  marginTop: 2,
+                }}
+              >
+                Permaculture · Nord Tunisie
+              </div>
+            </div>
+          </Link>
+
+          {/* Desktop nav — masqué sur mobile */}
+          <nav className="desktop-nav">
+            {NAV_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="site-nav-link">
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              className="btn btn--primary btn--sm"
+              style={{ borderRadius: 8 }}
+              id="header-cta"
+            >
+              Devenir partenaire
+            </Link>
+          </nav>
+
+          {/* Mobile toggle — visible UNIQUEMENT sur mobile, masqué sur PC */}
+          <button
+            className="mobile-menu-btn"
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+            id="mobile-menu-toggle"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99,
+            background: 'rgba(26,31,27,0.5)',
+            backdropFilter: 'blur(4px)',
+          }}
+          onClick={() => setOpen(false)}
+        >
+          <nav
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: 'min(340px, 90vw)',
+              background: 'var(--paper)',
+              padding: '88px 28px 48px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 6,
+              boxShadow: '-12px 0 48px rgba(26,31,27,0.18)',
+            }}
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                style={{
+                  display: 'block',
+                  padding: '14px 16px',
+                  borderRadius: 10,
+                  fontSize: 17,
+                  fontWeight: 600,
+                  color: 'var(--ink)',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--green-pale)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div style={{ borderTop: '1px solid var(--line-light)', marginTop: 12, paddingTop: 18 }}>
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="btn btn--primary"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                Devenir partenaire
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
+    </>
+  );
+}

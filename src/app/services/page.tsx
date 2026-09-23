@@ -7,9 +7,9 @@ import { VINERIA_SERVICES } from '@/lib/vineria-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services & Académie Vineria | VINERIA',
+  title: 'الخدمات وأكاديمية فينيريا | VINERIA',
   description:
-    'L\'Académie Vineria forme les petits agriculteurs tunisiens à la permaculture en sec. Sessions terrain, accompagnement technique, distillation partagée, visites pédagogiques et parrainage d\'amandier ou de ruche.',
+    'أكاديمية فينيريا لتكوين صغار الفلاحين التونسيين في الزراعة المستدامة بالنظام الجاف. دورات حقلية، مرافقة تقنية، تقطير مشترك، زيارات بيداغوجية، ورعاية أشجار اللوز والمناحل.',
 };
 
 export default async function Services() {
@@ -36,26 +36,26 @@ export default async function Services() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-            L'Académie Vineria & Nos Services
+            أكاديمية فينيريا وخدماتنا الفلاحية
           </span>
-          <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 720 }}>
-            Ce que nous faisons avec nos parcelles, nous l'enseignons.
+          <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 740, lineHeight: 1.25 }}>
+            ما نطبقه بنجاح في حقولنا، نعلّمه وننقله.
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 17, lineHeight: 1.75, maxWidth: 600, marginBottom: 32 }}>
-            Formation paysanne en dialecte local, accompagnement technique à la conversion agroécologique, distillation partagée pour le territoire, visites pédagogiques et parrainage d'amandier ou de ruche.
+          <p style={{ color: 'rgba(255,255,255,0.80)', fontSize: 17, lineHeight: 1.8, maxWidth: 620, marginBottom: 32 }}>
+            تكوين فلاحي تطبيقي بالعامية التونسية، مرافقة تقنية للتحول الإيكولوجي، تقطير مشترك لمنتجي المنطقة، زيارات تعليمية، ورعاية أشجار اللوز وخلايا النحل.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {['Sessions terrain en arabe', 'Petits groupes (8–12 pers)', 'Suivi post-formation', 'Bourses disponibles'].map((b) => (
+            {['دورات حقلية تطبيقية', 'مجموعات صغيرة (8–12 شخص)', 'متابعة ميدانية بعد التكوين', 'منح دراسية متوفرة'].map((b) => (
               <span
                 key={b}
                 style={{
-                  background: 'rgba(255,255,255,0.10)',
-                  border: '1px solid rgba(255,255,255,0.20)',
+                  background: 'rgba(255,255,255,0.12)',
+                  border: '1px solid rgba(255,255,255,0.22)',
                   borderRadius: 100,
                   padding: '6px 14px',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'rgba(255,255,255,0.85)',
+                  color: 'rgba(255,255,255,0.92)',
                 }}
               >
                 {b}
@@ -70,12 +70,12 @@ export default async function Services() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">Tous nos services</span>
+              <span className="eyebrow">جميع خدماتنا</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 0' }}>Ce qui fait de Vineria une entreprise.</h2>
+              <h2 className="display--md serif" style={{ margin: '10px 0 0' }}>ما يجعل من فينيريا مؤسسة ذات أثر حقيقي.</h2>
             </div>
             <Link href="/contact" className="btn btn--primary" id="services-contact-cta">
-              Nous contacter <ArrowUpRight size={15} />
+              تواصل معنا <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -100,35 +100,35 @@ export default async function Services() {
             <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
               <Image
                 src="/images/academy.jpg"
-                alt="L'Académie Vineria — Formation de terrain en permaculture au Nord de la Tunisie"
+                alt="أكاديمية فينيريا — تكوين تطبيقي في الزراعة المستدامة في شمال تونس"
                 fill
                 style={{ objectFit: 'cover' }}
               />
             </div>
 
             <div>
-              <span className="eyebrow">L'Académie Vineria</span>
+              <span className="eyebrow">أكاديمية فينيريا</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '16px 0 18px', fontSize: 'clamp(22px, 3vw, 36px)' }}>
-                Former les petits agriculteurs, c'est notre métier.
+              <h2 className="display--md serif" style={{ margin: '16px 0 18px', fontSize: 'clamp(22px, 3vw, 36px)', lineHeight: 1.3 }}>
+                تأهيل صغار الفلاحين هو جوهر رسالتنا.
               </h2>
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 22 }}>
-                Sessions courtes, sur la ferme, en dialecte tunisien, en petits groupes de 8 à 12 personnes, avec suivi individualisé directement sur les parcelles des participants.
+                دورات قصيرة، داخل المزرعة، بالعامية التونسية، بمجموعات صغيرة من 8 إلى 12 شخصاً، مع مرافقة فردية وتطبيق مباشر على أراضي المتدربين.
               </p>
 
               {/* Modules */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 28 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
                 {[
-                  'Conduite de l\'amandier et de l\'olivier en sec',
-                  'Initiation à l\'apiculture moderne',
-                  'Plantes aromatiques et distillation paysanne',
-                  'Compost vivant et fertilité organique',
-                  'Gestion de l\'eau de ruissellement',
-                  'Conditionnement et accès aux marchés',
+                  'إدارة أشجار اللوز والزيتون في النظام الجاف دون ري',
+                  'مبادئ تربية النحل الحديثة والمستدامة',
+                  'زراعة النباتات العطرية والتقطير الفلاحي',
+                  'صناعة السماد العضوي الحي والخصوبة الذاتية للتربة',
+                  'تقنيات حصاد مياه الأمطار وإدارة الجفاف',
+                  'التعبئة الصحية والولوج للأسواق المجزية',
                 ].map((module) => (
-                  <div key={module} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', flexShrink: 0 }} />
-                    <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{module}</span>
+                  <div key={module} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                    <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--green)', flexShrink: 0 }} />
+                    <span style={{ fontSize: 14.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{module}</span>
                   </div>
                 ))}
               </div>
@@ -142,14 +142,14 @@ export default async function Services() {
                   marginBottom: 24,
                   fontSize: 14,
                   color: 'var(--green-deep)',
-                  lineHeight: 1.65,
+                  lineHeight: 1.7,
                 }}
               >
-                <strong>Public prioritaire :</strong> Petits exploitants, femmes rurales, jeunes en installation. Tarification solidaire. Bourses disponibles via nos partenaires bailleurs.
+                <strong>الفئات ذات الأولوية:</strong> صغار الفلاحين، النساء الريفيات، والشباب الراغبون في الاستقرار الفلاحي. تعريفات تضامنية ومنح تغطية متاحة عبر شركائنا المانحين.
               </div>
 
               <Link href="/contact" className="btn btn--primary" id="academy-register-cta">
-                S'inscrire ou financer une promotion <ArrowUpRight size={15} />
+                التسجيل أو تمويل دفعة تكوينية <ArrowUpRight size={15} />
               </Link>
             </div>
           </div>
@@ -167,15 +167,15 @@ export default async function Services() {
       >
         <div className="container--narrow">
           <span style={{ fontSize: 48, display: 'block', marginBottom: 20 }}>🌳</span>
-          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>Parrainage</span>
-          <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}>
-            Parrainer un amandier ou une ruche.
+          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>برنامج الرعاية والتضامن</span>
+          <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 36px)', lineHeight: 1.3 }}>
+            رعاية شجرة لوز أو خلية نحل.
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
-            Une porte d'entrée simple vers un partenariat durable. Une plaque à votre nom, un suivi saisonnier et votre part de récolte chaque année.
+          <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 1.8, maxWidth: 540, margin: '0 auto 36px' }}>
+            مدخل مباشر وبسيط لشراكة ذات معنى بيئي واجتماعي. لوحة خشبية محفورة باسمك، تقارير دورية عن حقلك، ونصيبك الخاص من المحصول السنوي.
           </p>
           <Link href="/contact" className="btn btn--ochre" id="parrainage-cta">
-            Devenir parrain <ArrowUpRight size={15} />
+            كن راعياً للمزرعة <ArrowUpRight size={15} />
           </Link>
         </div>
       </section>

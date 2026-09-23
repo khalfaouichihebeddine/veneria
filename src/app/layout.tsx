@@ -10,25 +10,25 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'VINERIA — Ferme intégrée en permaculture, Nord de la Tunisie',
+    default: 'فينيريا — مزرعة بيئية متكاملة بالزراعة المستدامة، شمال تونس',
     template: '%s | VINERIA',
   },
   description:
-    'Vineria est une exploitation agricole intégrée au nord de la Tunisie : amandiers, oliviers, romarin et ruches conduits en permaculture sèche. Huiles essentielles, miel, amandes, huile d\'olive — et la transmission aux agriculteurs voisins.',
+    'فينيريا مزرعة نموذجية متكاملة في شمال تونس: بساتين لوز، زيتون، إكليل جبل ومناحل تدار بالزراعة الجافة المستدامة. زيوت عطرية، عسل طبيعي، لوز وزيت زيتون بكر ممتاز — وتكوين للفلاحين في المنطقة.',
   keywords: [
-    'permaculture Tunisie',
-    'huile essentielle romarin bio',
-    'miel sauvage tunisien',
-    'amandes biologiques',
-    'huile d\'olive vierge extra Tunisie',
-    'agriculture sèche méditerranéenne',
-    'formation agroécologie',
-    'Académie Vineria',
-    'ferme intégrée Nord Tunisie',
+    'الزراعة المستدامة تونس',
+    'زيت إكليل الجبل العطري العضوي',
+    'عسل بري تونسي',
+    'لوز عضوي',
+    'زيت زيتون بكر ممتاز تونس',
+    'الزراعة الجافة المتوسطية',
+    'تكوين في الإيكولوجيا الفلاحية',
+    'أكاديمية فينيريا',
+    'مزرعة متكاملة شمال تونس',
   ],
   openGraph: {
-    siteName: 'VINERIA',
-    locale: 'fr_TN',
+    siteName: 'فينيريا — VINERIA',
+    locale: 'ar_TN',
     type: 'website',
   },
   robots: { index: true, follow: true },
@@ -38,7 +38,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="ar" suppressHydrationWarning>
       <body>
         <LanguageProvider>
           <SiteHeader />

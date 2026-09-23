@@ -14,11 +14,10 @@ import {
 } from '@/lib/vineria-data';
 
 export const metadata = {
-  title: 'VINERIA — Ferme intégrée en permaculture, Nord de la Tunisie',
+  title: 'فينيريا — مزرعة بيئية متكاملة بالزراعة المستدامة، شمال تونس',
 };
 
 export default async function Home() {
-  // Try live data, fall back to static Vineria data
   let products: Awaited<ReturnType<typeof api.getProducts>>;
   let services: Awaited<ReturnType<typeof api.getServices>>;
   try {
@@ -51,7 +50,7 @@ export default async function Home() {
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <Image
             src="/images/hero-farm.jpg"
-            alt="Ferme Vineria — Verger d'amandiers, oliviers et ruches en permaculture au nord de la Tunisie"
+            alt="ضيعة فينيريا — بستان لوز، زيتون ومناحل بالزراعة المستدامة في شمال تونس"
             fill
             priority
             style={{ objectFit: 'cover', objectPosition: 'center 35%' }}
@@ -68,28 +67,28 @@ export default async function Home() {
 
         {/* Content */}
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: 'clamp(56px, 8vh, 96px)', paddingTop: 120 }}>
-          <div style={{ maxWidth: 760 }}>
+          <div style={{ maxWidth: 780 }}>
             <span className="eyebrow animate-fade-up" style={{ color: '#f1c98d', marginBottom: 20, display: 'inline-block' }}>
-              Ferme intégrée en permaculture · Nord de la Tunisie
+              مزرعة بيئية متكاملة بالزراعة المستدامة · شمال تونس
             </span>
 
             <h1
               className="display animate-fade-up animate-delay-1"
-              style={{ color: '#fff', margin: '20px 0 28px', maxWidth: 720, textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
+              style={{ color: '#fff', margin: '20px 0 28px', maxWidth: 740, textShadow: '0 2px 24px rgba(0,0,0,0.3)', lineHeight: 1.25 }}
             >
-              Produire en sec, sans intrants, en faisant vivre le territoire.
+              الإنتاج في النظام الجاف، بلا مدخلات كيميائية، وإحياء للمنطقة وأهلها.
             </h1>
 
             <p
               className="animate-fade-up animate-delay-2"
-              style={{ fontSize: 18, lineHeight: 1.75, color: 'rgba(255,255,255,0.82)', maxWidth: 580, marginBottom: 38 }}
+              style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(255,255,255,0.85)', maxWidth: 620, marginBottom: 38 }}
             >
-              Amandiers, oliviers, romarin et ruches dans un système où le déchet de l'un est la ressource vitale de l'autre. Trois activités : nos produits, nos services agricoles, et l'Académie Vineria.
+              أشجار لوز، زيتون، مزارع إكليل جبل وخلايا نحل ضمن منظومة حية متكاملة حيث مخلفات كل نشاط تمثل المورد الحيوي للآخر. ثلاث شعب مترابطة: محاصيلنا الأصيلة، خدماتنا الفلاحية، وأكاديمية فينيريا.
             </p>
 
             {/* Reassurance badges */}
             <div className="animate-fade-up animate-delay-2" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 36 }}>
-              {['100% Régime Sec', 'Zéro Intrant Chimique', 'Traçabilité par Lot', 'Parité Salariale'].map((b) => (
+              {['100% نظام جاف', 'صفر مدخلات كيميائية', 'تتبع دقيق للمصدر', 'مساواة في الأجر'].map((b) => (
                 <span
                   key={b}
                   style={{
@@ -99,9 +98,9 @@ export default async function Home() {
                     padding: '6px 14px',
                     fontSize: 12,
                     fontWeight: 600,
-                    color: 'rgba(255,255,255,0.88)',
+                    color: 'rgba(255,255,255,0.92)',
                     backdropFilter: 'blur(8px)',
-                    letterSpacing: '0.03em',
+                    letterSpacing: '0.02em',
                   }}
                 >
                   {b}
@@ -111,10 +110,10 @@ export default async function Home() {
 
             <div className="animate-fade-up animate-delay-3 hero-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
               <Link href="/produits" className="btn btn--ochre" id="hero-cta-produits">
-                Découvrir nos récoltes <ArrowUpRight size={16} />
+                اكتشف محاصيلنا <ArrowUpRight size={16} />
               </Link>
               <Link href="/a-propos" className="btn btn--ghost" id="hero-cta-methode">
-                Notre méthode en sec
+                منهجيتنا في النظام الجاف
               </Link>
             </div>
           </div>
@@ -126,24 +125,25 @@ export default async function Home() {
       ══════════════════════════════════════════ */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 56px' }}>
-            <span className="eyebrow">Notre modèle</span>
+          <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 56px' }}>
+            <span className="eyebrow">نموذجنا البيئي</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: '0 0 18px' }}>
-              Rien ne sort seul.
+              لا شيء يخرج بمفرده.
             </h2>
             <p className="lead">
-              C'est le cœur de notre modèle. Chaque atelier de la ferme alimente les autres. Le déchet de l'un est la ressource de l'autre.
+              هذا هو جوهر نموذجنا الفلاحي. كل ورشة ونشاط في المزرعة يغذي الأنشطة الأخرى. ما يُعد نفاية لدى أحدهم هو مورد أساسي للآخر.
             </p>
           </div>
 
-          {/* Workshop cards */}
+          {/* Workshop cards — cards are mirrored RTL */}
           <div className="grid-responsive-3" style={{ gap: 18, marginBottom: 48 }}>
             {PERMACULTURE_WORKSHOPS.map((workshop) => (
               <div
                 key={workshop.id}
                 className="card circularity-card"
-                style={{ padding: 26, border: '1.5px solid var(--line-light)' }}
+                dir="rtl"
+                style={{ padding: 26, border: '1.5px solid var(--line-light)', direction: 'rtl', textAlign: 'right' }}
               >
                 <div
                   style={{
@@ -164,18 +164,18 @@ export default async function Home() {
                    workshop.id === 'romarin' ? '🌿' :
                    workshop.id === 'ruches' ? '🍯' : '🌱'}
                 </div>
-                <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{workshop.name}</span>
-                <h3 style={{ fontSize: 16, fontWeight: 600, margin: '10px 0 8px', fontFamily: "'Playfair Display', Georgia, serif" }}>
+                <span className="eyebrow eyebrow--green" style={{ fontSize: 11 }}>{workshop.name}</span>
+                <h3 style={{ fontSize: 17, fontWeight: 700, margin: '10px 0 8px', color: 'var(--ink)' }}>
                   {workshop.produces}
                 </h3>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 14px' }}>
                   {workshop.details}
                 </p>
                 <div style={{ padding: '12px 14px', background: 'var(--green-pale)', borderRadius: 8, border: '1px solid rgba(42,82,54,0.10)' }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--green)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 5 }}>
-                    Apport au système
+                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', letterSpacing: '0.04em', marginBottom: 5 }}>
+                    الإسهام في المنظومة
                   </div>
-                  <p style={{ fontSize: 12.5, color: 'var(--green-deep)', lineHeight: 1.55, margin: 0 }}>
+                  <p style={{ fontSize: 12.5, color: 'var(--green-deep)', lineHeight: 1.6, margin: 0 }}>
                     {workshop.bringsToSystem}
                   </p>
                 </div>
@@ -183,34 +183,37 @@ export default async function Home() {
             ))}
           </div>
 
-          {/* Circular principle statement */}
+          {/* Circular principle statement banner */}
           <div
             className="card--forest grid-responsive-2"
+            dir="rtl"
             style={{
               borderRadius: 16,
               padding: 'clamp(28px, 5vw, 52px)',
               alignItems: 'center',
+              direction: 'rtl',
+              textAlign: 'right',
             }}
           >
             <div>
-              <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'block' }}>Principe circulaire</span>
-              <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}>
-                La paille de distillation retourne au compost.
+              <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'block' }}>المبدأ الدائري المستدام</span>
+              <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 36px)', lineHeight: 1.3 }}>
+                قش التقطير يعود إلى السماد العضوي.
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.75, fontSize: 15 }}>
-                La taille des oliviers protège le sol. Les abeilles augmentent la nouaison des amandiers. C'est ce qui rend le système viable en régime sec — et exactement ce que nous enseignons.
+              <p style={{ color: 'rgba(255,255,255,0.80)', lineHeight: 1.8, fontSize: 15 }}>
+                تقليم أشجار الزيتون يحمي التربة ويغذيها. والنحل يزيد من نسبة عقد ثمار اللوز. هذا التكامل الحيوي هو ما يجعل المنظومة منتجة ومستدامة في ظروف الجفاف — وهو بالضبط ما ندرسه وننقله.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                'Sol jamais nu — couverture végétale permanente',
-                'Zéro pompage de nappe phréatique',
-                'Compost 100% issu des résidus de la ferme',
-                'Aucun intrant chimique de synthèse depuis 2022',
+                'أرض مغطاة دوماً — غطاء نباتي وعضوي دائم',
+                'صفر استنزاف للطبقات المائية الجوفية',
+                'سماد عضوي 100% محضر من بقايا المزرعة',
+                'خلو تام من أي مدخلات كيميائية مصنعة منذ 2022',
               ].map((item) => (
-                <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <CheckCircle2 size={16} style={{ color: '#86efac', flexShrink: 0, marginTop: 2 }} />
-                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.55 }}>{item}</span>
+                <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                  <CheckCircle2 size={18} style={{ color: '#86efac', flexShrink: 0 }} />
+                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.88)', lineHeight: 1.55 }}>{item}</span>
                 </div>
               ))}
             </div>
@@ -225,15 +228,15 @@ export default async function Home() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">La récolte</span>
+              <span className="eyebrow">المحصول الطبيعي</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>Nos produits de terroir</h2>
-              <p style={{ color: 'var(--muted)', maxWidth: 480, lineHeight: 1.7, fontSize: 15 }}>
-                Huiles essentielles, miel cru, amandes en sec et huile d'olive — chaque lot tracé de la parcelle à la bouteille.
+              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>منتجاتنا الأصيلة من قلب الأرض</h2>
+              <p style={{ color: 'var(--muted)', maxWidth: 500, lineHeight: 1.7, fontSize: 15 }}>
+                زيوت عطرية نقية، عسل طبيعي خام، لوز مجفف طبيعياً وزيت زيتون بكر ممتاز — كل دفعة موثقة من الحقل إلى القارورة.
               </p>
             </div>
             <Link href="/produits" className="btn btn--secondary" id="home-see-all-products">
-              Tout le catalogue <ArrowUpRight size={15} />
+              كامل الكتالوج <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -250,11 +253,11 @@ export default async function Home() {
       ══════════════════════════════════════════ */}
       <section className="section" style={{ background: 'linear-gradient(160deg, #f0ebe0 0%, var(--cream) 100%)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
-            <span className="eyebrow">Nos engagements</span>
+          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 52px' }}>
+            <span className="eyebrow">التزاماتنا الميدانية</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: 0 }}>
-              Nos valeurs, traduites en pratiques.
+              قيمنا، مترجمة إلى ممارسات حقيقية.
             </h2>
           </div>
 
@@ -263,29 +266,39 @@ export default async function Home() {
               <div
                 key={pillar.id}
                 className="card"
-                style={{ padding: 26, border: '1.5px solid var(--line-light)', position: 'relative', overflow: 'hidden' }}
+                dir="rtl"
+                style={{
+                  padding: 26,
+                  border: '1.5px solid var(--line-light)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  direction: 'rtl',
+                  textAlign: 'right',
+                }}
               >
                 <div
                   style={{
                     position: 'absolute',
-                    top: 0, right: 0,
-                    width: 80, height: 80,
+                    top: 0,
+                    left: 0,
+                    width: 80,
+                    height: 80,
                     background: i % 2 === 0 ? 'var(--green-pale)' : 'var(--amber-pale)',
-                    borderRadius: '0 0 0 100%',
+                    borderRadius: '0 0 100% 0',
                     opacity: 0.5,
                   }}
                 />
-                <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>0{i + 1}</span>
-                <h3 style={{ fontSize: 17, fontWeight: 600, margin: '12px 0 6px', fontFamily: "'Playfair Display', Georgia, serif" }}>
+                <span className="eyebrow eyebrow--green" style={{ fontSize: 11 }}>0{i + 1}</span>
+                <h3 style={{ fontSize: 17, fontWeight: 700, margin: '12px 0 6px', color: 'var(--ink)' }}>
                   {pillar.title}
                 </h3>
-                <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px' }}>{pillar.subtitle}</p>
+                <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px', lineHeight: 1.45 }}>{pillar.subtitle}</p>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 16px' }}>
                   {pillar.description.slice(0, 160)}…
                 </p>
                 {pillar.statBadge && (
                   <span className="badge badge--green">
-                    <Leaf size={11} /> {pillar.statBadge}
+                    <Leaf size={12} /> {pillar.statBadge}
                   </span>
                 )}
               </div>
@@ -301,15 +314,15 @@ export default async function Home() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">L'accompagnement</span>
+              <span className="eyebrow">المرافقة والتأهيل</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>Services & Académie Vineria</h2>
-              <p style={{ color: 'var(--muted)', maxWidth: 520, lineHeight: 1.7, fontSize: 15 }}>
-                Formation paysanne sur le terrain, accompagnement technique, distillation partagée, visites et parrainage d'arbre ou de ruche.
+              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>خدماتنا وأكاديمية فينيريا</h2>
+              <p style={{ color: 'var(--muted)', maxWidth: 540, lineHeight: 1.7, fontSize: 15 }}>
+                تكوين فلاحي تطبيقي في الميدان، مرافقة تقنية للتحول الإيكولوجي، تقطير مشترك، زيارات تعليمية، ورعاية الأشجار والخلايا.
               </p>
             </div>
             <Link href="/services" className="btn btn--secondary" id="home-see-all-services">
-              Tous nos services <ArrowUpRight size={15} />
+              جميع خدماتنا <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -332,14 +345,14 @@ export default async function Home() {
         }}
       >
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: 580, margin: '0 auto 56px' }}>
-            <span className="eyebrow" style={{ color: '#f1c98d' }}>Impact vérifié</span>
+          <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto 56px' }}>
+            <span className="eyebrow" style={{ color: '#f1c98d' }}>أثر موثق ومثبت</span>
             <div style={{ width: 40, height: 3, background: 'rgba(241,201,141,0.5)', borderRadius: 2, margin: '14px auto' }} />
-            <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 16px' }}>
-              Des chiffres vérifiables et datés.
+            <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 16px', lineHeight: 1.3 }}>
+              أرقام حقيقية قابلة للتحقق ومؤرخة.
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, fontSize: 15 }}>
-              Un chiffre rond et invérifiable coûte plus cher en crédibilité qu'une ligne laissée de côté.
+            <p style={{ color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, fontSize: 15 }}>
+              الرقم الدقيق الموثق ميدانياً أصدق تعبيراً وأعلى مصداقية من الوعود الإنشائية العامة.
             </p>
           </div>
 
@@ -347,12 +360,16 @@ export default async function Home() {
             {IMPACT_METRICS.map((metric) => (
               <div
                 key={metric.id}
+                className="card"
+                dir="rtl"
                 style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.10)',
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.12)',
                   borderRadius: 14,
                   padding: '28px 26px',
                   backdropFilter: 'blur(12px)',
+                  direction: 'rtl',
+                  textAlign: 'right',
                 }}
               >
                 <div
@@ -361,26 +378,25 @@ export default async function Home() {
                 >
                   {metric.value}
                 </div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', margin: '2px 0 10px' }}>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontWeight: 700, margin: '4px 0 10px' }}>
                   {metric.unit}
                 </div>
-                <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', margin: '0 0 6px', lineHeight: 1.4 }}>{metric.label}</div>
-                <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, margin: '0 0 14px' }}>{metric.sublabel}</p>
+                <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 6px', lineHeight: 1.4 }}>{metric.label}</div>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: '0 0 16px' }}>{metric.sublabel}</p>
                 <span
                   style={{
                     display: 'inline-block',
-                    fontSize: 10,
+                    fontSize: 11,
                     fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    padding: '4px 10px',
+                    letterSpacing: '0.04em',
+                    padding: '4px 12px',
                     borderRadius: 100,
                     background: metric.status === 'verifie' ? 'rgba(134,239,172,0.18)' : 'rgba(241,201,141,0.18)',
                     color: metric.status === 'verifie' ? '#86efac' : '#f1c98d',
                     border: `1px solid ${metric.status === 'verifie' ? 'rgba(134,239,172,0.3)' : 'rgba(241,201,141,0.3)'}`,
                   }}
                 >
-                  {metric.status === 'verifie' ? '✓ Vérifié' : 'Campagne 2025–2026'}
+                  {metric.status === 'verifie' ? '✓ موثق ميدانياً' : 'موسم 2025–2026'}
                 </span>
               </div>
             ))}
@@ -393,12 +409,12 @@ export default async function Home() {
       ══════════════════════════════════════════ */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
-            <span className="eyebrow">Partenariats</span>
+          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 52px' }}>
+            <span className="eyebrow">الشراكات ذات المعنى</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
-            <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>Ce que nous cherchons</h2>
+            <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>ما نبحث عنه في شركائنا</h2>
             <p className="lead">
-              Nous ne cherchons pas de partenaires génériques. Nous cherchons des acteurs qui comprennent ce que signifie produire en régime sec dans la Méditerranée du XXIe siècle.
+              لا نبحث عن شراكات تقليدية، بل عن فاعلين يدركون قيمة وتحديات الإنتاج بالنظام الجاف في حوض المتوسط في القرن الحادي والعشرين.
             </p>
           </div>
 
@@ -407,10 +423,13 @@ export default async function Home() {
               <div
                 key={track.id}
                 className="card"
+                dir="rtl"
                 style={{
                   padding: 30,
                   border: '1.5px solid var(--line-light)',
                   borderTop: `4px solid ${i === 0 ? 'var(--ochre)' : i === 1 ? 'var(--green)' : 'var(--green-mid)'}`,
+                  direction: 'rtl',
+                  textAlign: 'right',
                 }}
               >
                 <span
@@ -424,10 +443,10 @@ export default async function Home() {
                 >
                   {track.tag}
                 </span>
-                <h3 style={{ fontSize: 17, fontWeight: 600, margin: '0 0 8px', fontFamily: "'Playfair Display', Georgia, serif", lineHeight: 1.35 }}>
+                <h3 style={{ fontSize: 17, fontWeight: 700, margin: '0 0 8px', lineHeight: 1.4, color: 'var(--ink)' }}>
                   {track.title}
                 </h3>
-                <p style={{ fontSize: 12, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 14px' }}>
+                <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 14px' }}>
                   {track.target}
                 </p>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 22px' }}>
@@ -465,7 +484,7 @@ export default async function Home() {
             <div style={{ position: 'relative', minHeight: 320 }}>
               <Image
                 src="/images/academy.jpg"
-                alt="L'Académie Vineria — Formation en permaculture sur le terrain en Tunisie"
+                alt="أكاديمية فينيريا — تكوين تطبيقي في الزراعة المستدامة في تونس"
                 fill
                 style={{ objectFit: 'cover' }}
               />
@@ -482,23 +501,23 @@ export default async function Home() {
               }}
             >
               <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'inline-block' }}>
-                L'Académie Vineria
+                أكاديمية فينيريا
               </span>
               <h2
                 className="display--md serif"
-                style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}
+                style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 36px)', lineHeight: 1.3 }}
               >
-                Former les paysans, c'est notre métier.
+                تكوين الفلاحين وتمكينهم هو صلب رسالتنا.
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 30px' }}>
-                Sessions courtes, sur le terrain, en dialecte local, avec suivi individualisé sur les parcelles des participants. Public prioritaire : petits exploitants, femmes rurales, jeunes en installation.
+              <p style={{ color: 'rgba(255,255,255,0.80)', fontSize: 15, lineHeight: 1.8, margin: '0 0 30px' }}>
+                دورات قصيرة، تطبيقية في الحقل، بالعامية التونسية، مع متابعة فردية لحقول المتدربين. الفئات ذات الأولوية: صغار الفلاحين، النساء الريفيات، والشباب الراغبون في الاستقرار الفلاحي.
               </p>
               <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <Link href="/services" className="btn btn--ochre" id="academy-cta">
-                  Voir les modules <ArrowUpRight size={15} />
+                  استكشاف الدورات <ArrowUpRight size={15} />
                 </Link>
                 <Link href="/contact" className="btn btn--ghost" id="academy-contact">
-                  S'inscrire ou financer
+                  التسجيل أو تمويل منحة
                 </Link>
               </div>
             </div>

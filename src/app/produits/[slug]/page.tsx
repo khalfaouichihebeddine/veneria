@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { CheckCircle2, ArrowLeft, ArrowUpRight, MapPin, Beaker, Package } from 'lucide-react';
+import { CheckCircle2, ArrowRight, ArrowUpRight, MapPin, Beaker, Package } from 'lucide-react';
 import { api } from '@/api';
 import { VINERIA_PRODUCTS } from '@/lib/vineria-data';
 import type { Metadata } from 'next';
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const products = VINERIA_PRODUCTS;
   const product = products.find((p) => p.slug === slug);
   return {
-    title: product ? `${product.name} | VINERIA` : 'Produit | VINERIA',
+    title: product ? `${product.name} | فينيريا` : 'المنتج | فينيريا',
     description: product?.description?.slice(0, 160),
   };
 }
@@ -23,7 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductDetail({ params }: Props) {
   const { slug } = await params;
 
-  // Try live data, fall back to static
   let product: Awaited<ReturnType<typeof api.getProduct>>;
   try {
     product = await api.getProduct(slug);
@@ -31,7 +30,6 @@ export default async function ProductDetail({ params }: Props) {
     product = undefined;
   }
   if (!product) {
-    // Fallback from static data
     const found = VINERIA_PRODUCTS.find((p) => p.slug === slug);
     if (!found) notFound();
     product = found as unknown as typeof product;
@@ -50,11 +48,11 @@ export default async function ProductDetail({ params }: Props) {
               gap: 6,
               color: 'var(--muted)',
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: 600,
               transition: 'color 0.2s',
             }}
           >
-            <ArrowLeft size={15} /> Retour au catalogue
+            <ArrowRight size={16} /> العودة إلى كتالوج المنتجات
           </Link>
         </div>
       </section>
@@ -109,16 +107,15 @@ export default async function ProductDetail({ params }: Props) {
                     style={{
                       position: 'absolute',
                       top: 16,
-                      left: 16,
-                      background: 'rgba(255,255,255,0.90)',
+                      right: 16,
+                      background: 'rgba(255,255,255,0.92)',
                       backdropFilter: 'blur(8px)',
                       border: '1px solid var(--line-light)',
                       borderRadius: 100,
                       padding: '5px 14px',
                       fontSize: 11,
                       fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
                       color: 'var(--green)',
                     }}
                   >
@@ -127,13 +124,13 @@ export default async function ProductDetail({ params }: Props) {
                 )}
               </div>
 
-              {/* Characteristics grid */}
+              {/* Characteristics card — mirrored RTL */}
               {product.characteristics && product.characteristics.length > 0 && (
                 <div style={{ marginTop: 24 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>
-                    Caractéristiques
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--muted)', marginBottom: 14 }}>
+                    المواصفات والخصائص
                   </div>
-                  <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                  <div className="card" dir="rtl" style={{ padding: 0, overflow: 'hidden', direction: 'rtl', textAlign: 'right' }}>
                     {product.characteristics.map((char, i) => (
                       <div
                         key={char.label}
@@ -146,8 +143,8 @@ export default async function ProductDetail({ params }: Props) {
                           alignItems: 'center',
                         }}
                       >
-                        <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 500 }}>{char.label}</span>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink-soft)', textAlign: 'right', maxWidth: '60%' }}>{char.value}</span>
+                        <span style={{ fontSize: 13.5, color: 'var(--muted)', fontWeight: 600 }}>{char.label}</span>
+                        <span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--ink-soft)', textAlign: 'left', maxWidth: '60%' }}>{char.value}</span>
                       </div>
                     ))}
                   </div>
@@ -158,18 +155,18 @@ export default async function ProductDetail({ params }: Props) {
             {/* Details */}
             <div style={{ position: 'sticky', top: 96 }}>
               <span className="eyebrow eyebrow--green" style={{ display: 'block', marginBottom: 14 }}>
-                Produit Vineria — Traçabilité garantie
+                منتجات فينيريا — تتبع معتمد ومضمون
               </span>
 
               <h1
                 className="display--md serif"
-                style={{ margin: '0 0 12px', lineHeight: 1.2, fontSize: 'clamp(24px, 3.5vw, 42px)' }}
+                style={{ margin: '0 0 12px', lineHeight: 1.25, fontSize: 'clamp(24px, 3.5vw, 38px)' }}
               >
                 {product.name}
               </h1>
 
               {product.tagline && (
-                <p style={{ color: 'var(--ochre)', fontWeight: 600, fontSize: 14, margin: '0 0 20px', lineHeight: 1.5 }}>
+                <p style={{ color: 'var(--ochre)', fontWeight: 600, fontSize: 14.5, margin: '0 0 20px', lineHeight: 1.5 }}>
                   {product.tagline}
                 </p>
               )}
@@ -178,56 +175,57 @@ export default async function ProductDetail({ params }: Props) {
                 {product.description}
               </p>
 
-              {/* Meta pills */}
+              {/* Meta info */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
                 {product.origin && (
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <MapPin size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <MapPin size={16} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 3 }} />
                     <div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>Origine</span>
-                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.origin}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.04em', display: 'block' }}>المنشأ الجغرافي</span>
+                      <span style={{ fontSize: 14, color: 'var(--ink-soft)', fontWeight: 500 }}>{product.origin}</span>
                     </div>
                   </div>
                 )}
                 {product.method && (
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <Beaker size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <Beaker size={16} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 3 }} />
                     <div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>Méthode</span>
-                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.method}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.04em', display: 'block' }}>طريقة الاستخلاص</span>
+                      <span style={{ fontSize: 14, color: 'var(--ink-soft)', fontWeight: 500 }}>{product.method}</span>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Packaging */}
+              {/* Packaging card — mirrored RTL */}
               {product.packaging && (
                 <div
+                  className="card"
+                  dir="rtl"
                   style={{
-                    background: 'var(--paper)',
-                    border: '1.5px solid var(--line-light)',
-                    borderRadius: 12,
                     padding: '18px 20px',
                     marginBottom: 28,
+                    direction: 'rtl',
+                    textAlign: 'right',
                   }}
                 >
-                  <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 12 }}>
-                    <Package size={14} style={{ color: 'var(--green)' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)' }}>Conditionnements</span>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+                    <Package size={15} style={{ color: 'var(--green)' }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--muted)' }}>أحجام التعبئة المتوفرة</span>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                      <CheckCircle2 size={13} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                      <CheckCircle2 size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                       <div>
-                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', display: 'block', marginBottom: 2 }}>DÉTAIL</span>
-                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.retail}</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--green)', display: 'block', marginBottom: 2 }}>تجزئة (أفراد ومتاجر)</span>
+                        <span style={{ fontSize: 13.5, color: 'var(--muted)' }}>{product.packaging.retail}</span>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                      <CheckCircle2 size={13} style={{ color: 'var(--ochre)', flexShrink: 0, marginTop: 2 }} />
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                      <CheckCircle2 size={15} style={{ color: 'var(--ochre)', flexShrink: 0, marginTop: 2 }} />
                       <div>
-                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ochre)', display: 'block', marginBottom: 2 }}>PROFESSIONNEL / B2B</span>
-                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.pro}</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--ochre)', display: 'block', marginBottom: 2 }}>محترفون ومصنعون / B2B والتصدير</span>
+                        <span style={{ fontSize: 13.5, color: 'var(--muted)' }}>{product.packaging.pro}</span>
                       </div>
                     </div>
                   </div>
@@ -248,25 +246,25 @@ export default async function ProductDetail({ params }: Props) {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>Prix indicatif</div>
-                  <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
-                    {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>د.ت</span>
+                  <div style={{ fontSize: 12, color: 'var(--muted)', fontWeight: 600, marginBottom: 4 }}>السعر التأشيري</div>
+                  <div style={{ fontSize: 32, fontWeight: 800, color: 'var(--green)', lineHeight: 1 }}>
+                    {product.price} <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--muted)' }}>د.ت</span>
                   </div>
-                  {product.unit && <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>/ {product.unit}</div>}
+                  {product.unit && <div style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 4 }}>/ {product.unit}</div>}
                 </div>
               </div>
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link href="/contact" className="btn btn--primary" style={{ flex: 1, justifyContent: 'center', minWidth: 160 }} id="product-inquiry-btn">
-                  Demander ce produit <ArrowUpRight size={15} />
+                  طلب هذا المنتج <ArrowUpRight size={15} />
                 </Link>
                 <Link href="/contact" className="btn btn--secondary btn--sm" style={{ whiteSpace: 'nowrap' }} id="product-b2b-btn">
-                  Devis B2B
+                  طلب عرض أسعار B2B
                 </Link>
               </div>
 
-              <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 16, lineHeight: 1.55 }}>
-                Réponse sous 48h. Échantillons disponibles pour commandes professionnelles.
+              <p style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 16, lineHeight: 1.6 }}>
+                الرد خلال 48 ساعة عمل. عينات متاحة للمهنيين ومسؤولي التوريد.
               </p>
             </div>
           </div>

@@ -6,9 +6,9 @@ import { VINERIA_PRODUCTS } from '@/lib/vineria-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Nos Produits de Terroir | VINERIA',
+  title: 'منتجاتنا الأصيلة من قلب الأرض | VINERIA',
   description:
-    'Huiles essentielles de romarin sauvage, miel cru de verger, amandes en régime sec et huile d\'olive vierge extra — tous traçables par lot et parcelle. Conditionnements détail et professionnels.',
+    'زيوت عطرية نقية من إكليل الجبل البري، عسل خام من البساتين، لوز بالزراعة الجافة وزيت زيتون بكر ممتاز — كلها قابلة للتتبع بدقة حسب القطعة والدفعة. تعبئة للتجزئة وللمحترفين.',
 };
 
 export default async function Products() {
@@ -21,11 +21,11 @@ export default async function Products() {
   }
 
   const categories = [
-    { id: 'all', label: 'Tous les produits' },
-    { id: 'huiles-essentielles', label: 'Huiles Essentielles' },
-    { id: 'ruche', label: 'Miel & Ruche' },
-    { id: 'amandes', label: 'Amandes' },
-    { id: 'huile-olive', label: 'Huile d\'Olive' },
+    { id: 'all', label: 'جميع المنتجات' },
+    { id: 'huiles-essentielles', label: 'الزيوت العطرية' },
+    { id: 'ruche', label: 'العسل ومنتجات النحل' },
+    { id: 'amandes', label: 'اللوز الأصيل' },
+    { id: 'huile-olive', label: 'زيت الزيتون' },
   ];
 
   return (
@@ -43,26 +43,26 @@ export default async function Products() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-            La récolte — Traçabilité par lot
+            المحصول الطبيعي — تتبع دقيق لكل دفعة
           </span>
-          <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 720 }}>
-            Nos produits de terroir.
+          <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 740, lineHeight: 1.25 }}>
+            منتجاتنا الأصيلة من قلب الأرض.
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 17, lineHeight: 1.75, maxWidth: 560, marginBottom: 32 }}>
-            Huiles essentielles de romarin distillées sur place, miels crus de verger, amandes en conduite sèche et huile d'olive vierge extra. Chaque lot rattaché à sa parcelle, sa date de récolte et son mode d'extraction.
+          <p style={{ color: 'rgba(255,255,255,0.80)', fontSize: 17, lineHeight: 1.8, maxWidth: 620, marginBottom: 32 }}>
+            زيوت عطرية نقية من إكليل الجبل مقطرة في المزرعة، عسل خام من البساتين، لوز بالزراعة الجافة وزيت زيتون بكر ممتاز. كل دفعة ترتبط بقطعتها الأرضية، تاريخ حصادها وطريقة استخلاصها.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {['Traçabilité parcellaire', 'Conditionnements détail & pro', '100% sans intrant chimique', 'Export possible'].map((b) => (
+            {['تتبع قطاعي دقيق', 'تعبئة للتجزئة وللمحترفين', '100% دون مدخلات كيميائية', 'جاهز للتصدير'].map((b) => (
               <span
                 key={b}
                 style={{
-                  background: 'rgba(255,255,255,0.10)',
-                  border: '1px solid rgba(255,255,255,0.20)',
+                  background: 'rgba(255,255,255,0.12)',
+                  border: '1px solid rgba(255,255,255,0.22)',
                   borderRadius: 100,
                   padding: '6px 14px',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'rgba(255,255,255,0.85)',
+                  color: 'rgba(255,255,255,0.92)',
                 }}
               >
                 {b}
@@ -85,11 +85,11 @@ export default async function Products() {
             gap: 12,
           }}
         >
-          <p style={{ fontSize: 14, color: 'var(--ochre-warm)', fontWeight: 500 }}>
-            🏪 <strong>Vous êtes distributeur, épicerie fine ou cosmétique bio ?</strong> Demandez notre catalogue professionnel et nos conditions B2B.
+          <p style={{ fontSize: 14, color: 'var(--ochre-warm)', fontWeight: 600 }}>
+            🏪 <strong>هل أنت موزع أو متجر أغذية طبيعية أو مصنع مستحضرات تجميل؟</strong> اطلب الكتالوج المهني وشروط الشراء بالجملة B2B.
           </p>
           <Link href="/contact" className="btn btn--ochre btn--sm" id="catalog-b2b-cta">
-            Catalogue B2B <ArrowUpRight size={14} />
+            كتالوج B2B المهني <ArrowUpRight size={14} />
           </Link>
         </div>
       </div>
@@ -120,9 +120,9 @@ export default async function Products() {
                 color: 'var(--muted)',
               }}
             >
-              <p style={{ fontSize: 18 }}>La collection sera bientôt disponible.</p>
+              <p style={{ fontSize: 18 }}>المجموعة ستتوفر قريباً.</p>
               <Link href="/contact" className="btn btn--primary" style={{ marginTop: 24, display: 'inline-flex' }}>
-                Nous contacter
+                تواصل معنا
               </Link>
             </div>
           )}
@@ -134,15 +134,15 @@ export default async function Products() {
         <div className="container">
           <div className="grid-4">
             {[
-              { icon: '🗺️', title: 'Parcelle d\'origine', desc: 'Chaque lot est rattaché à sa parcelle géolocalisée sur la ferme.' },
-              { icon: '📅', title: 'Date de récolte', desc: 'La date de récolte, les conditions et la durée de distillation sont indiquées.' },
-              { icon: '🔬', title: 'Analyses disponibles', desc: 'Chromatographies et bulletins physico-chimiques disponibles sur demande.' },
-              { icon: '📦', title: 'Deux formats', desc: 'Conditionnements détail pour particuliers et volumes professionnels pour transformateurs.' },
+              { icon: '🗺️', title: 'القطعة الأرضية الأصلية', desc: 'كل دفعة إنتاج ترتبط بقطعتها الأرضية المحددة بدقة في المزرعة.' },
+              { icon: '📅', title: 'تاريخ الحصاد المؤرخ', desc: 'تاريخ الجني الدقيق، الأحوال الجوية، ومدة التقطير مدونة بكل شفافية.' },
+              { icon: '🔬', title: 'تحاليل مخبرية معتمدة', desc: 'شهادات التحليل الفيزيائي الكيميائي والكروماتوغرافي متوفرة عند الطلب.' },
+              { icon: '📦', title: 'تعبئة مرنة ثنائية', desc: 'أحجام أنيقة للتجزئة للمستهلكين، وكميات مهنية مخصصة للمصنعين.' },
             ].map((item) => (
               <div key={item.title} style={{ textAlign: 'center', padding: '24px 16px' }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 8 }}>{item.title}</div>
-                <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6 }}>{item.desc}</p>
+                <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--ink)', marginBottom: 8 }}>{item.title}</div>
+                <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65 }}>{item.desc}</p>
               </div>
             ))}
           </div>

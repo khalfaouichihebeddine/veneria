@@ -5,13 +5,13 @@ import { Send, Mail, MapPin, Phone, Clock, ArrowUpRight } from 'lucide-react';
 import { PARTNERSHIP_TRACKS, VINERIA_INFO } from '@/lib/vineria-data';
 
 const INTEREST_OPTIONS = [
-  { value: 'commercial', label: '🏪 Distribution / Achat B2B / Export' },
-  { value: 'bailleur', label: '💼 Financement & Partenariat Technique' },
-  { value: 'recherche', label: '🔬 Recherche Agronomique' },
-  { value: 'formation', label: '🎓 S\'inscrire à l\'Académie Vineria' },
-  { value: 'parrainage', label: '🌳 Parrainage d\'amandier ou de ruche' },
-  { value: 'visite', label: '👁 Visite Pédagogique' },
-  { value: 'autre', label: 'Autre' },
+  { value: 'commercial', label: '🏪 توزيع / شراء بالجملة B2B / تصدير' },
+  { value: 'bailleur', label: '💼 تمويل وشراكة فنية وتنموية' },
+  { value: 'recherche', label: '🔬 بحث علمي ودراسات زراعية' },
+  { value: 'formation', label: '🎓 التسجيل في دورات أكاديمية فينيريا' },
+  { value: 'parrainage', label: '🌳 رعاية شجرة لوز أو خلية نحل' },
+  { value: 'visite', label: '👁 زيارة تربوية وميدانية للمزرعة' },
+  { value: 'autre', label: 'استفسار آخر' },
 ];
 
 export default function Contact() {
@@ -35,7 +35,7 @@ export default function Contact() {
       if (!response.ok) throw new Error('Erreur réseau');
       setSent(true);
     } catch {
-      setError('Impossible d\'envoyer le message. Réessayez ou écrivez-nous directement par e-mail.');
+      setError('تعذر إرسال الرسالة في الوقت الحالي. يرجى المحاولة مجدداً أو مراسلتنا مباشرة عبر البريد الإلكتروني.');
     } finally {
       setLoading(false);
     }
@@ -55,15 +55,15 @@ export default function Contact() {
       >
         <div style={{ position: 'absolute', top: -80, right: -80, width: 360, height: 360, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ maxWidth: 680 }}>
+          <div style={{ maxWidth: 700 }}>
             <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-              Contact & Partenariats
+              اتصل بنا وشراكات
             </span>
-            <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', fontSize: 'clamp(32px, 6vw, 72px)' }}>
-              Parlons de la ferme.
+            <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', fontSize: 'clamp(32px, 6vw, 68px)', lineHeight: 1.25 }}>
+              لنتحدث عن المزرعة ومشاريعها.
             </h1>
-            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 17, lineHeight: 1.75 }}>
-              Distributeur, bailleur de fonds, chercheur, apprenant ou curieux — nous répondons dans les deux jours ouvrables avec attention.
+            <p style={{ color: 'rgba(255,255,255,0.80)', fontSize: 17, lineHeight: 1.8 }}>
+              موزعاً، جهة مانحة، باحثاً، متعلماً أو مهتماً — نسعد بالإجابة عن استفساراتك بكل عناية خلال يومي عمل.
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function Contact() {
       <section style={{ background: 'var(--paper)', padding: '36px 0' }}>
         <div className="container">
           <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>Nous cherchons des partenaires :</span>
+            <span style={{ fontSize: 13.5, color: 'var(--muted)', fontWeight: 600 }}>نبحث عن شركاء فاعلين في مجالات:</span>
             {PARTNERSHIP_TRACKS.map((t) => (
               <span key={t.id} className="badge badge--green">{t.tag}</span>
             ))}
@@ -93,10 +93,10 @@ export default function Contact() {
           >
             {/* Left — Contact info */}
             <div>
-              <span className="eyebrow">Informations de contact</span>
+              <span className="eyebrow">معلومات التواصل المباشر</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
               <h2 className="display--md serif" style={{ margin: '16px 0 20px', fontSize: 'clamp(22px, 3vw, 36px)' }}>
-                La ferme Vineria
+                مزرعة فينيريا
               </h2>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
@@ -113,10 +113,10 @@ export default function Contact() {
                       flexShrink: 0,
                     }}
                   >
-                    <MapPin size={17} style={{ color: 'var(--green)' }} />
+                    <MapPin size={18} style={{ color: 'var(--green)' }} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 4 }}>Adresse</div>
+                    <div style={{ fontWeight: 700, fontSize: 14.5, color: 'var(--ink)', marginBottom: 4 }}>العنوان والموقع</div>
                     <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>{VINERIA_INFO.address}</div>
                   </div>
                 </div>
@@ -134,12 +134,12 @@ export default function Contact() {
                       flexShrink: 0,
                     }}
                   >
-                    <Phone size={17} style={{ color: 'var(--green)' }} />
+                    <Phone size={18} style={{ color: 'var(--green)' }} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 4 }}>Téléphone</div>
-                    <a href="tel:+21671890120" style={{ fontSize: 14, color: 'var(--muted)', display: 'block' }}>{VINERIA_INFO.phone.split('/')[0].trim()}</a>
-                    <a href="tel:+21698450320" style={{ fontSize: 14, color: 'var(--muted)' }}>{VINERIA_INFO.phone.split('/')[1].trim()}</a>
+                    <div style={{ fontWeight: 700, fontSize: 14.5, color: 'var(--ink)', marginBottom: 4 }}>الهاتف</div>
+                    <a href="tel:+21671890120" style={{ fontSize: 14, color: 'var(--muted)', display: 'block', direction: 'ltr', textAlign: 'left' }}>+216 71 890 120</a>
+                    <a href="tel:+21698450320" style={{ fontSize: 14, color: 'var(--muted)', display: 'block', direction: 'ltr', textAlign: 'left' }}>+216 98 450 320</a>
                   </div>
                 </div>
 
@@ -156,10 +156,10 @@ export default function Contact() {
                       flexShrink: 0,
                     }}
                   >
-                    <Mail size={17} style={{ color: 'var(--green)' }} />
+                    <Mail size={18} style={{ color: 'var(--green)' }} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 4 }}>E-mail</div>
+                    <div style={{ fontWeight: 700, fontSize: 14.5, color: 'var(--ink)', marginBottom: 4 }}>البريد الإلكتروني</div>
                     <a href={`mailto:${VINERIA_INFO.email}`} style={{ fontSize: 14, color: 'var(--muted)' }}>{VINERIA_INFO.email}</a>
                   </div>
                 </div>
@@ -177,10 +177,10 @@ export default function Contact() {
                       flexShrink: 0,
                     }}
                   >
-                    <Clock size={17} style={{ color: 'var(--green)' }} />
+                    <Clock size={18} style={{ color: 'var(--green)' }} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 4 }}>Horaires</div>
+                    <div style={{ fontWeight: 700, fontSize: 14.5, color: 'var(--ink)', marginBottom: 4 }}>أوقات العمل والاستقبال</div>
                     <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>{VINERIA_INFO.hours}</div>
                   </div>
                 </div>
@@ -188,14 +188,14 @@ export default function Contact() {
 
               {/* Partnership quick links */}
               <div style={{ borderTop: '1px solid var(--line-light)', paddingTop: 28 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>
-                  Liens rapides
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--muted)', marginBottom: 16 }}>
+                  روابط سريعة
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
-                    ['Nos produits & catalogue', '/produits'],
-                    ['Services & Académie Vineria', '/services'],
-                    ['Notre méthode permacole', '/a-propos'],
+                    ['منتجاتنا والكتالوج', '/produits'],
+                    ['خدماتنا وأكاديمية فينيريا', '/services'],
+                    ['منهجيتنا في الزراعة المعمرة', '/a-propos'],
                   ].map(([label, href]) => (
                     <Link
                       key={href}
@@ -204,65 +204,75 @@ export default function Contact() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: 6,
-                        fontSize: 14,
+                        fontSize: 14.5,
                         color: 'var(--green)',
                         fontWeight: 600,
                       }}
                     >
-                      {label} <ArrowUpRight size={13} />
+                      {label} <ArrowUpRight size={14} style={{ transform: 'scaleX(-1)' }} />
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* Right — Form */}
+            {/* Right — Form Card (mirrored RTL) */}
             <div>
               {sent ? (
                 <div
                   className="card"
+                  dir="rtl"
                   style={{
                     padding: 48,
                     textAlign: 'center',
                     border: '2px solid var(--green-pale)',
+                    direction: 'rtl',
                   }}
                 >
                   <div style={{ fontSize: 56, marginBottom: 20 }}>✅</div>
                   <h2 className="display--md serif" style={{ fontSize: 26, margin: '0 0 14px', color: 'var(--green)' }}>
-                    Message envoyé !
+                    تم إرسال رسالتك بنجاح!
                   </h2>
-                  <p style={{ color: 'var(--muted)', lineHeight: 1.7, marginBottom: 28 }}>
-                    Merci pour votre intérêt pour Vineria. Nous vous répondrons avec attention dans les deux jours ouvrables.
+                  <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: 28 }}>
+                    شكراً لاهتمامك بفينيريا. سنقوم بالرد عليك بعناية واهتمام خلال يومي عمل.
                   </p>
                   <Link href="/" className="btn btn--primary">
-                    Retour à l'accueil
+                    العودة إلى الصفحة الرئيسية
                   </Link>
                 </div>
               ) : (
                 <form
                   className="card"
-                  style={{ padding: 'clamp(24px, 4vw, 40px)', display: 'flex', flexDirection: 'column', gap: 22 }}
+                  dir="rtl"
+                  style={{
+                    padding: 'clamp(24px, 4vw, 40px)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 22,
+                    direction: 'rtl',
+                    textAlign: 'right',
+                  }}
                   onSubmit={submit}
                   id="contact-form"
                 >
                   <div>
-                    <h2 className="display--md serif" style={{ fontSize: 22, margin: '0 0 6px' }}>Envoyez-nous un message</h2>
-                    <p style={{ fontSize: 13.5, color: 'var(--muted)' }}>Réponse sous 48h ouvrables. Tous les champs marqués * sont obligatoires.</p>
+                    <h2 className="display--md serif" style={{ fontSize: 22, margin: '0 0 6px' }}>أرسل لنا رسالة</h2>
+                    <p style={{ fontSize: 13.5, color: 'var(--muted)' }}>الرد خلال 48 ساعة عمل. جميع الحقول التي تحمل علامة * إجبارية.</p>
                   </div>
 
                   <div className="grid-responsive-2" style={{ gap: 16 }}>
                     <label>
-                      Prénom & Nom *
+                      الاسم واللقب *
                       <input
                         required
                         name="name"
-                        placeholder="Fatima Ben Salah"
+                        placeholder="فاطمة بن صالح"
                         className="field"
                         id="contact-name"
                       />
                     </label>
                     <label>
-                      E-mail *
+                      البريد الإلكتروني *
                       <input
                         required
                         type="email"
@@ -270,22 +280,24 @@ export default function Contact() {
                         placeholder="fatima@example.com"
                         className="field"
                         id="contact-email"
+                        dir="ltr"
+                        style={{ textAlign: 'right' }}
                       />
                     </label>
                   </div>
 
                   <label>
-                    Organisation / Entreprise
+                    المؤسسة / الشركة / التعاونية
                     <input
                       name="organization"
-                      placeholder="Votre société, coopérative ou projet"
+                      placeholder="اسم شركتك أو مشروعك أو تعاونيتك الفلاحية"
                       className="field"
                       id="contact-org"
                     />
                   </label>
 
                   <label>
-                    Vous êtes... *
+                    طبيعة اهتمامك أو شراكتك *
                     <select
                       required
                       name="interestType"
@@ -294,7 +306,7 @@ export default function Contact() {
                       value={interest}
                       onChange={(e) => setInterest(e.target.value)}
                     >
-                      <option value="">Choisissez votre intérêt…</option>
+                      <option value="">اختر مجال اهتمامك…</option>
                       {INTEREST_OPTIONS.map((opt) => (
                         <option key={opt.value} value={opt.value}>{opt.label}</option>
                       ))}
@@ -302,22 +314,22 @@ export default function Contact() {
                   </label>
 
                   <label>
-                    Sujet *
+                    موضوع الرسالة *
                     <input
                       required
                       name="subject"
-                      placeholder="Demande d'échantillons / Inscription Académie / Parrainage…"
+                      placeholder="طلب عينات / تسجيل في الأكاديمية / رعاية…"
                       className="field"
                       id="contact-subject"
                     />
                   </label>
 
                   <label>
-                    Message *
+                    نص الرسالة *
                     <textarea
                       required
                       name="message"
-                      placeholder="Décrivez votre projet, vos besoins ou vos questions. Plus vous êtes précis, mieux nous pourrons vous répondre."
+                      placeholder="صف لنا مشروعك أو استفسارك أو طلبك بالتفصيل. كلما كنت أكثر دقة، كان بإمكاننا إفادتك بشكل أفضل."
                       className="field"
                       id="contact-message"
                       style={{ minHeight: 140, resize: 'vertical' }}
@@ -347,13 +359,13 @@ export default function Contact() {
                     style={{ justifyContent: 'center', opacity: loading ? 0.75 : 1 }}
                     id="contact-submit"
                   >
-                    {loading ? 'Envoi en cours…' : (
-                      <>Envoyer le message <Send size={15} /></>
+                    {loading ? 'جارٍ الإرسال…' : (
+                      <>إرسال الرسالة <Send size={15} style={{ transform: 'scaleX(-1)' }} /></>
                     )}
                   </button>
 
-                  <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', lineHeight: 1.55 }}>
-                    Vos données ne sont pas partagées avec des tiers. Elles sont utilisées uniquement pour vous répondre.
+                  <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', lineHeight: 1.6 }}>
+                    بياناتك محمية ولن تتم مشاركتها مع أي جهة خارجية. نستخدمها حصراً للرد على استفسارك.
                   </p>
                 </form>
               )}

@@ -136,16 +136,20 @@ const ARABIC_SERVICES: Record<string, Partial<Service>> = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('fr');
+  const [language, setLanguageState] = useState<Language>('ar');
 
   useEffect(() => {
     const stored = window.localStorage.getItem('vineria-language');
-    if (stored === 'ar' || stored === 'fr') setLanguageState(stored);
+    if (stored === 'ar' || stored === 'fr') {
+      setLanguageState(stored);
+    } else {
+      setLanguageState('ar');
+    }
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.dir = 'ltr';
     document.body.dataset.language = language;
     window.localStorage.setItem('vineria-language', language);
   }, [language]);

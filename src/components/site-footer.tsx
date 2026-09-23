@@ -1,17 +1,16 @@
 'use client';
 import Link from 'next/link';
 import { Leaf, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
-import { useLanguage } from './language-provider';
 
 export function SiteFooter() {
-  const { t } = useLanguage();
   const footerNavigation = [
-    ['/', t('home')],
-    ['/produits', t('products')],
-    ['/services', t('services')],
-    ['/a-propos', t('method')],
-    ['/contact', t('contact')],
+    ['/', 'الرئيسية'],
+    ['/produits', 'منتجاتنا'],
+    ['/services', 'الخدمات والأكاديمية'],
+    ['/a-propos', 'منهجيتنا'],
+    ['/contact', 'اتصل بنا وشراكات'],
   ];
+
   return (
     <footer
       style={{
@@ -46,15 +45,15 @@ export function SiteFooter() {
                 <Leaf size={18} color="white" />
               </span>
               <div>
-                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, letterSpacing: '0.14em', fontSize: 15, color: '#fff' }}>VINERIA</div>
-                <div style={{ fontSize: 9, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Permaculture · Nord Tunisie</div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, letterSpacing: '0.14em', fontSize: 16, color: '#fff' }}>VINERIA</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>زراعة مستدامة · شمال تونس</div>
               </div>
             </div>
-            <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.65)', maxWidth: 280 }}>
-              Ferme intégrée conduite en sec, sans intrants de synthèse. Amandiers, oliviers, romarin et ruches dans un système qui s'alimentent mutuellement.
+            <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.68)', maxWidth: 280 }}>
+              مزرعة نموذجية متكاملة تدار بالنظام الجاف، دون مدخلات كيميائية. بساتين لوز وزيتون ومزارع إكليل جبل ومناحل ضمن منظومة حية متكاملة تغذي بعضها البعض.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 22 }}>
-              {['100% Sec', 'Zéro Intrant', 'Traçabilité Lot', 'Parité Rurale'].map((b) => (
+              {['100% نظام جاف', 'صفر مدخلات كيميائية', 'تتبع دقيق للمصدر', 'مساواة في الأجر'].map((b) => (
                 <span
                   key={b}
                   style={{
@@ -64,8 +63,7 @@ export function SiteFooter() {
                     padding: '5px 12px',
                     fontSize: 11,
                     fontWeight: 600,
-                    color: 'rgba(255,255,255,0.75)',
-                    letterSpacing: '0.04em',
+                    color: 'rgba(255,255,255,0.85)',
                   }}
                 >
                   {b}
@@ -76,7 +74,7 @@ export function SiteFooter() {
 
           {/* Navigation */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>{t('navigation')}</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>التنقل السريع</div>
             {footerNavigation.map(([href, label]) => (
               <Link
                 key={href}
@@ -84,12 +82,12 @@ export function SiteFooter() {
                 style={{
                   display: 'block',
                   fontSize: 14,
-                  color: 'rgba(255,255,255,0.68)',
+                  color: 'rgba(255,255,255,0.72)',
                   padding: '6px 0',
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.68)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
               >
                 {label}
               </Link>
@@ -98,13 +96,13 @@ export function SiteFooter() {
 
           {/* Produits */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Nos Récoltes</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>محاصيلنا ومنتجاتنا</div>
             {[
-              ['Huiles Essentielles', '/produits'],
-              ['Miel & Produits Ruche', '/produits'],
-              ['Amandes de Terroir', '/produits'],
-              ['Huile d\'Olive', '/produits'],
-              ['Volumes Professionnels', '/contact'],
+              ['الزيوت العطرية النقية', '/produits'],
+              ['العسل ومنتجات النحل', '/produits'],
+              ['لوز أصيل بالزراعة الجافة', '/produits'],
+              ['زيت زيتون بكر ممتاز', '/produits'],
+              ['طلبيات مهنية B2B', '/contact'],
             ].map(([label, href]) => (
               <Link
                 key={label}
@@ -112,12 +110,12 @@ export function SiteFooter() {
                 style={{
                   display: 'block',
                   fontSize: 14,
-                  color: 'rgba(255,255,255,0.68)',
+                  color: 'rgba(255,255,255,0.72)',
                   padding: '6px 0',
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.68)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
               >
                 {label}
               </Link>
@@ -126,23 +124,23 @@ export function SiteFooter() {
 
           {/* Contact */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Nous Trouver</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>موقعنا والتواصل</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', gap: 10 }}>
                 <MapPin size={16} style={{ color: 'var(--amber)', flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(255,255,255,0.68)' }}>
-                  Domaine Vineria<br />Nord de la Tunisie
+                <span style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.72)' }}>
+                  ضيعة فينيريا<br />شمال تونس
                 </span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Phone size={16} style={{ color: 'var(--amber)', flexShrink: 0 }} />
-                <a href="tel:+21671890120" style={{ fontSize: 14, color: 'rgba(255,255,255,0.68)', transition: 'color 0.2s' }}>
+                <a href="tel:+21671890120" style={{ fontSize: 14, color: 'rgba(255,255,255,0.72)', transition: 'color 0.2s' }}>
                   +216 71 890 120
                 </a>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Mail size={16} style={{ color: 'var(--amber)', flexShrink: 0 }} />
-                <a href="mailto:contact@vineria-tunisie.com" style={{ fontSize: 14, color: 'rgba(255,255,255,0.68)', transition: 'color 0.2s' }}>
+                <a href="mailto:contact@vineria-tunisie.com" style={{ fontSize: 14, color: 'rgba(255,255,255,0.72)', transition: 'color 0.2s' }}>
                   contact@vineria-tunisie.com
                 </a>
               </div>
@@ -162,7 +160,7 @@ export function SiteFooter() {
                   width: 'fit-content',
                 }}
               >
-                Écrire à Vineria <ArrowUpRight size={14} />
+                مراسلة فينيريا <ArrowUpRight size={14} />
               </Link>
             </div>
           </div>
@@ -179,11 +177,11 @@ export function SiteFooter() {
             padding: '22px 0',
           }}
         >
-          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)' }}>
-            © {new Date().getFullYear()} VINERIA — Ferme intégrée en permaculture. Tous droits réservés.
+          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)' }}>
+            © {new Date().getFullYear()} فينيريا — مزرعة بيئية متكاملة بالزراعة المستدامة. جميع الحقوق محفوظة.
           </span>
-          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)', fontStyle: 'italic' }}>
-            Produire en sec. Transmettre ce qui marche.
+          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', fontStyle: 'italic' }}>
+            الإنتاج في النظام الجاف. ونقل ما أثبت نجاحه ميدانياً.
           </span>
         </div>
       </div>

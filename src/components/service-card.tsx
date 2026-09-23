@@ -35,12 +35,15 @@ export function ServiceCard({ service }: { service: Service }) {
     <Link
       href={`/services/${service.slug}`}
       className="card"
+      dir="rtl"
       style={{
         display: 'flex',
         flexDirection: 'column',
         padding: 0,
         overflow: 'hidden',
         textDecoration: 'none',
+        direction: 'rtl',
+        textAlign: 'right',
       }}
       id={`service-card-${service.slug}`}
     >
@@ -51,16 +54,15 @@ export function ServiceCard({ service }: { service: Service }) {
         {/* Category row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
           <span style={{ fontSize: 22 }}>{catIcon}</span>
-          <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{catLabel}</span>
+          <span className="eyebrow eyebrow--green" style={{ fontSize: 11 }}>{catLabel}</span>
         </div>
 
         <h3
           style={{
             fontSize: 18,
-            fontWeight: 600,
-            lineHeight: 1.35,
+            fontWeight: 700,
+            lineHeight: 1.4,
             margin: '0 0 8px',
-            fontFamily: "'Playfair Display', Georgia, serif",
             color: 'var(--ink)',
           }}
         >
@@ -68,7 +70,7 @@ export function ServiceCard({ service }: { service: Service }) {
         </h3>
 
         {service.tagline && (
-          <p style={{ fontSize: 13, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px', lineHeight: 1.4 }}>
+          <p style={{ fontSize: 13, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px', lineHeight: 1.45 }}>
             {service.tagline}
           </p>
         )}
@@ -79,13 +81,13 @@ export function ServiceCard({ service }: { service: Service }) {
 
         {/* Meta */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <Clock size={13} style={{ color: 'var(--muted-light)', flexShrink: 0 }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Clock size={14} style={{ color: 'var(--muted-light)', flexShrink: 0 }} />
             <span style={{ fontSize: 12.5, color: 'var(--muted)' }}>{service.duration}</span>
           </div>
           {service.targetAudience && (
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-              <Users size={13} style={{ color: 'var(--muted-light)', flexShrink: 0, marginTop: 2 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Users size={14} style={{ color: 'var(--muted-light)', flexShrink: 0 }} />
               <span style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.45 }}>{service.targetAudience}</span>
             </div>
           )}
@@ -103,7 +105,7 @@ export function ServiceCard({ service }: { service: Service }) {
         >
           <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--green)' }}>{priceLabel}</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--green)' }}>
-            {t('discover')} <ArrowUpRight size={13} />
+            اكتشف المزيد <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
           </span>
         </div>
       </div>

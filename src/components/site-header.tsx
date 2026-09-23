@@ -9,10 +9,10 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const { isArabic, toggleLanguage, t } = useLanguage();
   const navLinks = [
-    { href: '/produits', label: t('products') },
-    { href: '/services', label: t('services') },
-    { href: '/a-propos', label: t('method') },
-    { href: '/contact', label: t('contact') },
+    { href: '/produits', label: 'منتجاتنا' },
+    { href: '/services', label: 'الخدمات والأكاديمية' },
+    { href: '/a-propos', label: 'منهجيتنا' },
+    { href: '/contact', label: 'اتصل بنا وشراكات' },
   ];
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export function SiteHeader() {
               gap: 10,
               textDecoration: 'none',
             }}
-            aria-label="VINERIA — Accueil"
+            aria-label="VINERIA — الصفحة الرئيسية"
           >
             <span
               style={{
@@ -123,7 +123,7 @@ export function SiteHeader() {
           {/* Mobile toggle — visible UNIQUEMENT sur mobile, masqué sur PC */}
           <button
             className="mobile-menu-btn"
-            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={open ? 'إغلاق القائمة' : 'فتح القائمة'}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
             id="mobile-menu-toggle"

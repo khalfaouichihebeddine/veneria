@@ -23,11 +23,14 @@ export function ProductCard({ product }: { product: Product }) {
     <Link
       href={`/produits/${product.slug}`}
       className="card"
+      dir="rtl"
       style={{
         display: 'flex',
         flexDirection: 'column',
         textDecoration: 'none',
         overflow: 'hidden',
+        direction: 'rtl',
+        textAlign: 'right',
       }}
       id={`product-card-${product.slug}`}
     >
@@ -56,21 +59,20 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Category badge overlay */}
+        {/* Category badge overlay - on right side for mirrored card */}
         {product.categoryLabel && (
           <span
             style={{
               position: 'absolute',
               top: 12,
-              left: 12,
+              right: 12,
               background: colors.bg,
               color: colors.text,
               border: '1px solid rgba(0,0,0,0.07)',
               fontSize: 10,
               fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              padding: '5px 10px',
+              letterSpacing: '0.04em',
+              padding: '5px 11px',
               borderRadius: 100,
             }}
           >
@@ -81,24 +83,24 @@ export function ProductCard({ product }: { product: Product }) {
 
       {/* Content */}
       <div style={{ padding: '20px 22px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <h3 style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.35, margin: '0 0 7px', fontFamily: "'Playfair Display', Georgia, serif", color: 'var(--ink)' }}>
+        <h3 style={{ fontSize: 17, fontWeight: 700, lineHeight: 1.4, margin: '0 0 7px', color: 'var(--ink)' }}>
           {product.name}
         </h3>
 
         {product.tagline && (
-          <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 10px', lineHeight: 1.4 }}>
+          <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 10px', lineHeight: 1.45 }}>
             {product.tagline}
           </p>
         )}
 
-        <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6, flex: 1, margin: '0 0 16px' }}>
+        <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, flex: 1, margin: '0 0 16px' }}>
           {product.description.slice(0, 120)}{product.description.length > 120 ? '…' : ''}
         </p>
 
         {/* Origin */}
         {product.origin && (
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5, marginBottom: 14 }}>
-            <MapPin size={12} style={{ color: 'var(--muted-light)', marginTop: 2, flexShrink: 0 }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14 }}>
+            <MapPin size={13} style={{ color: 'var(--muted-light)', flexShrink: 0 }} />
             <span style={{ fontSize: 11.5, color: 'var(--muted-light)', lineHeight: 1.4 }}>{product.origin}</span>
           </div>
         )}
@@ -113,9 +115,9 @@ export function ProductCard({ product }: { product: Product }) {
             paddingTop: 14,
           }}
         >
-          <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 700, color: 'var(--green)' }}>
-            {product.price} <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--muted)' }}>{t('tunisianDinar')}</span>
-            {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}> / {product.unit}</span>}
+          <span style={{ fontSize: 19, fontWeight: 800, color: 'var(--green)' }}>
+            {product.price} <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--muted)' }}>د.ت</span>
+            {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 500 }}> / {product.unit}</span>}
           </span>
           <span
             style={{
@@ -127,7 +129,7 @@ export function ProductCard({ product }: { product: Product }) {
               color: 'var(--green)',
             }}
           >
-            {t('view')} <ArrowUpRight size={13} />
+            مشاهدة <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
           </span>
         </div>
       </div>

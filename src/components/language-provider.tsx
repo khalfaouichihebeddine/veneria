@@ -133,6 +133,115 @@ const ARABIC_SERVICES: Record<string, Partial<Service>> = {
   },
 };
 
+const FRENCH_PRODUCTS: Record<string, Partial<Product>> = {
+  'huile-essentielle-romarin-sauvage': {
+    name: 'Huile essentielle de romarin sauvage biologique', categoryLabel: 'Huiles essentielles',
+    tagline: 'Distillée à la ferme à la vapeur douce', description: 'Une huile essentielle de romarin pure et complète, issue de plantes cultivées sans produits chimiques et distillées juste après la récolte.',
+    method: 'Distillation lente à la vapeur d’eau basse température', origin: 'Champs de romarin de Vineria', unit: 'Flacon 30 ml',
+  },
+  'miel-sauvage-verger-romarin': {
+    name: 'Miel des vergers et romarin sauvage', categoryLabel: 'Produits de la ruche',
+    tagline: 'Miel cru des fleurs d’amandier et de romarin', description: 'Un miel cru récolté dans les ruches installées entre les amandiers et les champs de romarin, extrait à froid pour préserver ses qualités.',
+    method: 'Extraction à froid sans pasteurisation', origin: 'Rucher central de Vineria', unit: 'Pot 500 g',
+  },
+  'amandes-mediterraneennes-conduite-seche': {
+    name: 'Amandes méditerranéennes en conduite sèche', categoryLabel: 'Amandes du terroir',
+    tagline: 'L’amande signature de Vineria, croquante et intense', description: 'Des amandes cultivées sans irrigation artificielle dans le nord de la Tunisie, récoltées à la main et séchées naturellement au soleil.',
+    method: 'Récolte manuelle, séchage naturel et décorticage doux', origin: 'Verger d’amandiers de Vineria', unit: 'Sachet 500 g décortiqué',
+  },
+  'huile-olive-vierge-extra-permaculture': {
+    name: 'Huile d’olive vierge extra en permaculture', categoryLabel: 'Huile d’olive',
+    tagline: 'Une expression verte et intense, extraite à froid', description: 'Une huile issue de vergers conduits avec couverture végétale et soin du sol, pressée dans les six heures suivant la récolte.',
+    method: 'Extraction continue à froid', origin: 'Oliveraies de Vineria', unit: 'Flacon 750 ml',
+  },
+  'propolis-et-cire-d-opercule': {
+    name: 'Propolis et cire d’abeille naturelles', categoryLabel: 'Produits de la ruche',
+    tagline: 'Des matières premières naturelles pour les soins', description: 'Propolis brute et cire pure récoltées avec soin dans les ruches de Vineria, pour les fabricants de cosmétiques et de soins botaniques.',
+    method: 'Récolte douce et purification naturelle', origin: 'Ruchers de Vineria', unit: 'Coffret découverte',
+  },
+};
+
+const FRENCH_SERVICES: Record<string, Partial<Service>> = {
+  'formation-petits-agriculteurs-academie-vineria': { name: 'Formation des petits agriculteurs - Académie Vineria', tagline: 'Une formation pratique sur le terrain, en petits groupes', description: 'Des formations appliquées à la ferme, encadrées par des ingénieurs et des agriculteurs expérimentés en conduite sèche.', targetAudience: 'Petits agriculteurs, femmes rurales et jeunes', duration: 'De 2 à 5 jours avec suivi de terrain' },
+  'accompagnement-technique-conversion-agroecologique': { name: 'Accompagnement technique à la conversion agroécologique', tagline: 'Diagnostiquer la terre et construire un plan réaliste', description: 'Nous accompagnons les exploitations et les coopératives dans une transition progressive vers un système agricole adapté à leurs ressources.', targetAudience: 'Fermes familiales et coopératives', duration: 'Accompagnement saisonnier sur 1 à 2 saisons' },
+  'prestation-distillation-et-conditionnement': { name: 'Distillation et conditionnement partagés', tagline: 'Une unité professionnelle ouverte aux producteurs locaux', description: 'Notre unité de distillation basse pression et notre ligne de conditionnement sont accessibles aux producteurs de plantes aromatiques et médicinales.', targetAudience: 'Producteurs de plantes aromatiques et médicinales', duration: 'Selon le jour de distillation ou le volume frais' },
+  'visites-et-accueil-pedagogique': { name: 'Visites et accueil pédagogique à la ferme', tagline: 'Une ferme vivante pour apprendre et partager', description: 'Vineria accueille écoles, universités et associations pour découvrir un système méditerranéen performant sans pesticides ni irrigation au goutte-à-goutte.', targetAudience: 'Écoles, universités et associations', duration: 'Une demi-journée ou une journée' },
+  'parrainage-arbre-et-ruche': { name: 'Parrainage d’un amandier ou d’une ruche', tagline: 'Soutenir la conduite sèche et recevoir une part de la récolte', description: 'Une initiative pour soutenir un arbre ou une ruche pendant une saison, avec des nouvelles illustrées et un cadeau issu de la ferme.', targetAudience: 'Particuliers et organisations engagés pour la biodiversité', duration: 'Engagement annuel renouvelable' },
+};
+
+const FRENCH_PAGE_TEXT: Record<string, string> = {
+  'الرئيسية': 'Accueil',
+  'منتجاتنا': 'Nos produits',
+  'الخدمات والأكاديمية': 'Services et académie',
+  'منهجيتنا': 'Notre méthode',
+  'اتصل بنا وشراكات': 'Contact et partenariats',
+  'تواصل معنا': 'Nous contacter',
+  'منتجاتنا الأصيلة': 'Nos produits authentiques',
+  'اكتشف محاصيلنا': 'Découvrir nos récoltes',
+  'منهجيتنا في النظام الجاف': 'Notre méthode en conduite sèche',
+  'المحصول الطبيعي': 'La récolte naturelle',
+  'كامل الكتالوج': 'Voir le catalogue',
+  'الخدمات وأكاديمية فينيريا': 'Services et académie Vineria',
+  'جميع خدماتنا': 'Tous nos services',
+  'جميع المنتجات': 'Tous les produits',
+  'الزيوت العطرية': 'Huiles essentielles',
+  'العسل ومنتجات النحل': 'Miel et produits de la ruche',
+  'اللوز الأصيل': 'Amandes du terroir',
+  'زيت الزيتون': 'Huile d’olive',
+  'أكاديمية فينيريا': 'Académie Vineria',
+  'مزرعة بيئية متكاملة بالزراعة المستدامة · شمال تونس': 'Ferme écologique intégrée en agriculture durable · Nord de la Tunisie',
+  'نموذجنا البيئي': 'Notre modèle écologique',
+  'لا شيء يخرج بمفرده.': 'Rien ne sort du système seul.',
+  'الإسهام في المنظومة': 'Contribution au système',
+  'التزاماتنا الميدانية': 'Nos engagements sur le terrain',
+  'قيمنا، مترجمة إلى ممارسات حقيقية.': 'Nos valeurs, traduites en pratiques concrètes.',
+  'التعريف بالمزرعة والمشروع': 'La ferme et le projet',
+  'منهجية حية، لا مجرد شعبة فلاحية.': 'Une méthode vivante, pas une simple exploitation agricole.',
+  'من نحن': 'Qui sommes-nous ?',
+  'فينيريا، شمال تونس.': 'Vineria, dans le nord de la Tunisie.',
+  'النموذج البيئي': 'Le modèle écologique',
+  'الورشة الفلاحية': 'Atelier agricole',
+  'ما تنتجه': 'Ce qu’il produit',
+  'ما تقدمه للمنظومة الحية': 'Sa contribution au système vivant',
+  'معلومات التواصل المباشر': 'Coordonnées directes',
+  'مزرعة فينيريا': 'Ferme Vineria',
+  'العنوان والموقع': 'Adresse et localisation',
+  'الهاتف': 'Téléphone',
+  'البريد الإلكتروني': 'E-mail',
+  'أوقات العمل والاستقبال': 'Horaires et accueil',
+  'روابط سريعة': 'Liens rapides',
+  'الفضاء الخاص': 'Espace privé',
+  'تسجيل الدخول': 'Connexion',
+  'البريد الإلكتروني *': 'E-mail *',
+  'كلمة المرور *': 'Mot de passe *',
+  'فتح جلستي': 'Ouvrir ma session',
+  'إنشاء حساب جديد': 'Créer un compte',
+  'إنشاء حساب': 'Créer un compte',
+  'مرحباً بك في فينيريا': 'Bienvenue chez Vineria',
+  'الاسم الكامل *': 'Nom complet *',
+  'إنشاء حسابي': 'Créer mon compte',
+  'العودة إلى تسجيل الدخول': 'Retour à la connexion',
+};
+
+const ORIGINAL_TEXT = new WeakMap<Text, string>();
+
+function localizeStaticText(language: Language) {
+  const nodes = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes: Text[] = [];
+  let node: Node | null;
+  while ((node = nodes.nextNode())) textNodes.push(node as Text);
+  textNodes.forEach((textNode) => {
+    const parent = textNode.parentElement;
+    if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT', 'INPUT', 'TEXTAREA'].includes(parent.tagName)) return;
+    const original = ORIGINAL_TEXT.get(textNode) ?? textNode.nodeValue ?? '';
+    ORIGINAL_TEXT.set(textNode, original);
+    const value = original.trim();
+    const translated = language === 'fr' ? FRENCH_PAGE_TEXT[value] : undefined;
+    const nextValue = translated ? original.replace(value, translated) : original;
+    if (textNode.nodeValue !== nextValue) textNode.nodeValue = nextValue;
+  });
+}
+
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
@@ -149,9 +258,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.documentElement.dir = 'ltr';
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     document.body.dataset.language = language;
     window.localStorage.setItem('vineria-language', language);
+    localizeStaticText(language);
+    const observer = new MutationObserver(() => localizeStaticText(language));
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
   }, [language]);
 
   const value = useMemo<LanguageContextValue>(() => ({
@@ -160,8 +273,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     toggleLanguage: () => setLanguageState((current) => current === 'fr' ? 'ar' : 'fr'),
     isArabic: language === 'ar',
     t: (key) => language === 'ar' ? ARABIC_TRANSLATIONS[key] : TRANSLATIONS[key],
-    localizeProduct: (product) => language === 'ar' ? { ...product, ...ARABIC_PRODUCTS[product.slug] } : product,
-    localizeService: (service) => language === 'ar' ? { ...service, ...ARABIC_SERVICES[service.slug] } : service,
+    localizeProduct: (product) => language === 'ar' ? { ...product, ...ARABIC_PRODUCTS[product.slug] } : { ...product, ...FRENCH_PRODUCTS[product.slug] },
+    localizeService: (service) => language === 'ar' ? { ...service, ...ARABIC_SERVICES[service.slug] } : { ...service, ...FRENCH_SERVICES[service.slug] },
   }), [language]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

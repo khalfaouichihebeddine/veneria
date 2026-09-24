@@ -74,6 +74,16 @@ body {
   position: relative;
 }
 
+body[data-language='fr'] [dir='rtl'] {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+body[data-language='fr'] [dir='rtl'] table,
+body[data-language='fr'] [dir='rtl'] th {
+  text-align: left !important;
+}
+
 .display,
 .display--md,
 .serif,

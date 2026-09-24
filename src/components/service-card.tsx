@@ -35,15 +35,15 @@ export function ServiceCard({ service }: { service: Service }) {
     <Link
       href={`/services/${service.slug}`}
       className="card"
-      dir="rtl"
+      dir={isArabic ? 'rtl' : 'ltr'}
       style={{
         display: 'flex',
         flexDirection: 'column',
         padding: 0,
         overflow: 'hidden',
         textDecoration: 'none',
-        direction: 'rtl',
-        textAlign: 'right',
+        direction: isArabic ? 'rtl' : 'ltr',
+        textAlign: isArabic ? 'right' : 'left',
       }}
       id={`service-card-${service.slug}`}
     >
@@ -105,7 +105,7 @@ export function ServiceCard({ service }: { service: Service }) {
         >
           <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--green)' }}>{priceLabel}</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--green)' }}>
-            اكتشف المزيد <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
+            {isArabic ? 'اكتشف المزيد' : 'Découvrir'} <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
           </span>
         </div>
       </div>

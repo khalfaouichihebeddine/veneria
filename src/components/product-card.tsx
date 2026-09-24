@@ -7,7 +7,7 @@ import type { Product } from '@/types';
 import { useLanguage } from './language-provider';
 
 export function ProductCard({ product }: { product: Product }) {
-  const { localizeProduct, t } = useLanguage();
+  const { localizeProduct, t, isArabic } = useLanguage();
   product = localizeProduct(product);
   const categoryColors: Record<string, { bg: string; text: string }> = {
     'huiles-essentielles': { bg: '#e8f0ea', text: '#2a5236' },
@@ -23,14 +23,14 @@ export function ProductCard({ product }: { product: Product }) {
     <Link
       href={`/produits/${product.slug}`}
       className="card"
-      dir="rtl"
+      dir={isArabic ? 'rtl' : 'ltr'}
       style={{
         display: 'flex',
         flexDirection: 'column',
         textDecoration: 'none',
         overflow: 'hidden',
-        direction: 'rtl',
-        textAlign: 'right',
+        direction: isArabic ? 'rtl' : 'ltr',
+        textAlign: isArabic ? 'right' : 'left',
       }}
       id={`product-card-${product.slug}`}
     >
@@ -116,7 +116,7 @@ export function ProductCard({ product }: { product: Product }) {
           }}
         >
           <span style={{ fontSize: 19, fontWeight: 800, color: 'var(--green)' }}>
-            {product.price} <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--muted)' }}>د.ت</span>
+            {product.price} <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--muted)' }}>{t('tunisianDinar')}</span>
             {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 500 }}> / {product.unit}</span>}
           </span>
           <span
@@ -129,7 +129,7 @@ export function ProductCard({ product }: { product: Product }) {
               color: 'var(--green)',
             }}
           >
-            مشاهدة <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
+            {isArabic ? 'مشاهدة' : 'Voir'} <ArrowUpRight size={13} style={{ transform: 'scaleX(-1)' }} />
           </span>
         </div>
       </div>

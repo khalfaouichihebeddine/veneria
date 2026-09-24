@@ -9,10 +9,10 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const { isArabic, toggleLanguage, t } = useLanguage();
   const navLinks = [
-    { href: '/produits', label: 'منتجاتنا' },
-    { href: '/services', label: 'الخدمات والأكاديمية' },
-    { href: '/a-propos', label: 'منهجيتنا' },
-    { href: '/contact', label: 'اتصل بنا وشراكات' },
+    { href: '/produits', label: t('products') },
+    { href: '/services', label: t('services') },
+    { href: '/a-propos', label: t('method') },
+    { href: '/contact', label: t('contact') },
   ];
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export function SiteHeader() {
               gap: 10,
               textDecoration: 'none',
             }}
-            aria-label="VINERIA — الصفحة الرئيسية"
+            aria-label={`VINERIA — ${t('home')}`}
           >
             <span
               style={{
@@ -123,7 +123,7 @@ export function SiteHeader() {
           {/* Mobile toggle — visible UNIQUEMENT sur mobile, masqué sur PC */}
           <button
             className="mobile-menu-btn"
-            aria-label={open ? 'إغلاق القائمة' : 'فتح القائمة'}
+            aria-label={open ? (isArabic ? 'إغلاق القائمة' : 'Fermer le menu') : (isArabic ? 'فتح القائمة' : 'Ouvrir le menu')}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
             id="mobile-menu-toggle"
@@ -150,7 +150,7 @@ export function SiteHeader() {
             style={{
               position: 'absolute',
               top: 0,
-              right: 0,
+              [isArabic ? 'right' : 'left']: 0,
               bottom: 0,
               width: 'min(340px, 90vw)',
               background: 'var(--paper)',
@@ -158,7 +158,7 @@ export function SiteHeader() {
               display: 'flex',
               flexDirection: 'column',
               gap: 6,
-              boxShadow: '-12px 0 48px rgba(26,31,27,0.18)',
+                boxShadow: isArabic ? '-12px 0 48px rgba(26,31,27,0.18)' : '12px 0 48px rgba(26,31,27,0.18)',
             }}
           >
             {navLinks.map((link) => (

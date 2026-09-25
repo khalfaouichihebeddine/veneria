@@ -24,7 +24,9 @@ export function SiteHeader() {
   return (
     <>
       <header
+        dir="ltr"
         style={{
+          direction: 'ltr',
           position: 'sticky',
           top: 0,
           zIndex: 100,
@@ -38,7 +40,9 @@ export function SiteHeader() {
       >
         <div
           className="container"
+          dir="ltr"
           style={{
+            direction: 'ltr',
             height: 72,
             display: 'flex',
             alignItems: 'center',
@@ -147,10 +151,12 @@ export function SiteHeader() {
         >
           <nav
             onClick={(e) => e.stopPropagation()}
+            dir="ltr"
             style={{
+              direction: 'ltr',
               position: 'absolute',
               top: 0,
-              [isArabic ? 'right' : 'left']: 0,
+              right: 0,
               bottom: 0,
               width: 'min(340px, 90vw)',
               background: 'var(--paper)',
@@ -158,7 +164,7 @@ export function SiteHeader() {
               display: 'flex',
               flexDirection: 'column',
               gap: 6,
-                boxShadow: isArabic ? '-12px 0 48px rgba(26,31,27,0.18)' : '12px 0 48px rgba(26,31,27,0.18)',
+              boxShadow: '-12px 0 48px rgba(26,31,27,0.18)',
             }}
           >
             {navLinks.map((link) => (

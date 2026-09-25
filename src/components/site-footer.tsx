@@ -1,23 +1,49 @@
 'use client';
 import Link from 'next/link';
 import { Leaf, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from './language-provider';
 
 export function SiteFooter() {
+  const { isArabic, t } = useLanguage();
+
   const footerNavigation = [
-    ['/', 'الرئيسية'],
-    ['/produits', 'منتجاتنا'],
-    ['/services', 'الخدمات والأكاديمية'],
-    ['/a-propos', 'منهجيتنا'],
-    ['/contact', 'اتصل بنا وشراكات'],
+    ['/', t('home')],
+    ['/produits', t('products')],
+    ['/services', t('services')],
+    ['/a-propos', t('method')],
+    ['/contact', t('contact')],
   ];
+
+  const badges = isArabic
+    ? ['100% نظام جاف', 'صفر مدخلات كيميائية', 'تتبع دقيق للمصدر', 'مساواة في الأجر']
+    : ['100 % conduite sèche', 'Zéro intrant chimique', 'Traçabilité précise', 'Égalité salariale'];
+
+  const productLinks = isArabic
+    ? [
+        ['الزيوت العطرية النقية', '/produits'],
+        ['العسل ومنتجات النحل', '/produits'],
+        ['لوز أصيل بالزراعة الجافة', '/produits'],
+        ['زيت زيتون بكر ممتاز', '/produits'],
+        ['طلبيات مهنية B2B', '/contact'],
+      ]
+    : [
+        ['Huiles essentielles pures', '/produits'],
+        ['Miel et produits de la ruche', '/produits'],
+        ['Amandes du terroir en conduite sèche', '/produits'],
+        ['Huile d’olive vierge extra', '/produits'],
+        ['Commandes professionnelles B2B', '/contact'],
+      ];
 
   return (
     <footer
+      dir={isArabic ? 'rtl' : 'ltr'}
       style={{
         background: 'linear-gradient(160deg, var(--green-deep) 0%, #152d1c 100%)',
         color: 'rgba(255,255,255,0.88)',
         marginTop: 0,
         padding: '72px 0 0',
+        direction: isArabic ? 'rtl' : 'ltr',
+        textAlign: isArabic ? 'right' : 'left',
       }}
     >
       <div className="container">
@@ -46,14 +72,16 @@ export function SiteFooter() {
               </span>
               <div>
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, letterSpacing: '0.14em', fontSize: 16, color: '#fff' }}>VINERIA</div>
-                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>زراعة مستدامة · شمال تونس</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>{t('permaculture')}</div>
               </div>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.68)', maxWidth: 280 }}>
-              مزرعة نموذجية متكاملة تدار بالنظام الجاف، دون مدخلات كيميائية. بساتين لوز وزيتون ومزارع إكليل جبل ومناحل ضمن منظومة حية متكاملة تغذي بعضها البعض.
+              {isArabic
+                ? 'مزرعة نموذجية متكاملة تدار بالنظام الجاف، دون مدخلات كيميائية. بساتين لوز وزيتون ومزارع إكليل جبل ومناحل ضمن منظومة حية متكاملة تغذي بعضها البعض.'
+                : 'Ferme modèle intégrée conduite en agriculture sèche, sans intrants chimiques. Amandiers, oliviers, romarin et ruchers forment un écosystème vivant et complémentaire.'}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 22 }}>
-              {['100% نظام جاف', 'صفر مدخلات كيميائية', 'تتبع دقيق للمصدر', 'مساواة في الأجر'].map((b) => (
+              {badges.map((b) => (
                 <span
                   key={b}
                   style={{
@@ -74,7 +102,9 @@ export function SiteFooter() {
 
           {/* Navigation */}
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>التنقل السريع</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>
+              {isArabic ? 'التنقل السريع' : 'Navigation rapide'}
+            </div>
             {footerNavigation.map(([href, label]) => (
               <Link
                 key={href}
@@ -96,14 +126,10 @@ export function SiteFooter() {
 
           {/* Produits */}
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>محاصيلنا ومنتجاتنا</div>
-            {[
-              ['الزيوت العطرية النقية', '/produits'],
-              ['العسل ومنتجات النحل', '/produits'],
-              ['لوز أصيل بالزراعة الجافة', '/produits'],
-              ['زيت زيتون بكر ممتاز', '/produits'],
-              ['طلبيات مهنية B2B', '/contact'],
-            ].map(([label, href]) => (
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>
+              {isArabic ? 'محاصيلنا ومنتجاتنا' : 'Nos récoltes et produits'}
+            </div>
+            {productLinks.map(([label, href]) => (
               <Link
                 key={label}
                 href={href}
@@ -124,17 +150,19 @@ export function SiteFooter() {
 
           {/* Contact */}
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>موقعنا والتواصل</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>
+              {isArabic ? 'موقعنا والتواصل' : 'Nous trouver et nous contacter'}
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', gap: 10 }}>
                 <MapPin size={16} style={{ color: 'var(--amber)', flexShrink: 0, marginTop: 2 }} />
                 <span style={{ fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.72)' }}>
-                  ضيعة فينيريا<br />شمال تونس
+                  {isArabic ? <>ضيعة فينيريا<br />شمال تونس</> : <>Ferme Vineria<br />Nord de la Tunisie</>}
                 </span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Phone size={16} style={{ color: 'var(--amber)', flexShrink: 0 }} />
-                <a href="tel:+21671890120" style={{ fontSize: 14, color: 'rgba(255,255,255,0.72)', transition: 'color 0.2s' }}>
+                <a href="tel:+21671890120" style={{ fontSize: 14, color: 'rgba(255,255,255,0.72)', transition: 'color 0.2s', direction: 'ltr', textAlign: 'left' }}>
                   +216 71 890 120
                 </a>
               </div>
@@ -160,7 +188,7 @@ export function SiteFooter() {
                   width: 'fit-content',
                 }}
               >
-                مراسلة فينيريا <ArrowUpRight size={14} />
+                {isArabic ? 'مراسلة فينيريا' : 'Écrire à Vineria'} <ArrowUpRight size={14} style={{ transform: isArabic ? 'scaleX(-1)' : 'none' }} />
               </Link>
             </div>
           </div>
@@ -178,10 +206,14 @@ export function SiteFooter() {
           }}
         >
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)' }}>
-            © {new Date().getFullYear()} فينيريا — مزرعة بيئية متكاملة بالزراعة المستدامة. جميع الحقوق محفوظة.
+            {isArabic
+              ? `© ${new Date().getFullYear()} فينيريا — مزرعة بيئية متكاملة بالزراعة المستدامة. جميع الحقوق محفوظة.`
+              : `© ${new Date().getFullYear()} Vineria — Ferme écologique intégrée en agriculture durable. Tous droits réservés.`}
           </span>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', fontStyle: 'italic' }}>
-            الإنتاج في النظام الجاف. ونقل ما أثبت نجاحه ميدانياً.
+            {isArabic
+              ? 'الإنتاج في النظام الجاف. ونقل ما أثبت نجاحه ميدانياً.'
+              : 'Produire en conduite sèche. Transmettre ce qui a fait ses preuves sur le terrain.'}
           </span>
         </div>
       </div>

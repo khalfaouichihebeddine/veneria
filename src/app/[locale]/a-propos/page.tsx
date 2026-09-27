@@ -2,20 +2,33 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { VALUE_PILLARS, PERMACULTURE_WORKSHOPS, VINERIA_INFO } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Notre Méthode & Vision | VINERIA',
-  description:
-    'Vineria est une exploitation agricole intégrée au nord de la Tunisie. Découvrez notre méthode de permaculture en régime sec, nos 5 valeurs concrètes et notre engagement pour l\'agriculture paysanne et l\'inclusion des femmes rurales.',
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default function About() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'aboutUs.meta' });
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      languages: { fr: '/fr/a-propos', ar: '/ar/a-propos' },
+    },
+  };
+}
+
+export default async function About({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'aboutUs' });
+
   return (
     <main>
-      {/* ══════════════════════════════════════════
-          HERO À PROPOS
-      ══════════════════════════════════════════ */}
+      {/* HERO */}
       <section
         style={{
           background: 'linear-gradient(160deg, var(--green-deep) 0%, #2a5236 60%, #3a6b47 100%)',
@@ -25,20 +38,19 @@ export default function About() {
           overflow: 'hidden',
         }}
       >
-        {/* Decorative circles */}
         <div style={{ position: 'absolute', top: -80, right: -80, width: 360, height: 360, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', bottom: -60, left: '30%', width: 220, height: 220, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: 820 }}>
             <span className="eyebrow animate-fade-up" style={{ color: '#f1c98d', display: 'block', marginBottom: 20 }}>
-              Présentation de l'entreprise
+              {t('hero.eyebrow')}
             </span>
             <h1
               className="display animate-fade-up animate-delay-1"
               style={{ color: '#fff', margin: '0 0 28px', textShadow: '0 2px 20px rgba(0,0,0,0.2)' }}
             >
-              Une méthode, pas une filière.
+              {t('hero.headline')}
             </h1>
             <p
               className="animate-fade-up animate-delay-2"
@@ -47,20 +59,18 @@ export default function About() {
               {VINERIA_INFO.summary}
             </p>
             <div className="animate-fade-up animate-delay-3" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link href="/produits" className="btn btn--ochre" id="about-hero-produits">
-                Nos produits <ArrowUpRight size={15} />
+              <Link href={`/${locale}/produits`} className="btn btn--ochre" id="about-hero-produits">
+                {t('hero.ctaProducts')} <ArrowUpRight size={15} />
               </Link>
-              <Link href="/contact" className="btn btn--ghost" id="about-hero-contact">
-                Nous écrire
+              <Link href={`/${locale}/contact`} className="btn btn--ghost" id="about-hero-contact">
+                {t('hero.ctaContact')}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          QUI NOUS SOMMES
-      ══════════════════════════════════════════ */}
+      {/* QUI NOUS SOMMES */}
       <section className="section">
         <div className="container">
           <div
@@ -104,7 +114,6 @@ export default function About() {
                 fill
                 style={{ objectFit: 'cover' }}
               />
-              {/* Overlay info */}
               <div
                 style={{
                   position: 'absolute',
@@ -132,9 +141,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          LE MODÈLE CIRCULAIRE — TABLEAU
-      ══════════════════════════════════════════ */}
+      {/* LE MODÈLE CIRCULAIRE */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto 48px' }}>
@@ -154,7 +161,7 @@ export default function About() {
                 <tr>
                   <th>Atelier</th>
                   <th>Ce qu'il produit</th>
-                  <th>Ce qu'il apporte au système</th>
+                  <th>{t('systemContrib')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -176,7 +183,7 @@ export default function About() {
                   <td style={{ fontWeight: 600, color: 'var(--ink)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: 20 }}>♻️</span>
-                      Sol & Compost vivant
+                      Sol &amp; Compost vivant
                     </div>
                   </td>
                   <td style={{ color: 'var(--ink-soft)' }}>Humus fertile, amendement biologique</td>
@@ -204,9 +211,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          NOS VALEURS — DÉTAIL COMPLET
-      ══════════════════════════════════════════ */}
+      {/* NOS VALEURS */}
       <section className="section">
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
@@ -261,9 +266,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          ACADEMY IMAGE SECTION
-      ══════════════════════════════════════════ */}
+      {/* ACADEMY */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
           <div
@@ -293,7 +296,7 @@ export default function About() {
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 28 }}>
                 <strong style={{ color: 'var(--ink)' }}>Public prioritaire :</strong> petits exploitants, femmes rurales, jeunes en installation.
               </p>
-              <Link href="/services" className="btn btn--primary" id="about-academy-cta">
+              <Link href={`/${locale}/services`} className="btn btn--primary" id="about-academy-cta">
                 Découvrir l'Académie <ArrowUpRight size={15} />
               </Link>
             </div>
@@ -301,9 +304,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          CTA CONTACT
-      ══════════════════════════════════════════ */}
+      {/* CTA CONTACT */}
       <section
         style={{
           background: 'linear-gradient(140deg, var(--green-deep) 0%, #1e4a2a 100%)',
@@ -321,10 +322,10 @@ export default function About() {
             Que vous soyez distributeur, bailleur de fonds, chercheur ou simplement curieux d'une récolte — nous répondons dans les deux jours.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/contact" className="btn btn--ochre" id="about-contact-cta">
+            <Link href={`/${locale}/contact`} className="btn btn--ochre" id="about-contact-cta">
               Écrire à Vineria <ArrowUpRight size={15} />
             </Link>
-            <Link href="/produits" className="btn btn--ghost" id="about-products-cta">
+            <Link href={`/${locale}/produits`} className="btn btn--ghost" id="about-products-cta">
               Voir nos produits
             </Link>
           </div>

@@ -3,24 +3,33 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Clock, Users } from 'lucide-react';
 import { api } from '@/api';
 import { VINERIA_SERVICES } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const service = VINERIA_SERVICES.find((s) => s.slug === slug);
   return {
     title: service ? `${service.name} | VINERIA` : 'Service | VINERIA',
     description: service?.description?.slice(0, 160),
+    alternates: {
+      languages: {
+        fr: `/fr/services/${slug}`,
+        ar: `/ar/services/${slug}`,
+      },
+    },
   };
 }
 
 export default async function ServiceDetail({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'serviceDetail' });
 
   let service: Awaited<ReturnType<typeof api.getService>>;
   try {
@@ -37,10 +46,22 @@ export default async function ServiceDetail({ params }: Props) {
 
   const priceLabel =
     service.priceFrom === 0
-      ? 'Financement par bourse / Tarif solidaire'
-      : `À partir de ${service.priceFrom} ${service.currency ?? 'EUR'}`;
+      ? t('priceFree')
+      : `${t('priceFrom')} ${service.priceFrom} ${service.currency ?? 'EUR'}`;
 
   const hasImage = service.imageUrl;
+
+  const getCategoryLabel = (cat: string | undefined) => {
+    if (!cat) return '';
+    const map: Record<string, string> = {
+      academie: t('categories.academie'),
+      technique: t('categories.technique'),
+      distillation: t('categories.distillation'),
+      visite: t('categories.visite'),
+      parrainage: t('categories.parrainage'),
+    };
+    return map[cat] ?? cat;
+  };
 
   return (
     <main>
@@ -48,7 +69,7 @@ export default async function ServiceDetail({ params }: Props) {
       <section style={{ background: 'var(--paper)', padding: '22px 0', borderBottom: '1px solid var(--line-light)' }}>
         <div className="container">
           <Link
-            href="/services"
+            href={`/${locale}/services`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -58,12 +79,12 @@ export default async function ServiceDetail({ params }: Props) {
               fontWeight: 500,
             }}
           >
-            <ArrowLeft size={15} /> Retour aux services & Académie
+            <ArrowLeft size={15} /> {t('back')}
           </Link>
         </div>
       </section>
 
-      {/* Hero content */}
+      {/* Hero */}
       <section
         style={{
           background: 'linear-gradient(160deg, var(--green-deep) 0%, var(--green) 100%)',
@@ -75,11 +96,7 @@ export default async function ServiceDetail({ params }: Props) {
           <div style={{ maxWidth: 760 }}>
             {service.category && (
               <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-                {service.category === 'academie' ? '🎓 Académie Vineria' :
-                 service.category === 'technique' ? '🌿 Accompagnement Technique' :
-                 service.category === 'distillation' ? '🫙 Distillation Partagée' :
-                 service.category === 'visite' ? '👁 Accueil Pédagogique' :
-                 '🤝 Parrainage'}
+                {getCategoryLabel(service.category)}
               </span>
             )}
             <h1
@@ -97,7 +114,6 @@ export default async function ServiceDetail({ params }: Props) {
               {service.description}
             </p>
 
-            {/* Quick meta */}
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <Clock size={15} style={{ color: '#f1c98d' }} />
@@ -126,11 +142,10 @@ export default async function ServiceDetail({ params }: Props) {
           >
             {/* Main content */}
             <div>
-              {/* Syllabus / Features */}
               {service.syllabusOrFeatures && service.syllabusOrFeatures.length > 0 && (
                 <div style={{ marginBottom: 40 }}>
                   <h2 className="display--md serif" style={{ fontSize: 'clamp(20px, 2.5vw, 30px)', margin: '0 0 24px' }}>
-                    Ce que vous apprenez ou recevez
+                    {t('whatYouLearn')}
                   </h2>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                     {service.syllabusOrFeatures.map((item) => (
@@ -143,7 +158,6 @@ export default async function ServiceDetail({ params }: Props) {
                 </div>
               )}
 
-              {/* Image if available */}
               {hasImage && (
                 <div style={{ borderRadius: 14, overflow: 'hidden', marginBottom: 0, aspectRatio: '16/9', position: 'relative' }}>
                   <Image
@@ -169,14 +183,14 @@ export default async function ServiceDetail({ params }: Props) {
               >
                 <div style={{ marginBottom: 20 }}>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 8 }}>
-                    Tarif
+                    {t('pricing')}
                   </div>
                   <div
                     style={{
                       fontFamily: "'Playfair Display', Georgia, serif",
                       fontSize: 22,
                       fontWeight: 700,
-                      color: service.priceFrom === 0 ? 'var(--green)' : 'var(--green)',
+                      color: 'var(--green)',
                       lineHeight: 1.2,
                     }}
                   >
@@ -184,7 +198,6 @@ export default async function ServiceDetail({ params }: Props) {
                   </div>
                 </div>
 
-                {/* Duration */}
                 <div
                   style={{
                     padding: '12px 14px',
@@ -211,7 +224,7 @@ export default async function ServiceDetail({ params }: Props) {
                     }}
                   >
                     <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>
-                      Public cible
+                      {t('targetAudience')}
                     </div>
                     <p style={{ fontSize: 13, color: 'var(--ink-soft)', margin: 0, lineHeight: 1.55 }}>
                       {service.targetAudience}
@@ -220,24 +233,24 @@ export default async function ServiceDetail({ params }: Props) {
                 )}
 
                 <Link
-                  href="/contact"
+                  href={`/${locale}/contact`}
                   className="btn btn--primary"
                   style={{ width: '100%', justifyContent: 'center', marginBottom: 12 }}
                   id={`service-inquiry-${service.slug}`}
                 >
-                  Nous contacter <ArrowUpRight size={15} />
+                  {t('contactCta')} <ArrowUpRight size={15} />
                 </Link>
                 <Link
-                  href="/contact"
+                  href={`/${locale}/contact`}
                   className="btn btn--secondary btn--sm"
                   style={{ width: '100%', justifyContent: 'center' }}
                   id={`service-bailleur-${service.slug}`}
                 >
-                  Financer cette prestation
+                  {t('financeCta')}
                 </Link>
 
                 <p style={{ fontSize: 11.5, color: 'var(--muted)', textAlign: 'center', marginTop: 14, lineHeight: 1.55 }}>
-                  Réponse dans les 48h ouvrables. Adaptation possible selon le groupe et les financements disponibles.
+                  {t('responseNote')}
                 </p>
               </div>
             </div>

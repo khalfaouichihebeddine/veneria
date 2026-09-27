@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, Users, Clock } from 'lucide-react';
 import type { Service } from '@/types';
+import { useLocale, useTranslations } from 'next-intl';
 
 const CATEGORY_ICONS: Record<string, string> = {
   academie: '🎓',
@@ -10,25 +11,32 @@ const CATEGORY_ICONS: Record<string, string> = {
   parrainage: '🤝',
 };
 
-const CATEGORY_LABELS: Record<string, string> = {
-  academie: 'Académie Vineria',
-  technique: 'Accompagnement Technique',
-  distillation: 'Distillation Partagée',
-  visite: 'Accueil Pédagogique',
-  parrainage: 'Parrainage',
-};
-
 export function ServiceCard({ service }: { service: Service }) {
+  const t = useTranslations('serviceCard');
+  const locale = useLocale();
+
   const catIcon = service.category ? CATEGORY_ICONS[service.category] ?? '🌱' : '🌱';
-  const catLabel = service.category ? CATEGORY_LABELS[service.category] ?? service.category : '';
+
+  const getCatLabel = (cat: string | undefined) => {
+    if (!cat) return '';
+    const map: Record<string, string> = {
+      academie: t('categories.academie'),
+      technique: t('categories.technique'),
+      distillation: t('categories.distillation'),
+      visite: t('categories.visite'),
+      parrainage: t('categories.parrainage'),
+    };
+    return map[cat] ?? cat;
+  };
+
   const priceLabel =
     service.priceFrom === 0
-      ? 'Sur bourse / gratuit'
-      : `À partir de ${service.priceFrom} ${service.currency?.split(' ')[0] ?? 'EUR'}`;
+      ? t('free')
+      : `${t('from')} ${service.priceFrom} ${service.currency?.split(' ')[0] ?? 'EUR'}`;
 
   return (
     <Link
-      href={`/services/${service.slug}`}
+      href={`/${locale}/services/${service.slug}`}
       className="card"
       style={{
         display: 'flex',
@@ -46,7 +54,7 @@ export function ServiceCard({ service }: { service: Service }) {
         {/* Category row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
           <span style={{ fontSize: 22 }}>{catIcon}</span>
-          <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{catLabel}</span>
+          <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{getCatLabel(service.category)}</span>
         </div>
 
         <h3
@@ -98,7 +106,7 @@ export function ServiceCard({ service }: { service: Service }) {
         >
           <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--green)' }}>{priceLabel}</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, fontWeight: 700, color: 'var(--green)' }}>
-            Découvrir <ArrowUpRight size={13} />
+            {t('discover')} <ArrowUpRight size={13} />
           </span>
         </div>
       </div>

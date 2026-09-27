@@ -2,8 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Droplets, MapPin } from 'lucide-react';
 import type { Product } from '@/types';
+import { useLocale, useTranslations } from 'next-intl';
 
 export function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations('productCard');
+  const locale = useLocale();
+
   const categoryColors: Record<string, { bg: string; text: string }> = {
     'huiles-essentielles': { bg: '#e8f0ea', text: '#2a5236' },
     'ruche': { bg: '#fef3c7', text: '#b9752d' },
@@ -16,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link
-      href={`/produits/${product.slug}`}
+      href={`/${locale}/produits/${product.slug}`}
       className="card"
       style={{
         display: 'flex',
@@ -51,7 +55,6 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Category badge overlay */}
         {product.categoryLabel && (
           <span
             style={{
@@ -90,7 +93,6 @@ export function ProductCard({ product }: { product: Product }) {
           {product.description.slice(0, 120)}{product.description.length > 120 ? '…' : ''}
         </p>
 
-        {/* Origin */}
         {product.origin && (
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5, marginBottom: 14 }}>
             <MapPin size={12} style={{ color: 'var(--muted-light)', marginTop: 2, flexShrink: 0 }} />
@@ -109,7 +111,7 @@ export function ProductCard({ product }: { product: Product }) {
           }}
         >
           <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 700, color: 'var(--green)' }}>
-            {product.price} <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--muted)' }}>EUR</span>
+            {product.price} <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--muted)' }}>{t('eur')}</span>
             {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}> / {product.unit}</span>}
           </span>
           <span
@@ -122,7 +124,7 @@ export function ProductCard({ product }: { product: Product }) {
               color: 'var(--green)',
             }}
           >
-            Voir <ArrowUpRight size={13} />
+            {t('see')} <ArrowUpRight size={13} />
           </span>
         </div>
       </div>

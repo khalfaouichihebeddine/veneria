@@ -1,18 +1,33 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { api } from '@/api';
 import { ServiceCard } from '@/components/service-card';
 import { VINERIA_SERVICES } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Link } from '@/i18n/routing';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Services & Académie Vineria | VINERIA',
-  description:
-    'L\'Académie Vineria forme les petits agriculteurs tunisiens à la permaculture en sec. Sessions terrain, accompagnement technique, distillation partagée, visites pédagogiques et parrainage d\'amandier ou de ruche.',
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default async function Services() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'services.meta' });
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      languages: { fr: '/fr/services', ar: '/ar/services' },
+    },
+  };
+}
+
+export default async function Services({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'services' });
+
   let services: Awaited<ReturnType<typeof api.getServices>>;
   try {
     services = await api.getServices();
@@ -20,6 +35,8 @@ export default async function Services() {
   } catch {
     services = VINERIA_SERVICES as typeof services;
   }
+
+  const modules = ['1', '2', '3', '4', '5', '6'] as const;
 
   return (
     <main>
@@ -36,18 +53,18 @@ export default async function Services() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-            L'Académie Vineria & Nos Services
+            {t('hero.eyebrow')}
           </span>
           <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 720 }}>
-            Ce que nous faisons avec nos parcelles, nous l'enseignons.
+            {t('hero.headline')}
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 17, lineHeight: 1.75, maxWidth: 600, marginBottom: 32 }}>
-            Formation paysanne en dialecte local, accompagnement technique à la conversion agroécologique, distillation partagée pour le territoire, visites pédagogiques et parrainage d'amandier ou de ruche.
+            {t('hero.body')}
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {['Sessions terrain en arabe', 'Petits groupes (8–12 pers)', 'Suivi post-formation', 'Bourses disponibles'].map((b) => (
+            {(['sessions', 'groups', 'followup', 'grants'] as const).map((key) => (
               <span
-                key={b}
+                key={key}
                 style={{
                   background: 'rgba(255,255,255,0.10)',
                   border: '1px solid rgba(255,255,255,0.20)',
@@ -58,7 +75,7 @@ export default async function Services() {
                   color: 'rgba(255,255,255,0.85)',
                 }}
               >
-                {b}
+                {t(`hero.badges.${key}`)}
               </span>
             ))}
           </div>
@@ -70,12 +87,12 @@ export default async function Services() {
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">Tous nos services</span>
+              <span className="eyebrow">{t('grid.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 0' }}>Ce qui fait de Vineria une entreprise.</h2>
+              <h2 className="display--md serif" style={{ margin: '10px 0 0' }}>{t('grid.headline')}</h2>
             </div>
             <Link href="/contact" className="btn btn--primary" id="services-contact-cta">
-              Nous contacter <ArrowUpRight size={15} />
+              {t('grid.contactCta')} <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -87,7 +104,7 @@ export default async function Services() {
         </div>
       </section>
 
-      {/* Academy full callout */}
+      {/* Academy callout */}
       <section style={{ background: 'var(--paper)', padding: '72px 0' }}>
         <div className="container">
           <div
@@ -107,28 +124,20 @@ export default async function Services() {
             </div>
 
             <div>
-              <span className="eyebrow">L'Académie Vineria</span>
+              <span className="eyebrow">{t('academy.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
               <h2 className="display--md serif" style={{ margin: '16px 0 18px', fontSize: 'clamp(22px, 3vw, 36px)' }}>
-                Former les petits agriculteurs, c'est notre métier.
+                {t('academy.headline')}
               </h2>
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 22 }}>
-                Sessions courtes, sur la ferme, en dialecte tunisien, en petits groupes de 8 à 12 personnes, avec suivi individualisé directement sur les parcelles des participants.
+                {t('academy.body')}
               </p>
 
-              {/* Modules */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 28 }}>
-                {[
-                  'Conduite de l\'amandier et de l\'olivier en sec',
-                  'Initiation à l\'apiculture moderne',
-                  'Plantes aromatiques et distillation paysanne',
-                  'Compost vivant et fertilité organique',
-                  'Gestion de l\'eau de ruissellement',
-                  'Conditionnement et accès aux marchés',
-                ].map((module) => (
-                  <div key={module} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                {modules.map((num) => (
+                  <div key={num} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', flexShrink: 0 }} />
-                    <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{module}</span>
+                    <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{t(`academy.modules.${num}`)}</span>
                   </div>
                 ))}
               </div>
@@ -145,11 +154,11 @@ export default async function Services() {
                   lineHeight: 1.65,
                 }}
               >
-                <strong>Public prioritaire :</strong> Petits exploitants, femmes rurales, jeunes en installation. Tarification solidaire. Bourses disponibles via nos partenaires bailleurs.
+                <strong>{t('academy.publicLabel')}</strong> {t('academy.publicNote')}
               </div>
 
               <Link href="/contact" className="btn btn--primary" id="academy-register-cta">
-                S'inscrire ou financer une promotion <ArrowUpRight size={15} />
+                {t('academy.registerCta')} <ArrowUpRight size={15} />
               </Link>
             </div>
           </div>
@@ -167,15 +176,15 @@ export default async function Services() {
       >
         <div className="container--narrow">
           <span style={{ fontSize: 48, display: 'block', marginBottom: 20 }}>🌳</span>
-          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>Parrainage</span>
+          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>{t('parrainage.eyebrow')}</span>
           <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}>
-            Parrainer un amandier ou une ruche.
+            {t('parrainage.headline')}
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
-            Une porte d'entrée simple vers un partenariat durable. Une plaque à votre nom, un suivi saisonnier et votre part de récolte chaque année.
+            {t('parrainage.body')}
           </p>
           <Link href="/contact" className="btn btn--ochre" id="parrainage-cta">
-            Devenir parrain <ArrowUpRight size={15} />
+            {t('parrainage.cta')} <ArrowUpRight size={15} />
           </Link>
         </div>
       </section>

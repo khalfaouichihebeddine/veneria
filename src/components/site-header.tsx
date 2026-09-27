@@ -1,16 +1,13 @@
 'use client';
-import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { useState, useEffect } from 'react';
 import { Menu, X, Leaf } from 'lucide-react';
-
-const NAV_LINKS = [
-  { href: '/produits', label: 'Nos Produits' },
-  { href: '/services', label: 'Services & Académie' },
-  { href: '/a-propos', label: 'Notre Méthode' },
-  { href: '/contact', label: 'Contact & Partenariats' },
-];
+import { LanguageSwitcher } from './language-switcher';
 
 export function SiteHeader() {
+  const t = useTranslations('nav');
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -20,9 +17,18 @@ export function SiteHeader() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  const NAV_LINKS = [
+    { href: '/produits' as const, label: t('products') },
+    { href: '/services' as const, label: t('services') },
+    { href: '/a-propos' as const, label: t('about') },
+    { href: '/contact' as const, label: t('contact') },
+  ];
+
   return (
     <>
+      {/* Header is always LTR regardless of locale */}
       <header
+        dir="ltr"
         style={{
           position: 'sticky',
           top: 0,
@@ -45,9 +51,10 @@ export function SiteHeader() {
             gap: 24,
           }}
         >
-          {/* Logo */}
+          {/* Logo — always left */}
           <Link
             href="/"
+            locale={locale}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -99,39 +106,48 @@ export function SiteHeader() {
             </div>
           </Link>
 
-          {/* Desktop nav — masqué sur mobile */}
+          {/* Desktop nav — always in LTR order: Produits, Services, À propos, Contact */}
           <nav className="desktop-nav">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="site-nav-link">
+              <Link key={link.href} href={link.href} locale={locale} className="site-nav-link">
                 {link.label}
               </Link>
             ))}
             <Link
               href="/contact"
+              locale={locale}
               className="btn btn--primary btn--sm"
               style={{ borderRadius: 8 }}
               id="header-cta"
             >
-              Devenir partenaire
+              {t('partnerCta')}
             </Link>
+            {/* Language switcher — always rightmost, LTR */}
+            <LanguageSwitcher />
           </nav>
 
-          {/* Mobile toggle — visible UNIQUEMENT sur mobile, masqué sur PC */}
-          <button
-            className="mobile-menu-btn"
-            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-            id="mobile-menu-toggle"
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div className="mobile-lang-switcher">
+              <LanguageSwitcher />
+            </div>
+            <button
+              className="mobile-menu-btn"
+              aria-label={open ? t('closeMenu') : t('openMenu')}
+              aria-expanded={open}
+              onClick={() => setOpen(!open)}
+              id="mobile-menu-toggle"
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — always LTR */}
       {open && (
         <div
+          dir="ltr"
           style={{
             position: 'fixed',
             inset: 0,
@@ -161,6 +177,7 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
+                locale={locale}
                 onClick={() => setOpen(false)}
                 style={{
                   display: 'block',
@@ -180,11 +197,12 @@ export function SiteHeader() {
             <div style={{ borderTop: '1px solid var(--line-light)', marginTop: 12, paddingTop: 18 }}>
               <Link
                 href="/contact"
+                locale={locale}
                 onClick={() => setOpen(false)}
                 className="btn btn--primary"
                 style={{ width: '100%', justifyContent: 'center' }}
               >
-                Devenir partenaire
+                {t('partnerCta')}
               </Link>
             </div>
           </nav>

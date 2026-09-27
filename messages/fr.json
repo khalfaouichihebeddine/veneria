@@ -1,0 +1,342 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "products": "Nos Produits",
+    "services": "Services & Académie",
+    "about": "Notre Méthode",
+    "contact": "Contact & Partenariats",
+    "partnerCta": "Devenir partenaire",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "langSwitcher": {
+    "label": "Langue"
+  },
+  "footer": {
+    "tagline": "Ferme intégrée conduite en sec, sans intrants de synthèse. Amandiers, oliviers, romarin et ruches dans un système qui s'alimentent mutuellement.",
+    "badges": {
+      "dry": "100% Sec",
+      "noInput": "Zéro Intrant",
+      "traceability": "Traçabilité Lot",
+      "parity": "Parité Rurale"
+    },
+    "nav": "Navigation",
+    "navLinks": {
+      "home": "Accueil",
+      "products": "Nos Produits",
+      "services": "Services & Académie",
+      "about": "Notre Méthode",
+      "contact": "Contact"
+    },
+    "harvests": "Nos Récoltes",
+    "harvestLinks": {
+      "essentialOils": "Huiles Essentielles",
+      "honey": "Miel & Produits Ruche",
+      "almonds": "Amandes de Terroir",
+      "oliveOil": "Huile d'Olive",
+      "proVolumes": "Volumes Professionnels"
+    },
+    "findUs": "Nous Trouver",
+    "writeTo": "Écrire à Vineria",
+    "copyright": "© {year} VINERIA — Ferme intégrée en permaculture. Tous droits réservés.",
+    "motto": "Produire en sec. Transmettre ce qui marche."
+  },
+  "home": {
+    "meta": {
+      "title": "VINERIA — Ferme intégrée en permaculture, Nord de la Tunisie",
+      "description": "Vineria est une exploitation agricole intégrée au nord de la Tunisie : amandiers, oliviers, romarin et ruches conduits en permaculture sèche."
+    },
+    "hero": {
+      "eyebrow": "Ferme intégrée en permaculture · Nord de la Tunisie",
+      "headline": "Produire en sec, sans intrants, en faisant vivre le territoire.",
+      "body": "Amandiers, oliviers, romarin et ruches dans un système où le déchet de l'un est la ressource vitale de l'autre. Trois activités : nos produits, nos services agricoles, et l'Académie Vineria.",
+      "badges": {
+        "dry": "100% Régime Sec",
+        "noChemical": "Zéro Intrant Chimique",
+        "traceability": "Traçabilité par Lot",
+        "parity": "Parité Salariale"
+      },
+      "ctaProducts": "Découvrir nos récoltes",
+      "ctaAbout": "Notre méthode en sec",
+      "imageAlt": "Ferme Vineria — Verger d'amandiers, oliviers et ruches en permaculture au nord de la Tunisie"
+    },
+    "model": {
+      "eyebrow": "Notre modèle",
+      "headline": "Rien ne sort seul.",
+      "body": "C'est le cœur de notre modèle. Chaque atelier de la ferme alimente les autres. Le déchet de l'un est la ressource de l'autre.",
+      "systemContrib": "Apport au système",
+      "circular": {
+        "eyebrow": "Principe circulaire",
+        "headline": "La paille de distillation retourne au compost.",
+        "body": "La taille des oliviers protège le sol. Les abeilles augmentent la nouaison des amandiers. C'est ce qui rend le système viable en régime sec — et exactement ce que nous enseignons.",
+        "items": {
+          "1": "Sol jamais nu — couverture végétale permanente",
+          "2": "Zéro pompage de nappe phréatique",
+          "3": "Compost 100% issu des résidus de la ferme",
+          "4": "Aucun intrant chimique de synthèse depuis 2022"
+        }
+      }
+    },
+    "products": {
+      "eyebrow": "La récolte",
+      "headline": "Nos produits de terroir",
+      "body": "Huiles essentielles, miel cru, amandes en sec et huile d'olive — chaque lot tracé de la parcelle à la bouteille.",
+      "seeAll": "Tout le catalogue"
+    },
+    "values": {
+      "eyebrow": "Nos engagements",
+      "headline": "Nos valeurs, traduites en pratiques."
+    },
+    "services": {
+      "eyebrow": "L'accompagnement",
+      "headline": "Services & Académie Vineria",
+      "body": "Formation paysanne sur le terrain, accompagnement technique, distillation partagée, visites et parrainage d'arbre ou de ruche.",
+      "seeAll": "Tous nos services"
+    },
+    "impact": {
+      "eyebrow": "Impact vérifié",
+      "headline": "Des chiffres vérifiables et datés.",
+      "body": "Un chiffre rond et invérifiable coûte plus cher en crédibilité qu'une ligne laissée de côté.",
+      "verified": "✓ Vérifié",
+      "campaign": "Campagne 2025–2026"
+    },
+    "partnerships": {
+      "eyebrow": "Partenariats",
+      "headline": "Ce que nous cherchons",
+      "body": "Nous ne cherchons pas de partenaires génériques. Nous cherchons des acteurs qui comprennent ce que signifie produire en régime sec dans la Méditerranée du XXIe siècle."
+    },
+    "academy": {
+      "eyebrow": "L'Académie Vineria",
+      "headline": "Former les paysans, c'est notre métier.",
+      "body": "Sessions courtes, sur le terrain, en dialecte local, avec suivi individualisé sur les parcelles des participants. Public prioritaire : petits exploitants, femmes rurales, jeunes en installation.",
+      "ctaModules": "Voir les modules",
+      "ctaRegister": "S'inscrire ou financer",
+      "imageAlt": "L'Académie Vineria — Formation en permaculture sur le terrain en Tunisie"
+    }
+  },
+  "products": {
+    "meta": {
+      "title": "Nos Produits de Terroir | VINERIA",
+      "description": "Huiles essentielles de romarin sauvage, miel cru de verger, amandes en régime sec et huile d'olive vierge extra — tous traçables par lot et parcelle."
+    },
+    "hero": {
+      "eyebrow": "La récolte — Traçabilité par lot",
+      "headline": "Nos produits de terroir.",
+      "body": "Huiles essentielles de romarin distillées sur place, miels crus de verger, amandes en conduite sèche et huile d'olive vierge extra. Chaque lot rattaché à sa parcelle, sa date de récolte et son mode d'extraction.",
+      "badges": {
+        "traceability": "Traçabilité parcellaire",
+        "packaging": "Conditionnements détail & pro",
+        "noChemical": "100% sans intrant chimique",
+        "export": "Export possible"
+      }
+    },
+    "b2bBanner": {
+      "text": "🏪 Vous êtes distributeur, épicerie fine ou cosmétique bio ?",
+      "strong": "Demandez notre catalogue professionnel et nos conditions B2B.",
+      "cta": "Catalogue B2B"
+    },
+    "categories": {
+      "all": "Tous les produits",
+      "essentialOils": "Huiles Essentielles",
+      "honey": "Miel & Ruche",
+      "almonds": "Amandes",
+      "oliveOil": "Huile d'Olive"
+    },
+    "empty": "La collection sera bientôt disponible.",
+    "emptyContact": "Nous contacter",
+    "traceability": {
+      "origin": {
+        "icon": "🗺️",
+        "title": "Parcelle d'origine",
+        "desc": "Chaque lot est rattaché à sa parcelle géolocalisée sur la ferme."
+      },
+      "date": {
+        "icon": "📅",
+        "title": "Date de récolte",
+        "desc": "La date de récolte, les conditions et la durée de distillation sont indiquées."
+      },
+      "analysis": {
+        "icon": "🔬",
+        "title": "Analyses disponibles",
+        "desc": "Chromatographies et bulletins physico-chimiques disponibles sur demande."
+      },
+      "packaging": {
+        "icon": "📦",
+        "title": "Deux formats",
+        "desc": "Conditionnements détail pour particuliers et volumes professionnels pour transformateurs."
+      }
+    }
+  },
+  "productCard": {
+    "see": "Voir",
+    "eur": "EUR"
+  },
+  "productDetail": {
+    "backToProducts": "Retour au catalogue",
+    "badge": "Produit Vineria — Traçabilité garantie",
+    "characteristics": "Caractéristiques",
+    "origin": "Origine",
+    "method": "Méthode",
+    "packaging": {
+      "title": "Conditionnements",
+      "retail": "DÉTAIL",
+      "pro": "PROFESSIONNEL / B2B"
+    },
+    "price": {
+      "label": "Prix indicatif",
+      "eur": "EUR"
+    },
+    "cta": {
+      "inquiry": "Demander ce produit",
+      "b2b": "Devis B2B"
+    },
+    "responseNote": "Réponse sous 48h. Échantillons disponibles pour commandes professionnelles."
+  },
+  "services": {
+    "meta": {
+      "title": "Services & Académie Vineria | VINERIA",
+      "description": "L'Académie Vineria forme les petits agriculteurs tunisiens à la permaculture en sec. Sessions terrain, accompagnement technique, distillation partagée, visites et parrainage."
+    },
+    "hero": {
+      "eyebrow": "L'Académie Vineria & Nos Services",
+      "headline": "Ce que nous faisons avec nos parcelles, nous l'enseignons.",
+      "body": "Formation paysanne en dialecte local, accompagnement technique à la conversion agroécologique, distillation partagée pour le territoire, visites pédagogiques et parrainage d'amandier ou de ruche.",
+      "badges": {
+        "sessions": "Sessions terrain en arabe",
+        "groups": "Petits groupes (8–12 pers)",
+        "followup": "Suivi post-formation",
+        "grants": "Bourses disponibles"
+      }
+    },
+    "grid": {
+      "eyebrow": "Tous nos services",
+      "headline": "Ce qui fait de Vineria une entreprise.",
+      "contactCta": "Nous contacter"
+    },
+    "academy": {
+      "eyebrow": "L'Académie Vineria",
+      "headline": "Former les petits agriculteurs, c'est notre métier.",
+      "body": "Sessions courtes, sur la ferme, en dialecte tunisien, en petits groupes de 8 à 12 personnes, avec suivi individualisé directement sur les parcelles des participants.",
+      "modules": {
+        "1": "Conduite de l'amandier et de l'olivier en sec",
+        "2": "Initiation à l'apiculture moderne",
+        "3": "Plantes aromatiques et distillation paysanne",
+        "4": "Compost vivant et fertilité organique",
+        "5": "Gestion de l'eau de ruissellement",
+        "6": "Conditionnement et accès aux marchés"
+      },
+      "publicLabel": "Public prioritaire :",
+      "publicNote": "Petits exploitants, femmes rurales, jeunes en installation. Tarification solidaire. Bourses disponibles via nos partenaires bailleurs.",
+      "registerCta": "S'inscrire ou financer une promotion"
+    },
+    "parrainage": {
+      "eyebrow": "Parrainage",
+      "headline": "Parrainer un amandier ou une ruche.",
+      "body": "Une porte d'entrée simple vers un partenariat durable. Une plaque à votre nom, un suivi saisonnier et votre part de récolte chaque année.",
+      "cta": "Devenir parrain"
+    }
+  },
+  "serviceCard": {
+    "categories": {
+      "academie": "Académie Vineria",
+      "technique": "Accompagnement Technique",
+      "distillation": "Distillation Partagée",
+      "visite": "Accueil Pédagogique",
+      "parrainage": "Parrainage"
+    },
+    "free": "Sur bourse / gratuit",
+    "from": "À partir de",
+    "discover": "Découvrir"
+  },
+  "serviceDetail": {
+    "back": "Retour aux services & Académie",
+    "categories": {
+      "academie": "🎓 Académie Vineria",
+      "technique": "🌿 Accompagnement Technique",
+      "distillation": "🫙 Distillation Partagée",
+      "visite": "👁 Accueil Pédagogique",
+      "parrainage": "🤝 Parrainage"
+    },
+    "whatYouLearn": "Ce que vous apprenez ou recevez",
+    "pricing": "Tarif",
+    "priceFree": "Financement par bourse / Tarif solidaire",
+    "priceFrom": "À partir de",
+    "targetAudience": "Public cible",
+    "contactCta": "Nous contacter",
+    "financeCta": "Financer cette prestation",
+    "responseNote": "Réponse dans les 48h ouvrables. Adaptation possible selon le groupe et les financements disponibles."
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact & Partenariats | VINERIA",
+      "description": "Contactez la ferme Vineria : distributeurs, bailleurs, chercheurs, apprenants. Réponse en 48h ouvrables."
+    },
+    "hero": {
+      "eyebrow": "Contact & Partenariats",
+      "headline": "Parlons de la ferme.",
+      "body": "Distributeur, bailleur de fonds, chercheur, apprenant ou curieux — nous répondons dans les deux jours ouvrables avec attention."
+    },
+    "partnersLabel": "Nous cherchons des partenaires :",
+    "info": {
+      "eyebrow": "Informations de contact",
+      "headline": "La ferme Vineria",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "hours": "Horaires"
+    },
+    "quickLinks": {
+      "title": "Liens rapides",
+      "products": "Nos produits & catalogue",
+      "services": "Services & Académie Vineria",
+      "about": "Notre méthode permacole"
+    },
+    "form": {
+      "headline": "Envoyez-nous un message",
+      "subtitle": "Réponse sous 48h ouvrables. Tous les champs marqués * sont obligatoires.",
+      "name": "Prénom & Nom *",
+      "namePlaceholder": "Fatima Ben Salah",
+      "email": "E-mail *",
+      "emailPlaceholder": "fatima@example.com",
+      "organization": "Organisation / Entreprise",
+      "organizationPlaceholder": "Votre société, coopérative ou projet",
+      "youAre": "Vous êtes... *",
+      "choosePlaceholder": "Choisissez votre intérêt…",
+      "subject": "Sujet *",
+      "subjectPlaceholder": "Demande d'échantillons / Inscription Académie / Parrainage…",
+      "message": "Message *",
+      "messagePlaceholder": "Décrivez votre projet, vos besoins ou vos questions. Plus vous êtes précis, mieux nous pourrons vous répondre.",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours…",
+      "privacy": "Vos données ne sont pas partagées avec des tiers. Elles sont utilisées uniquement pour vous répondre.",
+      "networkError": "Impossible d'envoyer le message. Réessayez ou écrivez-nous directement par e-mail."
+    },
+    "interests": {
+      "commercial": "🏪 Distribution / Achat B2B / Export",
+      "bailleur": "💼 Financement & Partenariat Technique",
+      "recherche": "🔬 Recherche Agronomique",
+      "formation": "🎓 S'inscrire à l'Académie Vineria",
+      "parrainage": "🌳 Parrainage d'amandier ou de ruche",
+      "visite": "👁 Visite Pédagogique",
+      "autre": "Autre"
+    },
+    "success": {
+      "title": "Message envoyé !",
+      "body": "Merci pour votre intérêt pour Vineria. Nous vous répondrons avec attention dans les deux jours ouvrables.",
+      "backHome": "Retour à l'accueil"
+    }
+  },
+  "aboutUs": {
+    "meta": {
+      "title": "Notre Méthode & Vision | VINERIA",
+      "description": "Vineria est une exploitation agricole intégrée au nord de la Tunisie. Découvrez notre méthode de permaculture en régime sec, nos 5 valeurs concrètes et notre engagement pour l'agriculture paysanne."
+    },
+    "hero": {
+      "eyebrow": "Présentation de l'entreprise",
+      "headline": "Une méthode, pas une filière.",
+      "ctaProducts": "Nos produits",
+      "ctaContact": "Nous écrire"
+    },
+    "systemContrib": "Apport au système"
+  }
+}

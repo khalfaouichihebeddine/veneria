@@ -1,10 +1,16 @@
 'use client';
-import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { Leaf, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
 
 export function SiteFooter() {
+  const t = useTranslations('footer');
+  const locale = useLocale();
+
   return (
+    /* Footer always LTR — layout stays identical in FR and AR */
     <footer
+      dir="ltr"
       style={{
         background: 'linear-gradient(160deg, var(--green-deep) 0%, #152d1c 100%)',
         color: 'rgba(255,255,255,0.88)',
@@ -42,12 +48,12 @@ export function SiteFooter() {
               </div>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.65)', maxWidth: 280 }}>
-              Ferme intégrée conduite en sec, sans intrants de synthèse. Amandiers, oliviers, romarin et ruches dans un système qui s'alimentent mutuellement.
+              {t('tagline')}
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 22 }}>
-              {['100% Sec', 'Zéro Intrant', 'Traçabilité Lot', 'Parité Rurale'].map((b) => (
+              {(['dry', 'noInput', 'traceability', 'parity'] as const).map((key) => (
                 <span
-                  key={b}
+                  key={key}
                   style={{
                     background: 'rgba(255,255,255,0.10)',
                     border: '1px solid rgba(255,255,255,0.15)',
@@ -59,7 +65,7 @@ export function SiteFooter() {
                     letterSpacing: '0.04em',
                   }}
                 >
-                  {b}
+                  {t(`badges.${key}`)}
                 </span>
               ))}
             </div>
@@ -67,17 +73,20 @@ export function SiteFooter() {
 
           {/* Navigation */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Navigation</div>
-            {[
-              ['/', 'Accueil'],
-              ['/produits', 'Nos Produits'],
-              ['/services', 'Services & Académie'],
-              ['/a-propos', 'Notre Méthode'],
-              ['/contact', 'Contact'],
-            ].map(([href, label]) => (
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>
+              {t('nav')}
+            </div>
+            {([
+              ['/', 'home'],
+              ['/produits', 'products'],
+              ['/services', 'services'],
+              ['/a-propos', 'about'],
+              ['/contact', 'contact'],
+            ] as const).map(([href, key]) => (
               <Link
                 key={href}
                 href={href}
+                locale={locale}
                 style={{
                   display: 'block',
                   fontSize: 14,
@@ -88,24 +97,27 @@ export function SiteFooter() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.68)')}
               >
-                {label}
+                {t(`navLinks.${key}`)}
               </Link>
             ))}
           </div>
 
-          {/* Produits */}
+          {/* Récoltes */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Nos Récoltes</div>
-            {[
-              ['Huiles Essentielles', '/produits'],
-              ['Miel & Produits Ruche', '/produits'],
-              ['Amandes de Terroir', '/produits'],
-              ['Huile d\'Olive', '/produits'],
-              ['Volumes Professionnels', '/contact'],
-            ].map(([label, href]) => (
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>
+              {t('harvests')}
+            </div>
+            {([
+              ['essentialOils', '/produits'],
+              ['honey', '/produits'],
+              ['almonds', '/produits'],
+              ['oliveOil', '/produits'],
+              ['proVolumes', '/contact'],
+            ] as const).map(([key, href]) => (
               <Link
-                key={label}
+                key={key}
                 href={href}
+                locale={locale}
                 style={{
                   display: 'block',
                   fontSize: 14,
@@ -116,14 +128,16 @@ export function SiteFooter() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.68)')}
               >
-                {label}
+                {t(`harvestLinks.${key}`)}
               </Link>
             ))}
           </div>
 
           {/* Contact */}
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>Nous Trouver</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 18 }}>
+              {t('findUs')}
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', gap: 10 }}>
                 <MapPin size={16} style={{ color: 'var(--amber)', flexShrink: 0, marginTop: 2 }} />
@@ -145,6 +159,7 @@ export function SiteFooter() {
               </div>
               <Link
                 href="/contact"
+                locale={locale}
                 style={{
                   marginTop: 8,
                   display: 'inline-flex',
@@ -159,7 +174,7 @@ export function SiteFooter() {
                   width: 'fit-content',
                 }}
               >
-                Écrire à Vineria <ArrowUpRight size={14} />
+                {t('writeTo')} <ArrowUpRight size={14} />
               </Link>
             </div>
           </div>
@@ -177,10 +192,10 @@ export function SiteFooter() {
           }}
         >
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)' }}>
-            © {new Date().getFullYear()} VINERIA — Ferme intégrée en permaculture. Tous droits réservés.
+            {t('copyright', { year: new Date().getFullYear() })}
           </span>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.38)', fontStyle: 'italic' }}>
-            Produire en sec. Transmettre ce qui marche.
+            {t('motto')}
           </span>
         </div>
       </div>
@@ -195,6 +210,10 @@ export function SiteFooter() {
           footer .container > div:first-child {
             grid-template-columns: 1fr !important;
           }
+        }
+        .mobile-lang-switcher { display: none; }
+        @media (max-width: 860px) {
+          .mobile-lang-switcher { display: flex; }
         }
       `}</style>
     </footer>

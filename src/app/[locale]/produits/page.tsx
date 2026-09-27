@@ -1,17 +1,32 @@
-import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { api } from '@/api';
 import { ProductCard } from '@/components/product-card';
 import { VINERIA_PRODUCTS } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Link } from '@/i18n/routing';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Nos Produits de Terroir | VINERIA',
-  description:
-    'Huiles essentielles de romarin sauvage, miel cru de verger, amandes en régime sec et huile d\'olive vierge extra — tous traçables par lot et parcelle. Conditionnements détail et professionnels.',
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default async function Products() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'products.meta' });
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      languages: { fr: '/fr/produits', ar: '/ar/produits' },
+    },
+  };
+}
+
+export default async function Products({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'products' });
+
   let products: Awaited<ReturnType<typeof api.getProducts>>;
   try {
     products = await api.getProducts();
@@ -21,12 +36,14 @@ export default async function Products() {
   }
 
   const categories = [
-    { id: 'all', label: 'Tous les produits' },
-    { id: 'huiles-essentielles', label: 'Huiles Essentielles' },
-    { id: 'ruche', label: 'Miel & Ruche' },
-    { id: 'amandes', label: 'Amandes' },
-    { id: 'huile-olive', label: 'Huile d\'Olive' },
+    { id: 'all', key: 'all' as const },
+    { id: 'huiles-essentielles', key: 'essentialOils' as const },
+    { id: 'ruche', key: 'honey' as const },
+    { id: 'amandes', key: 'almonds' as const },
+    { id: 'huile-olive', key: 'oliveOil' as const },
   ];
+
+  const traceItems = ['origin', 'date', 'analysis', 'packaging'] as const;
 
   return (
     <main>
@@ -43,18 +60,18 @@ export default async function Products() {
         <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 16 }}>
-            La récolte — Traçabilité par lot
+            {t('hero.eyebrow')}
           </span>
           <h1 className="display" style={{ color: '#fff', margin: '0 0 22px', maxWidth: 720 }}>
-            Nos produits de terroir.
+            {t('hero.headline')}
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 17, lineHeight: 1.75, maxWidth: 560, marginBottom: 32 }}>
-            Huiles essentielles de romarin distillées sur place, miels crus de verger, amandes en conduite sèche et huile d'olive vierge extra. Chaque lot rattaché à sa parcelle, sa date de récolte et son mode d'extraction.
+            {t('hero.body')}
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            {['Traçabilité parcellaire', 'Conditionnements détail & pro', '100% sans intrant chimique', 'Export possible'].map((b) => (
+            {(['traceability', 'packaging', 'noChemical', 'export'] as const).map((key) => (
               <span
-                key={b}
+                key={key}
                 style={{
                   background: 'rgba(255,255,255,0.10)',
                   border: '1px solid rgba(255,255,255,0.20)',
@@ -65,7 +82,7 @@ export default async function Products() {
                   color: 'rgba(255,255,255,0.85)',
                 }}
               >
-                {b}
+                {t(`hero.badges.${key}`)}
               </span>
             ))}
           </div>
@@ -86,10 +103,10 @@ export default async function Products() {
           }}
         >
           <p style={{ fontSize: 14, color: 'var(--ochre-warm)', fontWeight: 500 }}>
-            🏪 <strong>Vous êtes distributeur, épicerie fine ou cosmétique bio ?</strong> Demandez notre catalogue professionnel et nos conditions B2B.
+            {t('b2bBanner.text')} <strong>{t('b2bBanner.strong')}</strong>
           </p>
           <Link href="/contact" className="btn btn--ochre btn--sm" id="catalog-b2b-cta">
-            Catalogue B2B <ArrowUpRight size={14} />
+            {t('b2bBanner.cta')} <ArrowUpRight size={14} />
           </Link>
         </div>
       </div>
@@ -97,11 +114,10 @@ export default async function Products() {
       {/* Categories + Grid */}
       <section className="section">
         <div className="container">
-          {/* Category pills */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 40 }}>
             {categories.map((cat) => (
               <button key={cat.id} className="category-pill active" type="button" id={`filter-${cat.id}`}>
-                {cat.label}
+                {t(`categories.${cat.key}`)}
               </button>
             ))}
           </div>
@@ -120,29 +136,24 @@ export default async function Products() {
                 color: 'var(--muted)',
               }}
             >
-              <p style={{ fontSize: 18 }}>La collection sera bientôt disponible.</p>
+              <p style={{ fontSize: 18 }}>{t('empty')}</p>
               <Link href="/contact" className="btn btn--primary" style={{ marginTop: 24, display: 'inline-flex' }}>
-                Nous contacter
+                {t('emptyContact')}
               </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* Traceability info */}
+      {/* Traceability */}
       <section style={{ background: 'var(--paper)', padding: '64px 0' }}>
         <div className="container">
           <div className="grid-4">
-            {[
-              { icon: '🗺️', title: 'Parcelle d\'origine', desc: 'Chaque lot est rattaché à sa parcelle géolocalisée sur la ferme.' },
-              { icon: '📅', title: 'Date de récolte', desc: 'La date de récolte, les conditions et la durée de distillation sont indiquées.' },
-              { icon: '🔬', title: 'Analyses disponibles', desc: 'Chromatographies et bulletins physico-chimiques disponibles sur demande.' },
-              { icon: '📦', title: 'Deux formats', desc: 'Conditionnements détail pour particuliers et volumes professionnels pour transformateurs.' },
-            ].map((item) => (
-              <div key={item.title} style={{ textAlign: 'center', padding: '24px 16px' }}>
-                <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 8 }}>{item.title}</div>
-                <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6 }}>{item.desc}</p>
+            {traceItems.map((key) => (
+              <div key={key} style={{ textAlign: 'center', padding: '24px 16px' }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>{t(`traceability.${key}.icon`)}</div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--ink)', marginBottom: 8 }}>{t(`traceability.${key}.title`)}</div>
+                <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6 }}>{t(`traceability.${key}.desc`)}</p>
               </div>
             ))}
           </div>

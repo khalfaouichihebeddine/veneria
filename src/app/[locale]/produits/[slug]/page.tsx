@@ -4,26 +4,34 @@ import { notFound } from 'next/navigation';
 import { CheckCircle2, ArrowLeft, ArrowUpRight, MapPin, Beaker, Package } from 'lucide-react';
 import { api } from '@/api';
 import { VINERIA_PRODUCTS } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const products = VINERIA_PRODUCTS;
   const product = products.find((p) => p.slug === slug);
   return {
     title: product ? `${product.name} | VINERIA` : 'Produit | VINERIA',
     description: product?.description?.slice(0, 160),
+    alternates: {
+      languages: {
+        fr: `/fr/produits/${slug}`,
+        ar: `/ar/produits/${slug}`,
+      },
+    },
   };
 }
 
 export default async function ProductDetail({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'productDetail' });
 
-  // Try live data, fall back to static
   let product: Awaited<ReturnType<typeof api.getProduct>>;
   try {
     product = await api.getProduct(slug);
@@ -31,7 +39,6 @@ export default async function ProductDetail({ params }: Props) {
     product = undefined;
   }
   if (!product) {
-    // Fallback from static data
     const found = VINERIA_PRODUCTS.find((p) => p.slug === slug);
     if (!found) notFound();
     product = found as unknown as typeof product;
@@ -43,7 +50,7 @@ export default async function ProductDetail({ params }: Props) {
       <section style={{ background: 'var(--paper)', padding: '28px 0' }}>
         <div className="container">
           <Link
-            href="/produits"
+            href={`/${locale}/produits`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -54,7 +61,7 @@ export default async function ProductDetail({ params }: Props) {
               transition: 'color 0.2s',
             }}
           >
-            <ArrowLeft size={15} /> Retour au catalogue
+            <ArrowLeft size={15} /> {t('backToProducts')}
           </Link>
         </div>
       </section>
@@ -103,7 +110,6 @@ export default async function ProductDetail({ params }: Props) {
                   </div>
                 )}
 
-                {/* Category badge */}
                 {product.categoryLabel && (
                   <span
                     style={{
@@ -127,11 +133,10 @@ export default async function ProductDetail({ params }: Props) {
                 )}
               </div>
 
-              {/* Characteristics grid */}
               {product.characteristics && product.characteristics.length > 0 && (
                 <div style={{ marginTop: 24 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>
-                    Caractéristiques
+                    {t('characteristics')}
                   </div>
                   <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
                     {product.characteristics.map((char, i) => (
@@ -158,7 +163,7 @@ export default async function ProductDetail({ params }: Props) {
             {/* Details */}
             <div style={{ position: 'sticky', top: 96 }}>
               <span className="eyebrow eyebrow--green" style={{ display: 'block', marginBottom: 14 }}>
-                Produit Vineria — Traçabilité garantie
+                {t('badge')}
               </span>
 
               <h1
@@ -178,13 +183,12 @@ export default async function ProductDetail({ params }: Props) {
                 {product.description}
               </p>
 
-              {/* Meta pills */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
                 {product.origin && (
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                     <MapPin size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                     <div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>Origine</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>{t('origin')}</span>
                       <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.origin}</span>
                     </div>
                   </div>
@@ -193,14 +197,13 @@ export default async function ProductDetail({ params }: Props) {
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                     <Beaker size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                     <div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>Méthode</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>{t('method')}</span>
                       <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.method}</span>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Packaging */}
               {product.packaging && (
                 <div
                   style={{
@@ -213,20 +216,20 @@ export default async function ProductDetail({ params }: Props) {
                 >
                   <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 12 }}>
                     <Package size={14} style={{ color: 'var(--green)' }} />
-                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)' }}>Conditionnements</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)' }}>{t('packaging.title')}</span>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
                       <CheckCircle2 size={13} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                       <div>
-                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', display: 'block', marginBottom: 2 }}>DÉTAIL</span>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', display: 'block', marginBottom: 2 }}>{t('packaging.retail')}</span>
                         <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.retail}</span>
                       </div>
                     </div>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
                       <CheckCircle2 size={13} style={{ color: 'var(--ochre)', flexShrink: 0, marginTop: 2 }} />
                       <div>
-                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ochre)', display: 'block', marginBottom: 2 }}>PROFESSIONNEL / B2B</span>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ochre)', display: 'block', marginBottom: 2 }}>{t('packaging.pro')}</span>
                         <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.pro}</span>
                       </div>
                     </div>
@@ -234,7 +237,6 @@ export default async function ProductDetail({ params }: Props) {
                 </div>
               )}
 
-              {/* Price & CTA */}
               <div
                 style={{
                   borderTop: '1px solid var(--line-light)',
@@ -248,25 +250,25 @@ export default async function ProductDetail({ params }: Props) {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>Prix indicatif</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>{t('price.label')}</div>
                   <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
-                    {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>EUR</span>
+                    {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>{t('price.eur')}</span>
                   </div>
                   {product.unit && <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>/ {product.unit}</div>}
                 </div>
               </div>
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <Link href="/contact" className="btn btn--primary" style={{ flex: 1, justifyContent: 'center', minWidth: 160 }} id="product-inquiry-btn">
-                  Demander ce produit <ArrowUpRight size={15} />
+                <Link href={`/${locale}/contact`} className="btn btn--primary" style={{ flex: 1, justifyContent: 'center', minWidth: 160 }} id="product-inquiry-btn">
+                  {t('cta.inquiry')} <ArrowUpRight size={15} />
                 </Link>
-                <Link href="/contact" className="btn btn--secondary btn--sm" style={{ whiteSpace: 'nowrap' }} id="product-b2b-btn">
-                  Devis B2B
+                <Link href={`/${locale}/contact`} className="btn btn--secondary btn--sm" style={{ whiteSpace: 'nowrap' }} id="product-b2b-btn">
+                  {t('cta.b2b')}
                 </Link>
               </div>
 
               <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 16, lineHeight: 1.55 }}>
-                Réponse sous 48h. Échantillons disponibles pour commandes professionnelles.
+                {t('responseNote')}
               </p>
             </div>
           </div>

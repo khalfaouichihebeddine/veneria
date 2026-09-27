@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2, Leaf } from 'lucide-react';
 import { api } from '@/api';
 import { ProductCard } from '@/components/product-card';
@@ -12,13 +11,32 @@ import {
   VINERIA_PRODUCTS,
   VINERIA_SERVICES,
 } from '@/lib/vineria-data';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Link } from '@/i18n/routing';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'VINERIA — Ferme intégrée en permaculture, Nord de la Tunisie',
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default async function Home() {
-  // Try live data, fall back to static Vineria data
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'home.meta' });
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { fr: '/fr', ar: '/ar' },
+    },
+  };
+}
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'home' });
+
   let products: Awaited<ReturnType<typeof api.getProducts>>;
   let services: Awaited<ReturnType<typeof api.getServices>>;
   try {
@@ -35,9 +53,7 @@ export default async function Home() {
 
   return (
     <main>
-      {/* ══════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════ */}
+      {/* HERO */}
       <section
         style={{
           position: 'relative',
@@ -47,16 +63,14 @@ export default async function Home() {
           alignItems: 'flex-end',
         }}
       >
-        {/* Background image */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <Image
             src="/images/hero-farm.jpg"
-            alt="Ferme Vineria — Verger d'amandiers, oliviers et ruches en permaculture au nord de la Tunisie"
+            alt={t('hero.imageAlt')}
             fill
             priority
             style={{ objectFit: 'cover', objectPosition: 'center 35%' }}
           />
-          {/* Dark gradient overlay */}
           <div
             style={{
               position: 'absolute',
@@ -66,32 +80,30 @@ export default async function Home() {
           />
         </div>
 
-        {/* Content */}
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: 'clamp(56px, 8vh, 96px)', paddingTop: 120 }}>
           <div style={{ maxWidth: 760 }}>
             <span className="eyebrow animate-fade-up" style={{ color: '#f1c98d', marginBottom: 20, display: 'inline-block' }}>
-              Ferme intégrée en permaculture · Nord de la Tunisie
+              {t('hero.eyebrow')}
             </span>
 
             <h1
               className="display animate-fade-up animate-delay-1"
               style={{ color: '#fff', margin: '20px 0 28px', maxWidth: 720, textShadow: '0 2px 24px rgba(0,0,0,0.3)' }}
             >
-              Produire en sec, sans intrants, en faisant vivre le territoire.
+              {t('hero.headline')}
             </h1>
 
             <p
               className="animate-fade-up animate-delay-2"
               style={{ fontSize: 18, lineHeight: 1.75, color: 'rgba(255,255,255,0.82)', maxWidth: 580, marginBottom: 38 }}
             >
-              Amandiers, oliviers, romarin et ruches dans un système où le déchet de l'un est la ressource vitale de l'autre. Trois activités : nos produits, nos services agricoles, et l'Académie Vineria.
+              {t('hero.body')}
             </p>
 
-            {/* Reassurance badges */}
             <div className="animate-fade-up animate-delay-2" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 36 }}>
-              {['100% Régime Sec', 'Zéro Intrant Chimique', 'Traçabilité par Lot', 'Parité Salariale'].map((b) => (
+              {(['dry', 'noChemical', 'traceability', 'parity'] as const).map((key) => (
                 <span
-                  key={b}
+                  key={key}
                   style={{
                     background: 'rgba(255,255,255,0.13)',
                     border: '1px solid rgba(255,255,255,0.25)',
@@ -104,40 +116,35 @@ export default async function Home() {
                     letterSpacing: '0.03em',
                   }}
                 >
-                  {b}
+                  {t(`hero.badges.${key}`)}
                 </span>
               ))}
             </div>
 
             <div className="animate-fade-up animate-delay-3 hero-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
               <Link href="/produits" className="btn btn--ochre" id="hero-cta-produits">
-                Découvrir nos récoltes <ArrowUpRight size={16} />
+                {t('hero.ctaProducts')} <ArrowUpRight size={16} />
               </Link>
               <Link href="/a-propos" className="btn btn--ghost" id="hero-cta-methode">
-                Notre méthode en sec
+                {t('hero.ctaAbout')}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          LE PRINCIPE — RIEN NE SORT SEUL
-      ══════════════════════════════════════════ */}
+      {/* LE PRINCIPE */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 56px' }}>
-            <span className="eyebrow">Notre modèle</span>
+            <span className="eyebrow">{t('model.eyebrow')}</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: '0 0 18px' }}>
-              Rien ne sort seul.
+              {t('model.headline')}
             </h2>
-            <p className="lead">
-              C'est le cœur de notre modèle. Chaque atelier de la ferme alimente les autres. Le déchet de l'un est la ressource de l'autre.
-            </p>
+            <p className="lead">{t('model.body')}</p>
           </div>
 
-          {/* Workshop cards */}
           <div className="grid-responsive-3" style={{ gap: 18, marginBottom: 48 }}>
             {PERMACULTURE_WORKSHOPS.map((workshop) => (
               <div
@@ -173,7 +180,7 @@ export default async function Home() {
                 </p>
                 <div style={{ padding: '12px 14px', background: 'var(--green-pale)', borderRadius: 8, border: '1px solid rgba(42,82,54,0.10)' }}>
                   <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--green)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 5 }}>
-                    Apport au système
+                    {t('model.systemContrib')}
                   </div>
                   <p style={{ fontSize: 12.5, color: 'var(--green-deep)', lineHeight: 1.55, margin: 0 }}>
                     {workshop.bringsToSystem}
@@ -183,7 +190,6 @@ export default async function Home() {
             ))}
           </div>
 
-          {/* Circular principle statement */}
           <div
             className="card--forest grid-responsive-2"
             style={{
@@ -193,24 +199,19 @@ export default async function Home() {
             }}
           >
             <div>
-              <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'block' }}>Principe circulaire</span>
+              <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'block' }}>{t('model.circular.eyebrow')}</span>
               <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}>
-                La paille de distillation retourne au compost.
+                {t('model.circular.headline')}
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.75, fontSize: 15 }}>
-                La taille des oliviers protège le sol. Les abeilles augmentent la nouaison des amandiers. C'est ce qui rend le système viable en régime sec — et exactement ce que nous enseignons.
+                {t('model.circular.body')}
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {[
-                'Sol jamais nu — couverture végétale permanente',
-                'Zéro pompage de nappe phréatique',
-                'Compost 100% issu des résidus de la ferme',
-                'Aucun intrant chimique de synthèse depuis 2022',
-              ].map((item) => (
-                <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              {(['1', '2', '3', '4'] as const).map((key) => (
+                <div key={key} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                   <CheckCircle2 size={16} style={{ color: '#86efac', flexShrink: 0, marginTop: 2 }} />
-                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.55 }}>{item}</span>
+                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.55 }}>{t(`model.circular.items.${key}`)}</span>
                 </div>
               ))}
             </div>
@@ -218,22 +219,20 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          NOS PRODUITS
-      ══════════════════════════════════════════ */}
+      {/* NOS PRODUITS */}
       <section className="section">
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">La récolte</span>
+              <span className="eyebrow">{t('products.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>Nos produits de terroir</h2>
+              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>{t('products.headline')}</h2>
               <p style={{ color: 'var(--muted)', maxWidth: 480, lineHeight: 1.7, fontSize: 15 }}>
-                Huiles essentielles, miel cru, amandes en sec et huile d'olive — chaque lot tracé de la parcelle à la bouteille.
+                {t('products.body')}
               </p>
             </div>
             <Link href="/produits" className="btn btn--secondary" id="home-see-all-products">
-              Tout le catalogue <ArrowUpRight size={15} />
+              {t('products.seeAll')} <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -245,16 +244,14 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          VALEURS — 5 PILIERS
-      ══════════════════════════════════════════ */}
+      {/* VALEURS */}
       <section className="section" style={{ background: 'linear-gradient(160deg, #f0ebe0 0%, var(--cream) 100%)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
-            <span className="eyebrow">Nos engagements</span>
+            <span className="eyebrow">{t('values.eyebrow')}</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: 0 }}>
-              Nos valeurs, traduites en pratiques.
+              {t('values.headline')}
             </h2>
           </div>
 
@@ -294,22 +291,20 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          SERVICES & ACADÉMIE
-      ══════════════════════════════════════════ */}
+      {/* SERVICES */}
       <section className="section">
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
             <div>
-              <span className="eyebrow">L'accompagnement</span>
+              <span className="eyebrow">{t('services.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
-              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>Services & Académie Vineria</h2>
+              <h2 className="display--md serif" style={{ margin: '10px 0 10px' }}>{t('services.headline')}</h2>
               <p style={{ color: 'var(--muted)', maxWidth: 520, lineHeight: 1.7, fontSize: 15 }}>
-                Formation paysanne sur le terrain, accompagnement technique, distillation partagée, visites et parrainage d'arbre ou de ruche.
+                {t('services.body')}
               </p>
             </div>
             <Link href="/services" className="btn btn--secondary" id="home-see-all-services">
-              Tous nos services <ArrowUpRight size={15} />
+              {t('services.seeAll')} <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -321,9 +316,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          IMPACT METRICS
-      ══════════════════════════════════════════ */}
+      {/* IMPACT METRICS */}
       <section
         className="section"
         style={{
@@ -333,13 +326,13 @@ export default async function Home() {
       >
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 580, margin: '0 auto 56px' }}>
-            <span className="eyebrow" style={{ color: '#f1c98d' }}>Impact vérifié</span>
+            <span className="eyebrow" style={{ color: '#f1c98d' }}>{t('impact.eyebrow')}</span>
             <div style={{ width: 40, height: 3, background: 'rgba(241,201,141,0.5)', borderRadius: 2, margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 16px' }}>
-              Des chiffres vérifiables et datés.
+              {t('impact.headline')}
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, fontSize: 15 }}>
-              Un chiffre rond et invérifiable coûte plus cher en crédibilité qu'une ligne laissée de côté.
+              {t('impact.body')}
             </p>
           </div>
 
@@ -380,7 +373,7 @@ export default async function Home() {
                     border: `1px solid ${metric.status === 'verifie' ? 'rgba(134,239,172,0.3)' : 'rgba(241,201,141,0.3)'}`,
                   }}
                 >
-                  {metric.status === 'verifie' ? '✓ Vérifié' : 'Campagne 2025–2026'}
+                  {metric.status === 'verifie' ? t('impact.verified') : t('impact.campaign')}
                 </span>
               </div>
             ))}
@@ -388,18 +381,14 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          CE QUE NOUS CHERCHONS — PARTENARIATS
-      ══════════════════════════════════════════ */}
+      {/* PARTENARIATS */}
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
-            <span className="eyebrow">Partenariats</span>
+            <span className="eyebrow">{t('partnerships.eyebrow')}</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
-            <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>Ce que nous cherchons</h2>
-            <p className="lead">
-              Nous ne cherchons pas de partenaires génériques. Nous cherchons des acteurs qui comprennent ce que signifie produire en régime sec dans la Méditerranée du XXIe siècle.
-            </p>
+            <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>{t('partnerships.headline')}</h2>
+            <p className="lead">{t('partnerships.body')}</p>
           </div>
 
           <div className="grid-3" style={{ gap: 22 }}>
@@ -447,9 +436,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          ACADEMY BANNER CTA
-      ══════════════════════════════════════════ */}
+      {/* ACADEMY CTA */}
       <section style={{ padding: '0 0 96px' }}>
         <div className="container">
           <div
@@ -461,17 +448,15 @@ export default async function Home() {
               gap: 0,
             }}
           >
-            {/* Image side */}
             <div style={{ position: 'relative', minHeight: 320 }}>
               <Image
                 src="/images/academy.jpg"
-                alt="L'Académie Vineria — Formation en permaculture sur le terrain en Tunisie"
+                alt={t('academy.imageAlt')}
                 fill
                 style={{ objectFit: 'cover' }}
               />
             </div>
 
-            {/* Content side */}
             <div
               style={{
                 background: 'linear-gradient(135deg, var(--green-deep) 0%, #1e4a2a 100%)',
@@ -482,23 +467,23 @@ export default async function Home() {
               }}
             >
               <span className="eyebrow" style={{ color: '#f1c98d', marginBottom: 12, display: 'inline-block' }}>
-                L'Académie Vineria
+                {t('academy.eyebrow')}
               </span>
               <h2
                 className="display--md serif"
                 style={{ color: '#fff', margin: '0 0 18px', fontSize: 'clamp(22px, 3vw, 38px)' }}
               >
-                Former les paysans, c'est notre métier.
+                {t('academy.headline')}
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.75, margin: '0 0 30px' }}>
-                Sessions courtes, sur le terrain, en dialecte local, avec suivi individualisé sur les parcelles des participants. Public prioritaire : petits exploitants, femmes rurales, jeunes en installation.
+                {t('academy.body')}
               </p>
               <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <Link href="/services" className="btn btn--ochre" id="academy-cta">
-                  Voir les modules <ArrowUpRight size={15} />
+                  {t('academy.ctaModules')} <ArrowUpRight size={15} />
                 </Link>
                 <Link href="/contact" className="btn btn--ghost" id="academy-contact">
-                  S'inscrire ou financer
+                  {t('academy.ctaRegister')}
                 </Link>
               </div>
             </div>

@@ -44,7 +44,7 @@ export function SiteFooter() {
               </span>
               <div>
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, letterSpacing: '0.14em', fontSize: 15, color: '#fff' }}>VINERIA</div>
-                <div style={{ fontSize: 9, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Permaculture · Nord Tunisie</div>
+                <div style={{ fontSize: 9, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>{t('brandSubtitle')}</div>
               </div>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.65)', maxWidth: 280 }}>
@@ -142,7 +142,7 @@ export function SiteFooter() {
               <div style={{ display: 'flex', gap: 10 }}>
                 <MapPin size={16} style={{ color: 'var(--amber)', flexShrink: 0, marginTop: 2 }} />
                 <span style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(255,255,255,0.68)' }}>
-                  Domaine Vineria<br />Nord de la Tunisie
+                  {t('address')}<br />{t('region')}
                 </span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>

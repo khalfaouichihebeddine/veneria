@@ -7,10 +7,14 @@
     "contact": "Contact & Partenariats",
     "partnerCta": "Devenir partenaire",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "closeMenu": "Fermer le menu",
+    "brandSubtitle": "Permaculture · Nord Tunisie",
+    "brandLabel": "VINERIA — Accueil"
   },
   "langSwitcher": {
-    "label": "Langue"
+    "label": "Langue",
+    "switchToFrench": "Switch to Français",
+    "switchToArabic": "Switch to العربية"
   },
   "footer": {
     "tagline": "Ferme intégrée conduite en sec, sans intrants de synthèse. Amandiers, oliviers, romarin et ruches dans un système qui s'alimentent mutuellement.",
@@ -39,7 +43,10 @@
     "findUs": "Nous Trouver",
     "writeTo": "Écrire à Vineria",
     "copyright": "© {year} VINERIA — Ferme intégrée en permaculture. Tous droits réservés.",
-    "motto": "Produire en sec. Transmettre ce qui marche."
+    "motto": "Produire en sec. Transmettre ce qui marche.",
+    "brandSubtitle": "Permaculture · Nord Tunisie",
+    "address": "Domaine Vineria",
+    "region": "Nord de la Tunisie"
   },
   "home": {
     "meta": {
@@ -334,9 +341,65 @@
     "hero": {
       "eyebrow": "Présentation de l'entreprise",
       "headline": "Une méthode, pas une filière.",
+      "summary": "Vineria est une exploitation agricole intégrée située au nord de la Tunisie. Amandiers, oliviers, romarin et ruches y sont conduits sur un même système, selon les principes de la permaculture. L'entreprise ne se définit pas par une filière mais par une méthode : produire en sec, sans intrants de synthèse, en faisant travailler les gens du territoire, et en transmettant ce qui marche aux exploitations voisines. Trois activités sortent de là : une gamme de produits, une offre de services agricoles, et une activité de formation.",
       "ctaProducts": "Nos produits",
       "ctaContact": "Nous écrire"
     },
+    "intro": {
+      "eyebrow": "Qui nous sommes",
+      "title": "Vineria, Nord de la Tunisie.",
+      "p1": "Vineria est une exploitation agricole intégrée située au nord de la Tunisie.",
+      "p1Strong": "Amandiers, oliviers, romarin et ruches",
+      "p1Tail": "y sont conduits sur un même système, selon les principes de la permaculture.",
+      "p2": "L'entreprise ne se définit pas par une filière mais par une méthode :",
+      "p2Strong": "produire en sec, sans intrants de synthèse",
+      "p2Tail": ", en faisant travailler les gens du territoire, et en transmettant ce qui marche aux exploitations voisines.",
+      "facts": {
+        "one": "Fondée en 2022 au Nord de la Tunisie",
+        "two": "Système intégré sur 32 hectares en conduite sèche",
+        "three": "75 ruches, 4 000+ amandiers et oliviers",
+        "four": "Aucun intrant chimique ou pesticide de synthèse"
+      },
+      "imageAlt": "Vue aérienne du domaine Vineria — verger intégré de permaculture en Tunisie",
+      "stats": { "permaculture": "En permaculture", "production": "En production", "founded": "Fondée en" }
+    },
+    "circular": {
+      "eyebrow": "Le modèle",
+      "headline": "Rien ne sort seul.",
+      "lead": "C'est le cœur de notre modèle, et ce qui nous distingue d'une exploitation classique. Chaque atelier alimente les autres.",
+      "workshop": "Atelier",
+      "produces": "Ce qu'il produit",
+      "soil": "Sol & Compost vivant",
+      "soilProduces": "Humus fertile, amendement biologique",
+      "soilSystem": "Recycle 100% des résidus de taille, de distillation et de trituration oléicole",
+      "callout": "💡 Un déchet de l'un est une ressource de l'autre. La paille de distillation retourne au compost, la taille protège le sol, les abeilles augmentent la nouaison des amandiers. C'est ce qui rend l'ensemble viable en régime sec — et exactement ce que nous enseignons."
+    },
+    "values": {
+      "eyebrow": "Nos engagements",
+      "headline": "Nos valeurs, traduites en pratiques.",
+      "lead": "Nous évitons les déclarations d'intention. Voici ce que chaque valeur veut dire concrètement chez nous.",
+      "label": "Valeur"
+    },
+    "academy": {
+      "eyebrow": "L'Académie Vineria",
+      "headline": "Ce que nous apprenons n'a de valeur que partagé.",
+      "p1": "La formation des petits agriculteurs n'est pas une activité annexe de communication : c'est un métier à part entière de l'entreprise. Sessions courtes, sur la ferme, en arabe, en petits groupes, avec suivi sur les parcelles des participants.",
+      "public": "Public prioritaire :",
+      "publicText": "petits exploitants, femmes rurales, jeunes en installation.",
+      "cta": "Découvrir l'Académie",
+      "imageAlt": "Session de formation de l'Académie Vineria — Compostage et fertilité des sols"
+    },
+    "cta": {
+      "eyebrow": "Nous rejoindre",
+      "headline": "Envie de travailler ensemble ?",
+      "body": "Que vous soyez distributeur, bailleur de fonds, chercheur ou simplement curieux d'une récolte — nous répondons dans les deux jours.",
+      "contact": "Écrire à Vineria",
+      "products": "Voir nos produits"
+    },
     "systemContrib": "Apport au système"
+  },
+  "auth": {
+    "login": { "eyebrow": "Espace prive", "title": "Se connecter", "email": "Email", "password": "Mot de passe", "error": "Connexion locale activee.", "submit": "Ouvrir ma session", "createAccount": "Creer un compte" },
+    "createAccount": { "eyebrow": "Bienvenue chez Veneria", "title": "Creer un compte", "name": "Nom", "email": "Email", "password": "Mot de passe", "success": "Compte cree. Vous pouvez vous connecter.", "submit": "Creer mon compte", "backToLogin": "Retour a la connexion" }
   }
 }

@@ -1,10 +1,11 @@
 'use client';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useTransition } from 'react';
 
 export function LanguageSwitcher() {
   const locale = useLocale();
+  const t = useTranslations('langSwitcher');
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
@@ -49,7 +50,7 @@ export function LanguageSwitcher() {
             color: locale === lng ? '#fff' : 'var(--muted)',
           }}
           aria-current={locale === lng ? 'true' : undefined}
-          aria-label={`Switch to ${lng === 'fr' ? 'Français' : 'العربية'}`}
+          aria-label={lng === 'fr' ? t('switchToFrench') : t('switchToArabic')}
         >
           {lng.toUpperCase()}
         </button>

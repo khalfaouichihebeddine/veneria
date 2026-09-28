@@ -56,7 +56,7 @@ export default async function About({ params }: Props) {
               className="animate-fade-up animate-delay-2"
               style={{ fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.75, color: 'rgba(255,255,255,0.78)', maxWidth: 640, marginBottom: 38 }}
             >
-              {VINERIA_INFO.summary}
+                {t('hero.summary')}
             </p>
             <div className="animate-fade-up animate-delay-3" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Link href={`/${locale}/produits`} className="btn btn--ochre" id="about-hero-produits">
@@ -81,23 +81,20 @@ export default async function About({ params }: Props) {
             }}
           >
             <div>
-              <span className="eyebrow">Qui nous sommes</span>
+              <span className="eyebrow">{t('intro.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
               <h2 className="display--md serif" style={{ margin: '16px 0 22px' }}>
-                Vineria, Nord de la Tunisie.
+                {t('intro.title')}
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--muted)', marginBottom: 20 }}>
-                Vineria est une exploitation agricole intégrée située au nord de la Tunisie. <strong style={{ color: 'var(--ink)' }}>Amandiers, oliviers, romarin et ruches</strong> y sont conduits sur un même système, selon les principes de la permaculture.
+                {t('intro.p1')} <strong style={{ color: 'var(--ink)' }}>{t('intro.p1Strong')}</strong> {t('intro.p1Tail')}
               </p>
               <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--muted)', marginBottom: 20 }}>
-                L'entreprise ne se définit pas par une filière mais par une méthode : <strong style={{ color: 'var(--ink)' }}>produire en sec, sans intrants de synthèse</strong>, en faisant travailler les gens du territoire, et en transmettant ce qui marche aux exploitations voisines.
+                {t('intro.p2')} <strong style={{ color: 'var(--ink)' }}>{t('intro.p2Strong')}</strong>{t('intro.p2Tail')}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 28 }}>
                 {[
-                  'Fondée en 2022 au Nord de la Tunisie',
-                  'Système intégré sur 32 hectares en conduite sèche',
-                  '75 ruches, 4 000+ amandiers et oliviers',
-                  'Aucun intrant chimique ou pesticide de synthèse',
+                  t('intro.facts.one'), t('intro.facts.two'), t('intro.facts.three'), t('intro.facts.four'),
                 ].map((fact) => (
                   <div key={fact} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <CheckCircle2 size={16} style={{ color: 'var(--green)', flexShrink: 0 }} />
@@ -110,7 +107,7 @@ export default async function About({ params }: Props) {
             <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
               <Image
                 src="/images/hero-farm.jpg"
-                alt="Vue aérienne du domaine Vineria — verger intégré de permaculture en Tunisie"
+                alt={t('intro.imageAlt')}
                 fill
                 style={{ objectFit: 'cover' }}
               />
@@ -129,7 +126,7 @@ export default async function About({ params }: Props) {
                   gap: 16,
                 }}
               >
-                {[['32 ha', 'En permaculture'], ['75 ruches', 'En production'], ['2022', 'Fondée en']].map(([val, label]) => (
+                {[['32 ha', t('intro.stats.permaculture')], ['75 ruches', t('intro.stats.production')], ['2022', t('intro.stats.founded')]].map(([val, label]) => (
                   <div key={label} style={{ textAlign: 'center' }}>
                     <div style={{ color: '#fff', fontWeight: 700, fontSize: 18, fontFamily: "'Playfair Display', Georgia, serif" }}>{val}</div>
                     <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 11 }}>{label}</div>
@@ -145,13 +142,13 @@ export default async function About({ params }: Props) {
       <section className="section" style={{ background: 'var(--paper)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto 48px' }}>
-            <span className="eyebrow">Le modèle</span>
+            <span className="eyebrow">{t('circular.eyebrow')}</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>
-              Rien ne sort seul.
+              {t('circular.headline')}
             </h2>
             <p className="lead">
-              C'est le cœur de notre modèle, et ce qui nous distingue d'une exploitation classique. Chaque atelier alimente les autres.
+              {t('circular.lead')}
             </p>
           </div>
 
@@ -159,8 +156,8 @@ export default async function About({ params }: Props) {
             <table className="feature-table">
               <thead>
                 <tr>
-                  <th>Atelier</th>
-                  <th>Ce qu'il produit</th>
+                  <th>{t('circular.workshop')}</th>
+                  <th>{t('circular.produces')}</th>
                   <th>{t('systemContrib')}</th>
                 </tr>
               </thead>
@@ -183,11 +180,11 @@ export default async function About({ params }: Props) {
                   <td style={{ fontWeight: 600, color: 'var(--ink)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: 20 }}>♻️</span>
-                      Sol &amp; Compost vivant
+                      {t('circular.soil')}
                     </div>
                   </td>
-                  <td style={{ color: 'var(--ink-soft)' }}>Humus fertile, amendement biologique</td>
-                  <td style={{ color: 'var(--muted)' }}>Recycle 100% des résidus de taille, de distillation et de trituration oléicole</td>
+                  <td style={{ color: 'var(--ink-soft)' }}>{t('circular.soilProduces')}</td>
+                  <td style={{ color: 'var(--muted)' }}>{t('circular.soilSystem')}</td>
                 </tr>
               </tbody>
             </table>
@@ -206,7 +203,7 @@ export default async function About({ params }: Props) {
               fontStyle: 'italic',
             }}
           >
-            💡 Un déchet de l'un est une ressource de l'autre. La paille de distillation retourne au compost, la taille protège le sol, les abeilles augmentent la nouaison des amandiers. C'est ce qui rend l'ensemble viable en régime sec — et exactement ce que nous enseignons.
+            {t('circular.callout')}
           </div>
         </div>
       </section>
@@ -215,12 +212,12 @@ export default async function About({ params }: Props) {
       <section className="section">
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 52px' }}>
-            <span className="eyebrow">Nos engagements</span>
+            <span className="eyebrow">{t('values.eyebrow')}</span>
             <div className="accent-line" style={{ display: 'block', margin: '14px auto' }} />
             <h2 className="display--md serif" style={{ margin: '0 0 16px' }}>
-              Nos valeurs, traduites en pratiques.
+              {t('values.headline')}
             </h2>
-            <p className="lead">Nous évitons les déclarations d'intention. Voici ce que chaque valeur veut dire concrètement chez nous.</p>
+            <p className="lead">{t('values.lead')}</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -236,7 +233,7 @@ export default async function About({ params }: Props) {
               >
                 <div>
                   <span className="eyebrow eyebrow--green" style={{ fontSize: 10, display: 'block', marginBottom: 10 }}>
-                    Valeur 0{i + 1} / {VALUE_PILLARS.length.toString().padStart(2, '0')}
+                    {t('values.label')} 0{i + 1} / {VALUE_PILLARS.length.toString().padStart(2, '0')}
                   </span>
                   <h3 className="display--md serif" style={{ fontSize: 'clamp(20px, 2.5vw, 30px)', margin: '0 0 8px', color: 'var(--ink)' }}>
                     {pillar.title}
@@ -279,25 +276,25 @@ export default async function About({ params }: Props) {
             <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
               <Image
                 src="/images/academy.jpg"
-                alt="Session de formation de l'Académie Vineria — Compostage et fertilité des sols"
+                alt={t('academy.imageAlt')}
                 fill
                 style={{ objectFit: 'cover' }}
               />
             </div>
             <div>
-              <span className="eyebrow">L'Académie Vineria</span>
+              <span className="eyebrow">{t('academy.eyebrow')}</span>
               <div className="accent-line" style={{ display: 'block', marginTop: 12 }} />
               <h2 className="display--md serif" style={{ margin: '16px 0 20px', fontSize: 'clamp(22px, 3vw, 36px)' }}>
-                Ce que nous apprenons n'a de valeur que partagé.
+                {t('academy.headline')}
               </h2>
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 20 }}>
-                La formation des petits agriculteurs n'est pas une activité annexe de communication : c'est un métier à part entière de l'entreprise. Sessions courtes, sur la ferme, en arabe, en petits groupes, avec suivi sur les parcelles des participants.
+                {t('academy.p1')}
               </p>
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 28 }}>
-                <strong style={{ color: 'var(--ink)' }}>Public prioritaire :</strong> petits exploitants, femmes rurales, jeunes en installation.
+                <strong style={{ color: 'var(--ink)' }}>{t('academy.public')}</strong> {t('academy.publicText')}
               </p>
               <Link href={`/${locale}/services`} className="btn btn--primary" id="about-academy-cta">
-                Découvrir l'Académie <ArrowUpRight size={15} />
+                {t('academy.cta')} <ArrowUpRight size={15} />
               </Link>
             </div>
           </div>
@@ -314,19 +311,19 @@ export default async function About({ params }: Props) {
         }}
       >
         <div className="container--narrow">
-          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 18 }}>Nous rejoindre</span>
+          <span className="eyebrow" style={{ color: '#f1c98d', display: 'block', marginBottom: 18 }}>{t('cta.eyebrow')}</span>
           <h2 className="display--md serif" style={{ color: '#fff', margin: '0 0 20px' }}>
-            Envie de travailler ensemble ?
+            {t('cta.headline')}
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.70)', fontSize: 16, lineHeight: 1.75, maxWidth: 520, margin: '0 auto 36px' }}>
-            Que vous soyez distributeur, bailleur de fonds, chercheur ou simplement curieux d'une récolte — nous répondons dans les deux jours.
+            {t('cta.body')}
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href={`/${locale}/contact`} className="btn btn--ochre" id="about-contact-cta">
-              Écrire à Vineria <ArrowUpRight size={15} />
+              {t('cta.contact')} <ArrowUpRight size={15} />
             </Link>
             <Link href={`/${locale}/produits`} className="btn btn--ghost" id="about-products-cta">
-              Voir nos produits
+              {t('cta.products')}
             </Link>
           </div>
         </div>

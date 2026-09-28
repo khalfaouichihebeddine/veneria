@@ -61,7 +61,7 @@ export function SiteHeader() {
               gap: 10,
               textDecoration: 'none',
             }}
-            aria-label="VINERIA — Accueil"
+            aria-label={t('brandLabel')}
           >
             <span
               style={{
@@ -101,7 +101,7 @@ export function SiteHeader() {
                   marginTop: 2,
                 }}
               >
-                Permaculture · Nord Tunisie
+                {t('brandSubtitle')}
               </div>
             </div>
           </Link>

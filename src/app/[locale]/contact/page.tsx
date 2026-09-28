@@ -25,7 +25,7 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Erreur réseau');
+      if (!response.ok) throw new Error(t('form.networkError'));
       setSent(true);
     } catch {
       setError(t('form.networkError'));

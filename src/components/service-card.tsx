@@ -13,7 +13,12 @@ const CATEGORY_ICONS: Record<string, string> = {
 
 export function ServiceCard({ service }: { service: Service }) {
   const t = useTranslations('serviceCard');
+  const catalog = useTranslations('catalog');
   const locale = useLocale();
+  const text = (field: string, fallback: string) => {
+    const key = `services.${service.slug}.${field}`;
+    return catalog.has(key) ? catalog(key) : locale === 'ar' ? `[AR] ${fallback}` : fallback;
+  };
 
   const catIcon = service.category ? CATEGORY_ICONS[service.category] ?? '🌱' : '🌱';
 
@@ -32,7 +37,7 @@ export function ServiceCard({ service }: { service: Service }) {
   const priceLabel =
     service.priceFrom === 0
       ? t('free')
-      : `${t('from')} ${service.priceFrom} ${service.currency?.split(' ')[0] ?? 'EUR'}`;
+      : `${t('from')} ${service.priceFrom} ${service.currency?.split(' ')[0] ?? 'TND'}`;
 
   return (
     <Link
@@ -67,29 +72,29 @@ export function ServiceCard({ service }: { service: Service }) {
             color: 'var(--ink)',
           }}
         >
-          {service.name}
+          {text('name', service.name)}
         </h3>
 
         {service.tagline && (
           <p style={{ fontSize: 13, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px', lineHeight: 1.4 }}>
-            {service.tagline}
+            {text('tagline', service.tagline)}
           </p>
         )}
 
         <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65, flex: 1, margin: '0 0 20px' }}>
-          {service.description.slice(0, 130)}{service.description.length > 130 ? '…' : ''}
+          {text('description', service.description).slice(0, 130)}{service.description.length > 130 ? '…' : ''}
         </p>
 
         {/* Meta */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Clock size={13} style={{ color: 'var(--muted-light)', flexShrink: 0 }} />
-            <span style={{ fontSize: 12.5, color: 'var(--muted)' }}>{service.duration}</span>
+            <span style={{ fontSize: 12.5, color: 'var(--muted)' }}>{text('duration', service.duration)}</span>
           </div>
           {service.targetAudience && (
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
               <Users size={13} style={{ color: 'var(--muted-light)', flexShrink: 0, marginTop: 2 }} />
-              <span style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.45 }}>{service.targetAudience}</span>
+              <span style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.45 }}>{text('targetAudience', service.targetAudience)}</span>
             </div>
           )}
         </div>

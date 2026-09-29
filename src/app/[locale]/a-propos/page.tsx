@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2, ArrowUpRight } from 'lucide-react';
-import { VALUE_PILLARS, PERMACULTURE_WORKSHOPS, VINERIA_INFO } from '@/lib/vineria-data';
+import { VALUE_PILLARS, PERMACULTURE_WORKSHOPS } from '@/lib/vineria-data';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 
@@ -25,6 +25,8 @@ export default async function About({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'aboutUs' });
+  const content = await getTranslations({ locale, namespace: 'content' });
+  const tx = (key: string, fallback: string) => (content.has(key) ? content(key) : fallback);
 
   return (
     <main>
@@ -169,11 +171,11 @@ export default async function About({ params }: Props) {
                         <span style={{ fontSize: 20 }}>
                           {w.id === 'amandiers' ? '🌸' : w.id === 'oliviers' ? '🫒' : w.id === 'romarin' ? '🌿' : w.id === 'ruches' ? '🍯' : '🌱'}
                         </span>
-                        {w.name}
+                        {tx(`workshops.${w.id}.name`, w.name)}
                       </div>
                     </td>
-                    <td style={{ color: 'var(--ink-soft)' }}>{w.produces}</td>
-                    <td style={{ color: 'var(--muted)' }}>{w.bringsToSystem}</td>
+                    <td style={{ color: 'var(--ink-soft)' }}>{tx(`workshops.${w.id}.produces`, w.produces)}</td>
+                    <td style={{ color: 'var(--muted)' }}>{tx(`workshops.${w.id}.bringsToSystem`, w.bringsToSystem)}</td>
                   </tr>
                 ))}
                 <tr>
@@ -236,23 +238,23 @@ export default async function About({ params }: Props) {
                     {t('values.label')} 0{i + 1} / {VALUE_PILLARS.length.toString().padStart(2, '0')}
                   </span>
                   <h3 className="display--md serif" style={{ fontSize: 'clamp(20px, 2.5vw, 30px)', margin: '0 0 8px', color: 'var(--ink)' }}>
-                    {pillar.title}
+                    {tx(`values.${pillar.id}.title`, pillar.title)}
                   </h3>
-                  <p style={{ fontSize: 13.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 16px' }}>{pillar.subtitle}</p>
+                  <p style={{ fontSize: 13.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 16px' }}>{tx(`values.${pillar.id}.subtitle`, pillar.subtitle)}</p>
                   {pillar.statBadge && (
-                    <span className="badge badge--green" style={{ fontSize: 11 }}>{pillar.statBadge}</span>
+                    <span className="badge badge--green" style={{ fontSize: 11 }}>{tx(`values.${pillar.id}.statBadge`, pillar.statBadge)}</span>
                   )}
                 </div>
 
                 <div>
                   <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8, margin: '0 0 22px' }}>
-                    {pillar.description}
+                    {tx(`values.${pillar.id}.description`, pillar.description)}
                   </p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {pillar.concretePractice.map((practice) => (
+                    {pillar.concretePractice.map((practice, i) => (
                       <div key={practice} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                         <CheckCircle2 size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 3 }} />
-                        <span style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.6 }}>{practice}</span>
+                        <span style={{ fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.6 }}>{tx(`values.${pillar.id}.practices.${i}`, practice)}</span>
                       </div>
                     ))}
                   </div>

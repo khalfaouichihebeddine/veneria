@@ -36,6 +36,8 @@ export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'home' });
+  const content = await getTranslations({ locale, namespace: 'content' });
+  const tx = (key: string, fallback: string) => (content.has(key) ? content(key) : fallback);
 
   let products: Awaited<ReturnType<typeof api.getProducts>>;
   let services: Awaited<ReturnType<typeof api.getServices>>;
@@ -171,19 +173,19 @@ export default async function Home({ params }: Props) {
                    workshop.id === 'romarin' ? '🌿' :
                    workshop.id === 'ruches' ? '🍯' : '🌱'}
                 </div>
-                <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{workshop.name}</span>
+                <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>{tx(`workshops.${workshop.id}.name`, workshop.name)}</span>
                 <h3 style={{ fontSize: 16, fontWeight: 600, margin: '10px 0 8px', fontFamily: "'Playfair Display', Georgia, serif" }}>
-                  {workshop.produces}
+                  {tx(`workshops.${workshop.id}.produces`, workshop.produces)}
                 </h3>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 14px' }}>
-                  {workshop.details}
+                  {tx(`workshops.${workshop.id}.details`, workshop.details)}
                 </p>
                 <div style={{ padding: '12px 14px', background: 'var(--green-pale)', borderRadius: 8, border: '1px solid rgba(42,82,54,0.10)' }}>
                   <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--green)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 5 }}>
                     {t('model.systemContrib')}
                   </div>
                   <p style={{ fontSize: 12.5, color: 'var(--green-deep)', lineHeight: 1.55, margin: 0 }}>
-                    {workshop.bringsToSystem}
+                    {tx(`workshops.${workshop.id}.bringsToSystem`, workshop.bringsToSystem)}
                   </p>
                 </div>
               </div>
@@ -274,15 +276,15 @@ export default async function Home({ params }: Props) {
                 />
                 <span className="eyebrow eyebrow--green" style={{ fontSize: 10 }}>0{i + 1}</span>
                 <h3 style={{ fontSize: 17, fontWeight: 600, margin: '12px 0 6px', fontFamily: "'Playfair Display', Georgia, serif" }}>
-                  {pillar.title}
+                  {tx(`values.${pillar.id}.title`, pillar.title)}
                 </h3>
-                <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px' }}>{pillar.subtitle}</p>
+                <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 12px' }}>{tx(`values.${pillar.id}.subtitle`, pillar.subtitle)}</p>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 16px' }}>
-                  {pillar.description.slice(0, 160)}…
+                  {tx(`values.${pillar.id}.description`, pillar.description).slice(0, 160)}…
                 </p>
                 {pillar.statBadge && (
                   <span className="badge badge--green">
-                    <Leaf size={11} /> {pillar.statBadge}
+                    <Leaf size={11} /> {tx(`values.${pillar.id}.statBadge`, pillar.statBadge)}
                   </span>
                 )}
               </div>
@@ -355,10 +357,10 @@ export default async function Home({ params }: Props) {
                   {metric.value}
                 </div>
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', margin: '2px 0 10px' }}>
-                  {metric.unit}
+                  {tx(`impact.${metric.id}.unit`, metric.unit)}
                 </div>
-                <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', margin: '0 0 6px', lineHeight: 1.4 }}>{metric.label}</div>
-                <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, margin: '0 0 14px' }}>{metric.sublabel}</p>
+                <div style={{ fontSize: 15, fontWeight: 600, color: '#fff', margin: '0 0 6px', lineHeight: 1.4 }}>{tx(`impact.${metric.id}.label`, metric.label)}</div>
+                <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, margin: '0 0 14px' }}>{tx(`impact.${metric.id}.sublabel`, metric.sublabel)}</p>
                 <span
                   style={{
                     display: 'inline-block',
@@ -411,16 +413,16 @@ export default async function Home({ params }: Props) {
                     border: `1px solid ${i === 0 ? 'rgba(185,117,45,0.18)' : 'rgba(42,82,54,0.14)'}`,
                   }}
                 >
-                  {track.tag}
+                  {tx(`partnerships.${track.id}.tag`, track.tag)}
                 </span>
                 <h3 style={{ fontSize: 17, fontWeight: 600, margin: '0 0 8px', fontFamily: "'Playfair Display', Georgia, serif", lineHeight: 1.35 }}>
-                  {track.title}
+                  {tx(`partnerships.${track.id}.title`, track.title)}
                 </h3>
                 <p style={{ fontSize: 12, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 14px' }}>
-                  {track.target}
+                  {tx(`partnerships.${track.id}.target`, track.target)}
                 </p>
                 <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, margin: '0 0 22px' }}>
-                  {track.description}
+                  {tx(`partnerships.${track.id}.description`, track.description)}
                 </p>
                 <Link
                   href="/contact"
@@ -428,7 +430,7 @@ export default async function Home({ params }: Props) {
                   style={{ width: '100%', justifyContent: 'center' }}
                   id={`partner-cta-${track.id}`}
                 >
-                  {track.actionLabel} <ArrowUpRight size={14} />
+                  {tx(`partnerships.${track.id}.actionLabel`, track.actionLabel)} <ArrowUpRight size={14} />
                 </Link>
               </div>
             ))}

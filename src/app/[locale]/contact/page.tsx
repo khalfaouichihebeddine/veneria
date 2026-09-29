@@ -7,6 +7,7 @@ import { Link } from '@/i18n/routing';
 
 export default function Contact() {
   const t = useTranslations('contact');
+  const content = useTranslations('content');
   const locale = useLocale();
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
@@ -78,7 +79,7 @@ export default function Contact() {
           <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
             <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>{t('partnersLabel')}</span>
             {PARTNERSHIP_TRACKS.map((track) => (
-              <span key={track.id} className="badge badge--green">{track.tag}</span>
+              <span key={track.id} className="badge badge--green">{content.has(`partnerships.${track.id}.tag`) ? content(`partnerships.${track.id}.tag`) : track.tag}</span>
             ))}
           </div>
         </div>
@@ -104,10 +105,10 @@ export default function Contact() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
                 {[
-                  { icon: <MapPin size={17} style={{ color: 'var(--green)' }} />, label: t('info.address'), value: VINERIA_INFO.address },
+                  { icon: <MapPin size={17} style={{ color: 'var(--green)' }} />, label: t('info.address'), value: content.has('info.address') ? content('info.address') : VINERIA_INFO.address },
                   { icon: <Phone size={17} style={{ color: 'var(--green)' }} />, label: t('info.phone'), value: VINERIA_INFO.phone },
                   { icon: <Mail size={17} style={{ color: 'var(--green)' }} />, label: t('info.email'), value: VINERIA_INFO.email },
-                  { icon: <Clock size={17} style={{ color: 'var(--green)' }} />, label: t('info.hours'), value: VINERIA_INFO.hours },
+                  { icon: <Clock size={17} style={{ color: 'var(--green)' }} />, label: t('info.hours'), value: content.has('info.hours') ? content('info.hours') : VINERIA_INFO.hours },
                 ].map(({ icon, label, value }) => (
                   <div key={label} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                     <div

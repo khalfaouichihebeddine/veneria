@@ -13,11 +13,15 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'productDetail' });
+  const catalog = await getTranslations({ locale, namespace: 'catalog' });
   const products = VINERIA_PRODUCTS;
   const product = products.find((p) => p.slug === slug);
+  const name = product && catalog.has(`products.${slug}.name`) ? catalog(`products.${slug}.name`) : product?.name;
+  const description = product && catalog.has(`products.${slug}.description`) ? catalog(`products.${slug}.description`) : product?.description;
   return {
-    title: product ? `${product.name} | VINERIA` : 'Produit | VINERIA',
-    description: product?.description?.slice(0, 160),
+    title: name ? `${name} | VINERIA` : t('metaFallback'),
+    description: description?.slice(0, 160),
     alternates: {
       languages: {
         fr: `/fr/produits/${slug}`,
@@ -31,6 +35,11 @@ export default async function ProductDetail({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'productDetail' });
+  const catalog = await getTranslations({ locale, namespace: 'catalog' });
+  const text = (field: string, fallback: string) => {
+    const key = `products.${slug}.${field}`;
+    return catalog.has(key) ? catalog(key) : locale === 'ar' ? `[AR] ${fallback}` : fallback;
+  };
 
   let product: Awaited<ReturnType<typeof api.getProduct>>;
   try {
@@ -90,7 +99,7 @@ export default async function ProductDetail({ params }: Props) {
                 {product.imageUrl ? (
                   <Image
                     src={product.imageUrl}
-                    alt={product.name}
+                    alt={text('name', product.name)}
                     fill
                     style={{ objectFit: 'cover' }}
                     priority
@@ -128,7 +137,7 @@ export default async function ProductDetail({ params }: Props) {
                       color: 'var(--green)',
                     }}
                   >
-                    {product.categoryLabel}
+                    {text('categoryLabel', product.categoryLabel)}
                   </span>
                 )}
               </div>
@@ -151,8 +160,8 @@ export default async function ProductDetail({ params }: Props) {
                           alignItems: 'center',
                         }}
                       >
-                        <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 500 }}>{char.label}</span>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink-soft)', textAlign: 'right', maxWidth: '60%' }}>{char.value}</span>
+                        <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 500 }}>{catalog.has(`products.${slug}.characteristics.${i}.label`) ? catalog(`products.${slug}.characteristics.${i}.label`) : locale === 'ar' ? `[AR] ${char.label}` : char.label}</span>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink-soft)', textAlign: 'right', maxWidth: '60%' }}>{catalog.has(`products.${slug}.characteristics.${i}.value`) ? catalog(`products.${slug}.characteristics.${i}.value`) : locale === 'ar' ? `[AR] ${char.value}` : char.value}</span>
                       </div>
                     ))}
                   </div>
@@ -170,17 +179,17 @@ export default async function ProductDetail({ params }: Props) {
                 className="display--md serif"
                 style={{ margin: '0 0 12px', lineHeight: 1.2, fontSize: 'clamp(24px, 3.5vw, 42px)' }}
               >
-                {product.name}
+                {text('name', product.name)}
               </h1>
 
               {product.tagline && (
                 <p style={{ color: 'var(--ochre)', fontWeight: 600, fontSize: 14, margin: '0 0 20px', lineHeight: 1.5 }}>
-                  {product.tagline}
+                  {text('tagline', product.tagline)}
                 </p>
               )}
 
               <p style={{ fontSize: 15.5, color: 'var(--muted)', lineHeight: 1.8, margin: '0 0 28px' }}>
-                {product.description}
+                {text('description', product.description)}
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
@@ -189,7 +198,7 @@ export default async function ProductDetail({ params }: Props) {
                     <MapPin size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>{t('origin')}</span>
-                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.origin}</span>
+                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{text('origin', product.origin)}</span>
                     </div>
                   </div>
                 )}
@@ -198,7 +207,7 @@ export default async function ProductDetail({ params }: Props) {
                     <Beaker size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>{t('method')}</span>
-                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{product.method}</span>
+                      <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{text('method', product.method)}</span>
                     </div>
                   </div>
                 )}
@@ -223,14 +232,14 @@ export default async function ProductDetail({ params }: Props) {
                       <CheckCircle2 size={13} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
                       <div>
                         <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', display: 'block', marginBottom: 2 }}>{t('packaging.retail')}</span>
-                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.retail}</span>
+                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{text('packaging.retail', product.packaging.retail)}</span>
                       </div>
                     </div>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
                       <CheckCircle2 size={13} style={{ color: 'var(--ochre)', flexShrink: 0, marginTop: 2 }} />
                       <div>
                         <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ochre)', display: 'block', marginBottom: 2 }}>{t('packaging.pro')}</span>
-                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{product.packaging.pro}</span>
+                        <span style={{ fontSize: 13, color: 'var(--muted)' }}>{text('packaging.pro', product.packaging.pro)}</span>
                       </div>
                     </div>
                   </div>
@@ -254,7 +263,7 @@ export default async function ProductDetail({ params }: Props) {
                   <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 700, color: 'var(--green)', lineHeight: 1 }}>
                     {product.price} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>{t('price.eur')}</span>
                   </div>
-                  {product.unit && <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>/ {product.unit}</div>}
+                  {product.unit && <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>/ {text('unit', product.unit)}</div>}
                 </div>
               </div>
 

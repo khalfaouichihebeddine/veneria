@@ -6,7 +6,12 @@ import { useLocale, useTranslations } from 'next-intl';
 
 export function ProductCard({ product }: { product: Product }) {
   const t = useTranslations('productCard');
+  const catalog = useTranslations('catalog');
   const locale = useLocale();
+  const text = (field: string, fallback: string) => {
+    const key = `products.${product.slug}.${field}`;
+    return catalog.has(key) ? catalog(key) : locale === 'ar' ? `[AR] ${fallback}` : fallback;
+  };
 
   const categoryColors: Record<string, { bg: string; text: string }> = {
     'huiles-essentielles': { bg: '#e8f0ea', text: '#2a5236' },
@@ -35,7 +40,7 @@ export function ProductCard({ product }: { product: Product }) {
         {product.imageUrl ? (
           <Image
             src={product.imageUrl}
-            alt={product.name}
+            alt={text('name', product.name)}
             fill
             style={{ objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.22,1,0.36,1)' }}
             sizes="(max-width: 680px) 100vw, (max-width: 1000px) 50vw, 33vw"
@@ -72,7 +77,7 @@ export function ProductCard({ product }: { product: Product }) {
               borderRadius: 100,
             }}
           >
-            {product.categoryLabel}
+            {text('categoryLabel', product.categoryLabel)}
           </span>
         )}
       </div>
@@ -80,23 +85,23 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Content */}
       <div style={{ padding: '20px 22px', display: 'flex', flexDirection: 'column', flex: 1 }}>
         <h3 style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.35, margin: '0 0 7px', fontFamily: "'Playfair Display', Georgia, serif", color: 'var(--ink)' }}>
-          {product.name}
+          {text('name', product.name)}
         </h3>
 
         {product.tagline && (
           <p style={{ fontSize: 12.5, color: 'var(--ochre)', fontWeight: 600, margin: '0 0 10px', lineHeight: 1.4 }}>
-            {product.tagline}
+            {text('tagline', product.tagline)}
           </p>
         )}
 
         <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6, flex: 1, margin: '0 0 16px' }}>
-          {product.description.slice(0, 120)}{product.description.length > 120 ? '…' : ''}
+          {text('description', product.description).slice(0, 120)}{product.description.length > 120 ? '…' : ''}
         </p>
 
         {product.origin && (
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 5, marginBottom: 14 }}>
             <MapPin size={12} style={{ color: 'var(--muted-light)', marginTop: 2, flexShrink: 0 }} />
-            <span style={{ fontSize: 11.5, color: 'var(--muted-light)', lineHeight: 1.4 }}>{product.origin}</span>
+            <span style={{ fontSize: 11.5, color: 'var(--muted-light)', lineHeight: 1.4 }}>{text('origin', product.origin)}</span>
           </div>
         )}
 
@@ -112,7 +117,7 @@ export function ProductCard({ product }: { product: Product }) {
         >
           <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 700, color: 'var(--green)' }}>
             {product.price} <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--muted)' }}>{t('eur')}</span>
-            {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}> / {product.unit}</span>}
+            {product.unit && <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}> / {text('unit', product.unit)}</span>}
           </span>
           <span
             style={{

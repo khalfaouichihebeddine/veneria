@@ -117,7 +117,7 @@ export default async function Services({ params }: Props) {
             <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
               <Image
                 src="/images/academy.jpg"
-                alt="L'Académie Vineria — Formation de terrain en permaculture au Nord de la Tunisie"
+                alt={t('academy.imageAlt')}
                 fill
                 style={{ objectFit: 'cover' }}
               />

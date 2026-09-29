@@ -364,7 +364,7 @@ export const VINERIA_SERVICES: VineriaService[] = [
     targetAudience: 'Exploitations familiales, coopératives agricoles, GDA locaux',
     duration: 'Accompagnement saisonnier sur 1 à 2 campagnes agricoles',
     priceFrom: 280,
-    currency: 'EUR par exploitation (possibilité d’appui bailleur)',
+    currency: 'TND par exploitation (possibilité d’appui bailleur)',
     imageUrl: '/images/hero-farm.jpg',
     syllabusOrFeatures: [
       'Diagnostic pédologique et hydrologique approfondi de la parcelle',
@@ -385,7 +385,7 @@ export const VINERIA_SERVICES: VineriaService[] = [
     targetAudience: 'Producteurs indépendants de plantes à parfum, aromatiques et médicinales (PPAM)',
     duration: 'À la journée de passe alambic ou au volume de matière fraîche',
     priceFrom: 65,
-    currency: 'EUR / passe d’alambic',
+    currency: 'TND / passe d’alambic',
     imageUrl: '/images/rosemary-oil.jpg',
     syllabusOrFeatures: [
       'Distillation contrôlée à la vapeur douce avec contrôle thermique continu',
@@ -406,7 +406,7 @@ export const VINERIA_SERVICES: VineriaService[] = [
     targetAudience: 'Écoles, universités agronomiques, ONG, délégations d’entreprises',
     duration: 'Demi-journée (3h30) ou journée complète avec repas fermier de terroir',
     priceFrom: 15,
-    currency: 'EUR par participant (gratuité écoles publiques locales)',
+    currency: 'TND par participant (gratuité écoles publiques locales)',
     imageUrl: '/images/academy.jpg',
     syllabusOrFeatures: [
       'Parcours guidé à travers les 5 ateliers interconnectés',
@@ -427,7 +427,7 @@ export const VINERIA_SERVICES: VineriaService[] = [
     targetAudience: 'Particuliers engagés, entreprises RSE, mécènes de la biodiversité',
     duration: 'Engagement annuel renouvelable',
     priceFrom: 95,
-    currency: 'EUR / an',
+    currency: 'TND / an',
     imageUrl: '/images/hero-farm.jpg',
     syllabusOrFeatures: [
       'Plaque gravée au nom du parrain ou de l’entreprise sur l’arbre / la ruche',
